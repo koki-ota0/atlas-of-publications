@@ -1,0 +1,80 @@
+ATLAS — run-all summary
+
+  ok    1.1 #papers renders 10 rows   10
+  ok    1.2 network has 10 nodes
+  ok    1.3 network has 8 edges
+  ok    1.4 2 live edges into the unnamed paper
+  ok    1.5 cluster hulls published
+  ok    1.6 channel banner + avatar drawn
+  ok    1.7 handle line present
+  ok    1.8 channel tabs (4)
+  ok    1.9 index rows are plain (no thumbnails)
+  ok    1.10 unique element ids
+  ok    1.11 no external subresources
+  ok    1.12 no external requests
+  ok    1.13 stats line counts nodes/edges/density   ノード 10 · エッジ 8 · 密度 0.18 · 描画 7ms
+  ok    1.14 copy says YouTube (not NLP)
+  ok    1b.1 subscribe button label
+  ok    1b.2 subscribe toggles
+  ok    1b.3 登録 record unlocked
+  ok    1b.4 toast promises 0 bytes
+  ok    1b.5 tab scrolls to a section   1092
+  ok    1b.6 tab marks itself current
+  ok    2.1 cat dock visible on load
+  ok    2.2 cat badge visible before key
+  ok    2.3 door hidden before key
+  ok    3.1 drawer opens on node click
+  ok    3.2 drawer shows YouTube-era title
+  ok    3.3 index row focused and drawer closed
+  ok    4.1 palette opens
+  ok    4.2 palette lists all 9 commands   9
+  ok    4.3 filter+enter runs and closes
+  ok    4.4 d switches to paper theme
+  ok    4.5 l draws lineage labels
+  ok    5.1 player has the AS OF scrubber
+  ok    5.2 year bars drawn (6)
+  ok    5.3 scrub back to 2023
+  ok    5.4 6 ghost nodes (2024-2026)   6
+  ok    5.5 ghost click yields a fragment
+  ok    5.6 room button blocked without the key
+  ok    6.1 badge still says ?
+  ok    6.2 key returned: badge disappears
+  ok    6.3 body marked keyed
+  ok    6.4 door visible
+  ok    6.5 cat fragment a collected
+  ok    6.6 player button opens the room after the key
+  ok    6.7 terminal 2nd line is 前回来た
+  ok    7.1 total reaches 100
+  ok    7.2 total reaches 100
+  ok    7.3 total reaches 100
+  ok    8.1 even split scores in 40-78   66/78/76
+  ok    8.2 average shown
+  ok    8.3 near-perfect scores >=98   99
+  ok    9.1 five runs listed
+  ok    9.2 #0302 mentions the session-order bug
+  ok    9.3 3 runs read -> 失敗 record
+  ok    9.4 #0291 yields fragment c
+  ok    10.1 ten papers with history
+  ok    10.2 fragment d collected
+  ok    10.3 chain revealed
+  ok    10.4 mutual link visible
+  ok    10.5 choice recorded in terminal
+  ok    10.6 after reveal the cat speaks
+  ok    10.7 index gained 1 extra row
+  ok    10.8 投稿から N 日 on the unnamed node
+  ok    11.1 oracle point placed
+  ok    11.2 PLAY drives to 2026   2026
+  ok    11.3 再生 record unlocked
+  ok    11.4 theme filter dims other clusters
+  ok    11.5 fragments survive reload
+  ok    11.6 key state survives reload
+  ok    11.7 oracle survives reload
+  ok    12.1 no horizontal overflow on 390px   overflow=0
+  ok    12.2 room reachable on mobile
+  ok    13.1 print hides player and cat
+  ok    13.2 reduced-motion renders static network
+  ok    13.3 reduced-motion stops the halo animation
+
+pageerrors / console errors: 0
+
+flows passed 74 / 74

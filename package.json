@@ -1,0 +1,13 @@
+{
+  "name": "atlas-of-publications",
+  "version": "3.0.0",
+  "private": true,
+  "description": "ATLAS OF PUBLICATIONS — 静的 HTML 1 ファイルの研究者サイト（地図・隠し要素・伏線回収）",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}

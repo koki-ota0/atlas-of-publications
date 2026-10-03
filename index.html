@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATLAS OF PUBLICATIONS — 推薦のネットワーク</title>
+<meta name="description" content="2021–2026。YouTube の推薦を測った 10 本を、引用関係のネットワークとして置いた個人研究者サイト。査読中の点には、まだ名前がない。">
+<meta name="color-scheme" content="dark light">
+<style>
+/* ============================================================
+   0. tokens
+   ============================================================ */
+:root{
+  --bg:#0b0d11; --panel:#101419; --panel2:#0e1216; --ink:#e8ecf1; --ink2:#aab6c4;
+  --muted:#7b8794; --line:#1e242c; --line2:#2a323d; --accent:#6fd2c0; --accent2:#d9a441;
+  --danger:#c96a5a; --mapbg:#0d1116; --grid:#1a212a; --focus:#e0b34a;
+  --hatch:#8d99a6;
+  --yt:#ff2d46;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Yu Gothic UI",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --r:3px; --maxw:1080px;
+}
+html[data-theme="light"]{
+  --yt:#c8102e;
+  --bg:#f7f7f4; --panel:#ffffff; --panel2:#fbfbf9; --ink:#181c22; --ink2:#4a525c;
+  --muted:#6c757f; --line:#e2e2dc; --line2:#cfcfc6; --accent:#146d61; --accent2:#8a5a00;
+  --danger:#9c3b2c; --mapbg:#ffffff; --grid:#ececE4; --focus:#8a5a00; --hatch:#6c757f;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.9; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+::selection{background:var(--accent2);color:#101318}
+a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line2)}
+a:hover{border-bottom-color:var(--accent)}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+:focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+h1,h2,h3{font-weight:600; letter-spacing:.005em; margin:0}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:0;background:var(--panel);padding:10px 16px;z-index:200}
+.skip:focus{left:12px;top:12px}
+
+/* ============================================================
+   1. header / colophon (name, state, press)
+   ============================================================ */
+header.site{padding:34px 0 0}
+.bar{display:flex; justify-content:space-between; align-items:baseline; gap:18px; font-family:var(--mono);
+     font-size:11.5px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase}
+.bar .left{display:flex; gap:14px; flex-wrap:wrap}
+.bar .press{display:flex; gap:6px; align-items:center; color:var(--muted); letter-spacing:.14em; text-transform:uppercase}
+.bar .press:hover{color:var(--ink2)}
+.bar .press kbd{font-family:var(--mono); font-size:11px; border:1px solid var(--line2); padding:1px 6px; border-radius:var(--r); color:var(--ink2)}
+.colophon{display:grid; grid-template-columns:1.55fr 1fr; gap:40px; align-items:end; padding:30px 0 22px}
+.who h1{font-size:44px; line-height:1.15; letter-spacing:-.02em}
+.who h1 small{display:block; font-size:12.5px; font-family:var(--mono); letter-spacing:.22em; color:var(--muted); text-transform:uppercase; margin-top:12px; font-weight:400}
+.who p.def{color:var(--ink2); margin:16px 0 0; max-width:46ch}
+.who p.def b{color:var(--ink); font-weight:600}
+.meta{font-family:var(--mono); font-size:12.5px; color:var(--ink2); display:grid; gap:2px}
+.meta div{display:flex; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); padding:6px 0}
+.meta span:first-child{color:var(--muted); letter-spacing:.06em}
+.rule{height:1px; background:var(--line); margin:4px 0 0}
+
+/* ============================================================
+   2. atlas
+   ============================================================ */
+section.atlas{padding:38px 0 8px}
+.shead{display:flex; justify-content:space-between; align-items:baseline; gap:20px; margin-bottom:14px}
+.shead h2{font-size:20px}
+.shead .hint{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.08em; text-align:right}
+.shead .hint b{color:var(--ink2); font-weight:500}
+.chipline{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 12px}
+.chip{font-family:var(--mono); font-size:11.5px; color:var(--ink2); border:1px solid var(--line2); border-radius:999px;
+      padding:3px 11px; background:var(--panel2)}
+.chip[aria-pressed="true"]{border-color:var(--accent); color:var(--ink); background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.chip .n{color:var(--muted); margin-left:5px}
+.chipboard{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-left:auto; padding:3px 0}
+
+.mapscroll{position:relative}
+#mapwrap{position:relative; border:1px solid var(--line); background:var(--mapbg); border-radius:var(--r); overflow:hidden}
+#mapinner{overflow-x:auto; overscroll-behavior-x:contain}
+#mapsvg{display:block; width:100%; height:auto; min-width:0; touch-action:manipulation}
+#mapsvg .grid{stroke:var(--grid); stroke-width:1}
+#mapsvg .dots{fill:var(--ink); opacity:.10}
+#mapsvg .yearlab{fill:var(--muted); font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-anchor:middle}
+#mapsvg .bandlab{fill:var(--ink2); font-family:var(--sans); font-size:11.5px; letter-spacing:.08em}
+#mapsvg .clab{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; opacity:.9}
+#mapsvg .bandline{stroke:var(--grid); stroke-width:1; stroke-dasharray:1 5}
+#mapsvg .axisline{stroke:var(--line2); stroke-width:1}
+#mapsvg .edge{stroke:var(--line2); stroke-width:1; fill:none}
+#mapsvg .edgelab{fill:var(--muted); font-family:var(--mono); font-size:9.5px; letter-spacing:.06em}
+#mapsvg .node{cursor:pointer}
+#mapsvg .node .disc{transition:opacity .18s ease}
+#mapsvg .node text{font-family:var(--mono); font-size:10px; fill:var(--ink2); letter-spacing:.04em; pointer-events:none}
+#mapsvg .node .idx{fill:var(--muted); font-size:9px}
+#mapsvg .node:hover .disc{opacity:.82}
+#mapsvg .node:focus-visible{outline:none}
+#mapsvg .node:focus-visible .disc{stroke:var(--focus); stroke-width:2}
+#mapsvg .stub{font-family:var(--mono); font-size:10px; letter-spacing:.04em}
+#mapsvg .node text,#mapsvg .clab,#mapsvg .edgelab,#mapsvg .stub,#mapsvg .mylab,#mapsvg .bandlab{
+  paint-order:stroke; stroke:var(--mapbg); stroke-width:3.4px; stroke-linejoin:round}
+#mapsvg .stub .a{fill:var(--ink2)}
+#mapsvg .stub .b{fill:var(--muted); font-size:9.5px}
+#mapsvg .leader{stroke:var(--danger); stroke-width:1; stroke-dasharray:1 3; opacity:.75}
+#mapsvg .node.dim{opacity:.20}
+#mapsvg .ghost .disc{fill:none!important;stroke:var(--muted);stroke-width:1;stroke-dasharray:2 3}
+#mapsvg .ghost text{fill:var(--muted)}
+#mapsvg .hit{fill:none; pointer-events:all; cursor:pointer}
+#mapsvg .mylab{fill:var(--accent2); font-family:var(--mono); font-size:9.5px}
+#mapsvg .dbg{fill:none; stroke:var(--danger); stroke-width:1}
+#mapsvg .dbgtext{fill:var(--danger); font-family:var(--mono); font-size:9px}
+.mappointer #mapcontrols{opacity:.25; pointer-events:none}
+#mapcontrols{position:absolute; right:10px; top:10px; display:flex; gap:6px; transition:opacity .2s}
+#mapcontrols button{font-family:var(--mono); font-size:11px; border:1px solid var(--line2); background:color-mix(in srgb,var(--panel) 86%,transparent);
+  color:var(--ink2); padding:4px 9px; border-radius:var(--r); backdrop-filter:blur(3px)}
+#mapcontrols button:hover{color:var(--ink); border-color:var(--accent)}
+#maptip{position:absolute; z-index:5; pointer-events:none; background:var(--panel); border:1px solid var(--line2);
+  border-radius:var(--r); padding:9px 12px; max-width:290px; font-size:12px; line-height:1.65; color:var(--ink2);
+  box-shadow:0 8px 26px rgba(0,0,0,.35); opacity:0; transition:opacity .12s}
+#maptip.on{opacity:1}
+#maptip .t{color:var(--ink); font-weight:600}
+#maptip .m{font-family:var(--mono); font-size:10.5px; color:var(--muted); letter-spacing:.06em; margin-top:4px}
+#maptip .cat{color:var(--accent2)}
+.mapfoot{display:flex; justify-content:space-between; gap:18px; align-items:baseline; margin-top:9px; flex-wrap:wrap}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--muted)}
+.legend i{display:inline-block; vertical-align:middle; margin-right:6px}
+.maphint{display:none; font-size:10.5px; color:var(--muted)}
+.mapfoot .note{font-family:var(--mono); font-size:11px; color:var(--muted); text-align:right}
+.mapfoot .note b{color:var(--ink2); font-weight:500}
+
+/* AS OF slider */
+.asof{display:flex; align-items:center; gap:14px; font-family:var(--mono); font-size:11.5px; color:var(--muted);
+  border:1px solid var(--line); border-radius:var(--r); padding:8px 13px; margin-top:12px; background:var(--panel2)}
+.asof label{letter-spacing:.12em}
+.asof input[type=range]{flex:1; accent-color:var(--accent); min-width:80px}
+.asof .val{color:var(--ink); min-width:9ch; letter-spacing:.06em}
+.asof button{font-family:var(--mono); font-size:11px; color:var(--muted); border:1px solid transparent; padding:2px 6px}
+.asof button:hover{color:var(--ink); border-color:var(--line2)}
+
+/* ============================================================
+   3. index of publications
+   ============================================================ */
+section.index{padding:40px 0 10px}
+.filters{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 4px; align-items:center}
+.paper{display:grid; grid-template-columns:64px 1fr 132px; gap:22px; padding:20px 0; border-bottom:1px solid var(--line)}
+.paper:hover{background:var(--panel2)}
+.paper .yr{font-family:var(--mono); font-size:12.5px; color:var(--muted); letter-spacing:.06em; padding-top:3px}
+.paper .yr b{display:block; color:var(--ink2); font-weight:500; font-size:11px; margin-bottom:4px}
+.paper h3{font-size:16.5px; line-height:1.6; font-weight:600}
+.paper h3 .idx{font-family:var(--mono); font-size:11px; color:var(--muted); margin-right:9px; font-weight:400}
+.paper .sub{font-family:var(--mono); font-size:11.5px; color:var(--ink2); margin-top:7px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+.paper .note{color:var(--ink2); font-size:13.5px; margin-top:9px; max-width:74ch}
+.paper .note .revline{display:block; color:var(--accent2); font-family:var(--mono); font-size:11.5px; margin-top:7px}
+.paper .aside{text-align:right; font-family:var(--mono); font-size:11.5px; color:var(--muted); padding-top:3px}
+.paper .aside .cites{color:var(--ink2); display:block}
+.paper .aside .links{display:flex; gap:10px; justify-content:flex-end; margin-top:9px; flex-wrap:wrap}
+.paper .aside .links span{border-bottom:1px dotted var(--line2); font-size:11px}
+.lk{cursor:help}
+.paper .aside .links .off{color:var(--muted); border:0}
+.paper .aside .hist{margin-top:11px}
+.paper .aside .hist button{font-family:var(--mono); font-size:11px; color:var(--accent); border-bottom:1px solid transparent}
+.paper .aside .hist button:hover{border-bottom-color:var(--accent)}
+.st{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; letter-spacing:.04em}
+.st i{width:9px; height:9px; border-radius:50%; flex:none}
+.st.accepted i{background:var(--accent)}
+.st.oral i{background:var(--accent); box-shadow:0 0 0 2px var(--mapbg),0 0 0 3.5px var(--accent)}
+.st.pre i{background:var(--mapbg); border:1.5px solid var(--accent2)}
+.st.review i{background:var(--mapbg); border:1.5px dashed var(--danger)}
+.st.accepted{color:var(--ink2)} .st.pre{color:var(--accent2)} .st.review{color:var(--danger)}
+.cc{color:var(--muted); font-family:var(--mono); font-size:11.5px}
+.cc.dim{color:var(--line2)}
+
+/* ============================================================
+   4. overlap note / footer
+   ============================================================ */
+.fieldnotes{padding:42px 0 4px}
+.fieldnotes .shead{margin-bottom:18px}
+.fieldnotes .shead h2{font-size:18px}
+.fieldnotes .lede{max-width:42ch;color:var(--muted);font-size:12px;line-height:1.7;text-align:right}
+.fieldgrid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:10px}
+.fieldcard{min-height:178px;border:1px solid var(--line);background:var(--panel2);padding:18px 18px 16px;position:relative;overflow:hidden}
+.fieldcard::after{content:"";position:absolute;inset:auto -18px -28px auto;width:120px;height:120px;border:1px solid var(--line2);border-radius:50%;opacity:.55}
+.fieldcard:first-child{border-top:2px solid var(--yt)}
+.fieldcard:nth-child(2){border-top:2px solid var(--accent)}
+.fieldcard:nth-child(3){border-top:2px solid var(--accent2)}
+.fieldcard .tag{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.fieldcard h3{font-size:16px;line-height:1.45;margin:18px 0 8px;max-width:18ch}
+.fieldcard p{font-size:12.5px;line-height:1.7;color:var(--ink2);margin:0;max-width:31ch}
+.fieldcard .mark{position:absolute;right:16px;top:15px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.signal{display:flex;align-items:center;gap:10px;margin-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.signal i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent)}
+@media (max-width:760px){.fieldnotes{padding-top:30px}.fieldnotes .lede{text-align:left;margin-top:5px}.fieldgrid{grid-template-columns:1fr}.fieldcard{min-height:150px}.fieldcard h3{margin-top:14px}}
+.overlap{padding:38px 0 8px}
+.overlap .card{border:1px solid var(--line); border-left:2px solid var(--accent2); background:var(--panel2);
+  border-radius:var(--r); padding:20px 24px; max-width:78ch}
+.overlap h3{font-size:15px; margin-bottom:8px}
+.overlap p{color:var(--ink2); font-size:13.5px; margin:8px 0 0}
+.overlap .src{font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:12px}
+footer.site{margin-top:44px; border-top:1px solid var(--line); padding:26px 0 60px}
+footer.site .cols{display:grid; grid-template-columns:1fr 1fr; gap:30px; font-size:12.5px; color:var(--ink2)}
+footer.site h4{margin:0 0 8px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; font-weight:500}
+footer.site p{margin:0 0 8px}
+.catline{display:flex; align-items:center; gap:12px; margin-top:18px; color:var(--muted)}
+#catbtn{color:var(--muted); opacity:.55; transition:opacity .2s}
+#catbtn:hover{opacity:1; color:var(--ink2)}
+.catnote{font-size:10.5px; letter-spacing:.08em}
+#doordock{position:fixed; right:14px; bottom:14px; z-index:60}
+#doordock button{width:30px;height:38px; border:1px solid var(--line2); border-radius:2px 2px 1px 1px; opacity:.30;
+  background:var(--panel); color:var(--muted); transition:opacity .2s, border-color .2s; display:block}
+#doordock button:hover{opacity:1; border-color:var(--accent); color:var(--ink2)}
+#doordock button i{display:block; width:2px;height:2px;border-radius:50%;background:currentColor;margin:0 0 0 20px;transform:translateY(19px)}
+@media print{#doordock,#catdock,.catline,#maphint{display:none!important}}
+footer.site .fine{margin-top:26px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  font-family:var(--mono); font-size:11px; color:var(--muted)}
+
+/* ============================================================
+   5. overlays (drawer / room / palette / game / history)
+   ============================================================ */
+.ovl{position:fixed; inset:0; z-index:80; display:none; background:color-mix(in srgb,var(--bg) 82%,transparent); backdrop-filter:blur(2px)}
+.ovl.on{display:block}
+.ovl .sheet{position:absolute; right:0; top:0; bottom:0; width:min(660px,100%); background:var(--panel);
+  border-left:1px solid var(--line2); box-shadow:-24px 0 60px rgba(0,0,0,.4); display:flex; flex-direction:column;
+  animation:slidein .26s cubic-bezier(.22,.8,.24,1)}
+@keyframes slidein{from{transform:translateX(24px);opacity:.4}to{transform:none;opacity:1}}
+.ovl .sheet>header{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 24px; border-bottom:1px solid var(--line)}
+.ovl .sheet>header h3{font-size:15px}
+.ovl .sheet>header .k{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.1em}
+.ovl .sheet .body{overflow:auto; padding:22px 24px 60px; flex:1}
+.ovl .sheet .body h4{font-size:13px; margin:22px 0 10px; font-family:var(--mono); letter-spacing:.1em; color:var(--muted); text-transform:uppercase; font-weight:500}
+.ovl .sheet .body h4:first-child{margin-top:0}
+.xclose{border:1px solid var(--line2); border-radius:var(--r); padding:3px 9px; font-family:var(--mono); font-size:11px; color:var(--ink2)}
+.xclose:hover{border-color:var(--accent); color:var(--ink)}
+
+/* palette */
+#palette.ovl{background:color-mix(in srgb,var(--bg) 72%,transparent)}
+#palette .box{position:relative; margin:12vh auto 0; width:min(560px,calc(100% - 32px)); background:var(--panel);
+  border:1px solid var(--line2); border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,.5); animation:pop .18s ease}
+@keyframes pop{from{transform:translateY(-6px);opacity:0}to{transform:none;opacity:1}}
+#palette .box>header{padding:12px 18px; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11.5px;
+  color:var(--muted); letter-spacing:.12em; display:flex; justify-content:space-between}
+#palette ul{list-style:none; margin:0; padding:8px; max-height:52vh; overflow:auto}
+#palette li{display:grid; grid-template-columns:38px 1fr auto; gap:12px; align-items:center; padding:8px 12px; border-radius:var(--r); cursor:pointer}
+#palette li .cmd{font-family:var(--mono); font-size:11.5px; color:var(--accent2); letter-spacing:.06em}
+#palette li .lb{font-size:13.5px; color:var(--ink2)}
+#palette li .fmt{font-family:var(--mono); font-size:10.5px; color:var(--muted); letter-spacing:.08em}
+#palette li.sel{background:var(--panel2); box-shadow:inset 0 0 0 1px var(--line2)}
+#palette li.sel .lb{color:var(--ink)}
+#palette footer{padding:10px 18px; border-top:1px solid var(--line); font-family:var(--mono); font-size:10.5px; color:var(--muted); display:flex; justify-content:space-between}
+
+/* achievements panel (inside palette footer area / separate) */
+.achline{display:flex; gap:8px; flex-wrap:wrap; font-family:var(--mono); font-size:10.5px; color:var(--muted); padding:9px 18px; border-top:1px solid var(--line)}
+.achline .a{color:var(--ink2); border:1px solid var(--line2); border-radius:999px; padding:1px 8px}
+.achline .a.off{opacity:.5}
+
+/* room */
+#room .room{position:absolute; inset:0; display:grid; grid-template-columns:220px 1fr 300px; grid-template-rows:52px 1fr 40px;
+  background:var(--panel); color:var(--ink)}
+#room .rhead{grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 20px; border-bottom:1px solid var(--line)}
+#room .rhead .t{font-family:var(--mono); font-size:12px; letter-spacing:.2em; color:var(--ink2)}
+#room .rhead .right{display:flex; gap:12px; align-items:center; font-family:var(--mono); font-size:11px; color:var(--muted)}
+#room .lamp{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 10px var(--accent)}
+#room .rnav{border-right:1px solid var(--line); padding:14px 10px; display:flex; flex-direction:column; gap:4px}
+#room .rnav button{text-align:left; font-family:var(--mono); font-size:12.5px; color:var(--ink2); padding:8px 11px; border-radius:var(--r); line-height:1.5;
+  display:grid; grid-template-columns:22px 1fr; gap:8px; align-items:baseline}
+#room .rnav button .d{color:var(--accent2); font-size:11px}
+#room .rnav button:hover{background:var(--panel2)}
+#room .rnav button[aria-current="true"]{background:var(--panel2); color:var(--ink); box-shadow:inset 2px 0 0 var(--accent)}
+#room .rbody{overflow:auto; padding:24px 30px 60px}
+#room .rbody h3{font-size:16px; margin-bottom:6px}
+#room .rbody .lead{color:var(--muted); font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; margin-bottom:18px}
+#room .rterm{border-left:1px solid var(--line); background:var(--panel2); padding:16px 18px; overflow:auto; font-family:var(--mono); font-size:11.5px; line-height:1.85; color:var(--ink2)}
+#room .rterm .cursor{display:inline-block;width:7px;height:12px;background:var(--accent);vertical-align:-1px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#room .rfoot{grid-column:1/-1; border-top:1px solid var(--line); display:flex; align-items:center; padding:0 20px; gap:18px; font-family:var(--mono); font-size:10.5px; color:var(--muted)}
+#room .rfoot .frag{margin-left:auto; letter-spacing:.1em}
+#room .rfoot .frag b{color:var(--accent2); font-weight:500}
+.inviewbox{width:34px;height:34px;border:1px solid var(--line2);border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono); font-size:10px; color:var(--muted); margin:0 auto 14px}
+
+/* attention game */
+.gwrap{display:grid; grid-template-columns:1.05fr .95fr; gap:26px}
+.gsent{font-family:var(--mono); font-size:13px; line-height:1.9; margin:6px 0 14px}
+.gsent .w{padding:1px 2px}
+.gsent .hit{color:var(--accent2)}
+.gsent .miss{text-decoration:underline dotted var(--danger)}
+.grow{display:grid; grid-template-columns:92px 1fr 54px; gap:8px; align-items:center; margin-bottom:4px}
+.grow input.gv{width:100%; background:var(--panel2); border:1px solid var(--line2); border-radius:2px; padding:3px 5px;
+  font-family:var(--mono); font-size:11px; color:var(--ink); text-align:right}
+.grow input.gv:disabled{opacity:.65; border-color:transparent; background:transparent}
+.gtrack .sgl{position:absolute; top:0; bottom:0; width:1px; background:var(--line2); opacity:.55}
+.grow .gl{font-family:var(--mono); font-size:10.5px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.gtrack{position:relative; height:22px; background:var(--panel2); border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.gtrack .fp{position:absolute; top:2px; bottom:2px; background:color-mix(in srgb,var(--accent) 30%,transparent); border-right:2px solid var(--accent)}
+.gtrack .fa{position:absolute; top:2px; bottom:2px; background:color-mix(in srgb,var(--accent2) 45%,transparent); border-right:2px solid var(--accent2)}
+.gtrack .err{position:absolute; left:0; bottom:0; height:5px;
+  background:repeating-linear-gradient(135deg,var(--danger) 0 2px,transparent 2px 5px); opacity:.8}
+.grow .gv{font-family:var(--mono); font-size:11px; color:var(--ink2); text-align:right}
+.gscale2{display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin:2px 0 4px}
+.gscale2 .seg{height:7px; border:1px solid var(--line2)}
+.gaxis{display:grid; grid-template-columns:repeat(4,1fr) 5ch; font-family:var(--mono); font-size:10px;
+  color:var(--muted); margin-bottom:14px}
+.gaxis span:nth-child(1){grid-column:1; justify-self:start}
+.gaxis span:nth-child(2),.gaxis span:nth-child(3),.gaxis span:nth-child(4){grid-column:auto; justify-self:start}
+.gaxis span:nth-child(5){justify-self:end}
+.gscale .seg{height:6px; border:1px solid var(--line2); position:relative}
+.gscale .seg.s1{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.gscale .seg.s2{background:repeating-linear-gradient(135deg,var(--hatch) 0 2px,transparent 2px 5px)}
+.gscale .seg.s3{background:repeating-linear-gradient(135deg,var(--hatch) 0 5px,transparent 5px 8px)}
+.gscore{font-family:var(--mono); font-size:12px; color:var(--ink2); margin-top:12px; display:flex; gap:18px; flex-wrap:wrap}
+.gscore b{color:var(--accent); font-weight:500}
+.gpass{border:1px solid var(--accent); border-radius:var(--r); padding:14px 16px; margin-top:14px; font-size:13px;
+  background:color-mix(in srgb,var(--accent) 8%,transparent); display:none}
+.gpass.on{display:block; animation:pop .3s ease}
+.gform{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:14px 0}
+.gform label{font-family:var(--mono); font-size:10.5px; color:var(--muted); display:block; margin-bottom:4px}
+.gform input{width:100%; background:var(--panel2); border:1px solid var(--line2); color:var(--ink); border-radius:var(--r);
+  padding:7px 9px; font-family:var(--mono); font-size:13px}
+.gform input:focus{outline:2px solid var(--focus); outline-offset:1px}
+.btn{border:1px solid var(--line2); border-radius:var(--r); padding:7px 14px; font-family:var(--mono); font-size:12px; color:var(--ink2)}
+.btn:hover{border-color:var(--accent); color:var(--ink)}
+.btn.primary{border-color:var(--accent); color:var(--ink); background:color-mix(in srgb,var(--accent) 10%,transparent)}
+
+/* experiments */
+.xlist{list-style:none; margin:0; padding:0; border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.xlist li{display:grid; grid-template-columns:74px 1fr 92px; gap:14px; padding:9px 13px; border-bottom:1px solid var(--line);
+  cursor:pointer; font-family:var(--mono); font-size:11.5px; color:var(--ink2); align-items:center}
+.xlist li:last-child{border-bottom:0}
+.xlist li:hover{background:var(--panel2)}
+.xlist li[aria-current="true"]{background:var(--panel2); box-shadow:inset 2px 0 0 var(--accent2); color:var(--ink)}
+.xlist .rid{color:var(--accent2)}
+.xlist .shape{color:var(--ink)}
+.xlist .out{color:var(--muted); text-align:right; font-size:10.5px}
+.xchart{margin:16px 0 6px; border:1px solid var(--line); border-radius:var(--r); background:var(--panel2); padding:8px}
+.xchart svg{display:block; width:100%; height:auto}
+.xchart .ax{stroke:var(--line2); stroke-width:1}
+.xchart .curve{fill:none; stroke:var(--accent); stroke-width:1.4}
+.xchart .tick{font-family:var(--mono); font-size:9px; fill:var(--muted)}
+.xnote{font-size:13px; color:var(--ink2); border-left:2px solid var(--line2); padding-left:14px; margin-top:14px}
+.xnote b{color:var(--ink); font-weight:600}
+.xmsg{margin-top:16px; border:1px solid var(--line2); border-left:2px solid var(--accent2); padding:12px 15px; font-size:13px; color:var(--ink2);
+  background:var(--panel2); border-radius:var(--r)}
+.xmsg .s1{color:var(--accent2)}
+
+/* history / versions */
+.histpaper{border:1px solid var(--line); border-radius:var(--r); margin-bottom:14px; overflow:hidden}
+.histpaper>button.h{width:100%; text-align:left; padding:13px 16px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:baseline}
+.histpaper>button.h:hover{background:var(--panel2)}
+.histpaper .ht{font-size:14px; font-weight:600}
+.histpaper .hm{font-family:var(--mono); font-size:11px; color:var(--muted)}
+.histpaper .steps{border-top:1px solid var(--line); padding:6px 16px 14px}
+.histpaper .steps li{font-size:13px; color:var(--ink2); margin:10px 0; display:grid; grid-template-columns:96px 1fr; gap:14px}
+.histpaper .steps li .d{font-family:var(--mono); font-size:10.5px; color:var(--muted)}
+.rev{border-left:2px solid var(--danger); padding-left:13px; margin:12px 0 0}
+.rev .q{font-size:13px; color:var(--ink)}
+.rev .a{font-size:12.5px; color:var(--muted); margin-top:5px; font-family:var(--mono)}
+.unresolved{border-left:2px solid var(--accent2); padding:12px 15px; margin-top:14px; font-size:13px; color:var(--ink2); background:var(--panel2)}
+.choice{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.choice .picked{font-family:var(--mono); font-size:12px; color:var(--accent); border:1px solid var(--accent); border-radius:var(--r); padding:6px 12px}
+
+/* toast */
+#toasts{position:fixed; left:20px; bottom:20px; z-index:120; display:flex; flex-direction:column; gap:8px;
+  align-items:flex-start; pointer-events:none; max-width:min(420px,72vw)}
+#toasts .t{background:var(--panel); border:1px solid var(--line2); border-radius:999px; padding:7px 16px; font-family:var(--mono);
+  font-size:11.5px; color:var(--ink2); box-shadow:0 10px 30px rgba(0,0,0,.35); animation:tin .3s ease}
+#toasts .t b{color:var(--accent2); font-weight:500}
+body.room-open #toasts{bottom:auto; top:66px; left:20px}
+@keyframes tin{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
+
+/* ============================================================
+   5.5 youtube layer — 播放器 / 動画リスト / ネットワーク
+   ============================================================ */
+.playmark{width:0;height:0;border-left:9px solid var(--yt);border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;
+  display:inline-block;margin-right:10px;transform:translateY(-1px)}
+/* player — AS OF の年スライダを YouTube のシークバーとして使う */
+.player{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--panel2);
+  border-radius:6px;padding:7px 12px;margin-top:12px}
+.player .cbtn{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid transparent;color:var(--ink2);font-size:12px;position:relative;flex:none}
+.player .cbtn:hover{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}
+.player .cbtn.playbtn{background:var(--yt);color:#fff}
+.player .cbtn.playbtn:hover{background:var(--yt);filter:brightness(1.14)}
+.player .cbtn[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  background:color-mix(in srgb,var(--bg) 94%,transparent);color:var(--ink);border:1px solid var(--line2);
+  font-family:var(--mono);font-size:10.5px;padding:4px 8px;border-radius:3px;white-space:nowrap;z-index:20}
+.ytrack{flex:1;position:relative;height:26px;display:flex;align-items:center;min-width:90px}
+.ybars{position:absolute;left:0;right:0;top:3px;height:7px;display:flex;gap:2px;pointer-events:none}
+.ybars i{flex:1;background:var(--line2);border-radius:1px;opacity:.45}
+.ybars i.on{background:var(--yt);opacity:.85}
+.ybars i.rev{border:1px dashed var(--line2);background:transparent;opacity:.8}
+.yscrub{position:relative;width:100%;height:26px;margin:0;appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer;z-index:2}
+.yscrub::-webkit-slider-runnable-track{height:7px;background:color-mix(in srgb,var(--ink) 12%,transparent);border-radius:4px}
+.yscrub::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;background:var(--yt);margin-top:-3.5px;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--yt) 18%,transparent)}
+.yscrub::-moz-range-track{height:7px;background:color-mix(in srgb,var(--ink) 12%,transparent);border-radius:4px}
+.yscrub::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:var(--yt)}
+.ptime{font-family:var(--mono);font-size:12px;color:var(--ink);min-width:19ch;white-space:nowrap}
+.pctl{display:flex;gap:2px;margin-left:auto;border-left:1px solid var(--line);padding-left:8px}
+@media (max-width:760px){.pctl{display:none}.ptime{min-width:0;font-size:11px}}
+
+/* 索引は論文リストのまま（動画の装飾はしない） */
+.badge{display:inline-block;min-width:13px;height:13px;background:var(--ink2);color:var(--bg);border-radius:50%;
+  font-size:9px;line-height:13px;text-align:center;font-weight:700;font-family:var(--sans);padding:0 2px}
+
+/* チャンネルヘッダ（プロフィールだけ YouTube 風） */
+.chan{position:relative;padding-bottom:2px}
+.banner{height:124px;border:1px solid var(--line);border-radius:5px;overflow:hidden;position:relative;
+  background:
+    radial-gradient(120% 180% at 8% 0%, color-mix(in srgb,var(--yt) 22%,transparent), transparent 58%),
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 42px),
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg,var(--panel2),var(--panel))}
+.banner .wm{position:absolute;right:26px;bottom:-30px;font-family:var(--mono);font-size:104px;letter-spacing:.04em;
+  color:var(--ink);opacity:.045;line-height:1}
+.banner .sig{position:absolute;right:22px;top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ink2);opacity:.8}
+.banner .playline{position:absolute;left:22px;top:18px;display:flex;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.18em;color:var(--ink2);opacity:.85}
+.chanrow{display:grid;grid-template-columns:104px 1fr auto;gap:22px;align-items:start;padding:0 4px;margin-top:-40px;position:relative;z-index:2}
+.avatar{width:96px;height:96px;border-radius:50%;border:3px solid var(--bg);background:color-mix(in srgb,var(--accent) 16%,var(--panel));
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:27px;letter-spacing:.02em;
+  color:var(--ink2);box-shadow:0 0 0 1px var(--line2)}
+.chinfo h1{display:flex;align-items:center;gap:9px;font-size:27px;letter-spacing:-.01em}
+.chinfo .check{width:16px;height:16px;flex:none;color:var(--muted)}
+.chinfo .handle{font-family:var(--mono);font-size:12px;color:var(--ink2);margin-top:7px;letter-spacing:.04em}
+.cstats{display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:11px}
+.cstats b{color:var(--ink);font-weight:500}
+.cstats i{font-style:normal;color:var(--line2)}
+.chinfo .def{margin-top:13px;max-width:62ch;color:var(--ink2)}
+.chinfo .def b{color:var(--ink);font-weight:600}
+.chact{display:flex;gap:9px;align-items:flex-start;padding-top:44px}
+.subbtn{display:flex;align-items:center;gap:9px;background:var(--yt);color:#fff;border-radius:999px;padding:10px 17px;
+  font-size:13px;font-weight:600;letter-spacing:.02em;border:1px solid transparent;transition:filter .18s,background .2s,color .2s}
+.subbtn:hover{filter:brightness(1.1)}
+.subbtn.on{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink2);font-weight:500;border-color:var(--line2)}
+.subbtn.on:hover{filter:none;color:var(--ink)}
+.subbtn svg{display:block;flex:none}
+.ctabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin-top:20px;padding:0 4px}
+.ctabs button{position:relative;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);padding:11px 1px 10px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.ctabs button:hover{color:var(--ink2)}
+.ctabs button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--yt)}
+@media (max-width:900px){
+  .chanrow{grid-template-columns:76px 1fr;gap:16px;margin-top:-34px}
+  .avatar{width:74px;height:74px;font-size:21px}
+  .chact{grid-column:2;padding-top:0}
+  .chinfo h1{font-size:23px}
+  .banner{height:96px}
+  .banner .wm{font-size:78px}
+}
+
+/* ネットワーク */
+#mapsvg .edge{stroke:color-mix(in srgb,var(--ink) 26%,transparent);stroke-width:1.2;fill:none}
+#mapsvg .earrow{fill:color-mix(in srgb,var(--ink) 34%,transparent)}
+#mapsvg .edge.back{stroke-dasharray:2 3}
+#mapsvg .edge.live{stroke:var(--yt);stroke-width:1.4;opacity:.85;stroke-dasharray:3 6;animation:flow 1.8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-18}}
+#mapsvg .hull{fill:currentColor;opacity:.05}
+#mapsvg .node .disc{transition:opacity .18s ease}
+#mapsvg .node.glow .disc{filter:drop-shadow(0 0 8px currentColor)}
+#mapsvg .halo{fill:none;stroke:var(--yt);stroke-width:1.2;transform-box:fill-box;transform-origin:center;
+  animation:halo 2.8s ease-out infinite}
+@keyframes halo{0%{transform:scale(1);opacity:.55}70%{transform:scale(2.2);opacity:0}100%{transform:scale(2.2);opacity:0}}
+#mapsvg .node.pulse .disc{animation:nodetick 3.4s ease-in-out infinite}
+@keyframes nodetick{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* 猫と扉 — 見つけられるように */
+#catdock{position:fixed;right:16px;bottom:62px;z-index:61}
+#catdock>button{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);
+  background:color-mix(in srgb,var(--panel) 92%,transparent);color:var(--ink2);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 22px rgba(0,0,0,.4);transition:transform .18s,border-color .2s,color .2s;opacity:.92}
+#catdock>button:hover{opacity:1;border-color:var(--accent);color:var(--ink)}
+#catdock>button.wig{animation:wig 1.1s ease 2}
+#catdock .badge{position:absolute;right:-3px;top:-3px;background:var(--yt);color:#fff}
+#catdock .lbl{position:absolute;right:54px;bottom:9px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;color:var(--ink2);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);border:1px solid var(--line2);border-radius:3px;padding:3px 9px;
+  opacity:0;transition:opacity .2s;pointer-events:none}
+#catdock>button:hover .lbl{opacity:1}
+@keyframes wig{0%,100%{transform:rotate(0)}30%{transform:rotate(-10deg)}70%{transform:rotate(10deg)}}
+body.keyed #catdock .badge{display:none}
+#doordock button{opacity:.55}
+body.keyed #doordock button{opacity:.92;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
+#doordock .sign{position:absolute;right:40px;bottom:5px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;color:var(--ink2);
+  border:1px solid var(--line2);border-radius:3px;padding:3px 8px;background:color-mix(in srgb,var(--panel) 95%,transparent);
+  opacity:0;transition:opacity .2s;pointer-events:none}
+#doordock:hover .sign{opacity:1}
+body.no-motion *{animation:none!important;transition:none!important}
+
+/* ============================================================
+   6. responsive
+   ============================================================ */
+@media (max-width:900px){
+  #catdock{bottom:56px;right:12px}
+  .paper{grid-template-columns:1fr; gap:12px}
+  .paper .yr{display:flex; gap:9px; align-items:baseline; padding-top:0}
+  .paper .yr b{display:inline;margin:0}
+  .paper .aside{grid-column:2; text-align:left; display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+  .paper .aside .links{justify-content:flex-start; margin-top:0}
+  .paper .aside .hist{margin-top:0}
+  #room .room{grid-template-columns:1fr; grid-template-rows:52px 1fr 46px}
+  #room .rnav{grid-row:3; flex-direction:row; border-right:0; border-top:1px solid var(--line); overflow-x:auto; padding:6px}
+  #room .rnav button{grid-template-columns:1fr; white-space:nowrap}
+  #room .rbody{padding:18px}
+  #room .rterm{display:none}
+  #room .rfoot{grid-row:4}
+  .gwrap{grid-template-columns:1fr}
+  .shead{display:block}
+  .shead .hint{text-align:left; margin-top:8px}
+  #toasts{left:12px; bottom:12px; max-width:calc(100vw - 96px)}
+  #toasts .t{font-size:11px; padding:6px 13px}
+}
+@media (max-width:760px){
+  #mapsvg{min-width:700px}
+  #maphint{display:block}
+  #mapcontrols{right:8px; top:8px}
+  #mapcontrols button{font-size:10px; padding:3px 7px}
+  #mapwrap::after{content:""; position:absolute; right:0; top:0; bottom:0; width:26px; pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--mapbg))}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .bar{gap:10px; font-size:10px; flex-wrap:nowrap}
+  .bar .left{gap:10px; white-space:nowrap}
+  .bar .press{gap:5px; white-space:nowrap}
+  .bar .press span:last-child{display:none}
+  .banner{height:84px}
+  .banner .sig{display:none}
+  .banner .playline{font-size:9.5px; letter-spacing:.1em; right:12px; white-space:nowrap; overflow:hidden}
+  .banner .wm{font-size:64px; bottom:-18px}
+  .chanrow{grid-template-columns:64px 1fr; gap:14px; margin-top:-28px}
+  .avatar{width:62px;height:62px;font-size:18px;border-width:2px}
+  .chinfo h1{font-size:21px}
+  .chinfo .def{font-size:14px}
+  .ctabs{gap:20px}
+  .ctabs button{font-size:10.5px; letter-spacing:.1em}
+  .ovl .sheet{width:100%}
+  body{font-size:14.5px}
+  .who h1{font-size:29px}
+  .bar{font-size:10.5px}
+  .gform{grid-template-columns:1fr 1fr}
+  .gform .g3{grid-column:1/-1}
+}
+@media print{
+  html[data-theme="light"],html[data-theme="dark"]{
+    --bg:#fff;--panel:#fff;--panel2:#fff;--ink:#000;--ink2:#222;--muted:#555;--line:#bbb;--line2:#999;
+    --accent:#000;--accent2:#444;--danger:#000;--mapbg:#fff;--grid:#ddd;--hatch:#888;
+  }
+  body{background:#fff;color:#000}
+  .bar .press,.filters,.asof,#mapcontrols,.hint,#maphint,footer.site .fine .k{display:none!important}
+  .paper{break-inside:avoid}
+  .paper .aside .links a::after{content:" (" attr(href) ")"; font-size:10px}
+  a{border:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#atlas">地図へスキップ</a>
+
+<header class="site">
+  <div class="wrap">
+    <div class="bar">
+      <div class="left">
+        <span>ATLAS OF PUBLICATIONS</span><span>REV. 5.0</span><span>2026-10</span>
+      </div>
+      <div class="press">
+        <span>PRESS</span><kbd>?</kbd><span>FOR COMMANDS</span>
+        <button class="press" id="presshint" type="button" aria-label="コマンドパレットを開く" style="all:unset;cursor:pointer"></button>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="chan" id="top">
+      <div class="banner" aria-hidden="true">
+        <span class="wm">MS</span>
+        <span class="playline"><span class="playmark" style="margin:0"></span>ATLAS OF PUBLICATIONS — CHANNEL</span>
+        <span class="sig">REV. 5.0&nbsp;&nbsp;·&nbsp;&nbsp;外部通信 0</span>
+      </div>
+      <div class="chanrow">
+        <div class="avatar" aria-hidden="true">MS</div>
+        <div class="chinfo">
+          <h1>白沙 ミナト
+            <svg class="check" viewBox="0 0 20 20" role="img" aria-label="本人確認済み"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 10.4l2.7 2.6L14.2 7.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </h1>
+          <div class="handle">@minato.shirasuna&nbsp;&nbsp;·&nbsp;&nbsp;博士課程 3 年&nbsp;&nbsp;·&nbsp;&nbsp;推薦システムの計測</div>
+          <div class="cstats" id="cstats" aria-label="チャンネル統計">
+            <span>論文 <b id="mPub">—</b> 本</span><i>|</i>
+            <span>引用 <b id="mCites">—</b></span><i>|</i>
+            <span>査読中 <b id="mRev">—</b> 本</span><i>|</i>
+            <span><b id="mYears">—</b></span><i>|</i>
+            <span>送信 <b>0</b> bytes</span>
+          </div>
+          <p class="def"><b>YouTube の「次にこれ」が、なぜ毎回違うのかを測っています。</b>視聴セッションの切り方、推薦由来の再生、そして再現しない実験。2021 年から 2026 年までに出した 10 本を、引用関係のネットワークとして置きました。</p>
+        </div>
+        <div class="chact">
+          <button class="subbtn" id="subbtn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M10 2.6c-2.2 0-3.4 1.5-3.4 3.6v1.6c0 .8-.3 1.4-.9 2l-.6.6v.8h9.8v-.8l-.6-.6c-.6-.6-.9-1.2-.9-2V6.2c0-2.1-1.2-3.6-3.4-3.6z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.3 13.9a1.7 1.7 0 0 0 3.4 0" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span id="subtxt">更新を受け取る</span>
+          </button>
+        </div>
+      </div>
+      <nav class="ctabs" id="ctabs" aria-label="チャンネル内の移動">
+        <button type="button" data-tab="top" aria-current="true">ホーム</button>
+        <button type="button" data-tab="atlas">地図</button>
+        <button type="button" data-tab="index">論文</button>
+        <button type="button" data-tab="about">概要</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="atlas" id="atlas" aria-label="ATLAS OF PUBLICATIONS">
+    <div class="shead">
+      <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">NETWORK VIEW · 2021 — 2026</span></h2>
+      <div class="hint">点 = 論文&nbsp;&nbsp;·&nbsp;&nbsp;線 = 系譜（引用・引き継ぎ）&nbsp;&nbsp;·&nbsp;&nbsp;大きさ = 引用数&nbsp;&nbsp;·&nbsp;&nbsp;色 = テーマ<br>
+        <b>点を選ぶ</b>と詳細が出ます&nbsp;&nbsp;<b>r</b> でネットワークを組み直す</div>
+    </div>
+
+    <div class="chipline" id="chips" role="group" aria-label="テーマで絞り込む">
+      <span class="chipboard" id="chipboard"></span>
+    </div>
+
+    <div class="mapscroll">
+      <div id="mapwrap">
+        <div id="mapinner">
+          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2021年から2026年までの論文を年と研究テーマで配置した地図" tabindex="0"></svg>
+        </div>
+        <div id="mapcontrols">
+          <button id="btnRelayout" type="button" title="r">RECOMPUTE</button>
+          <button id="btnLabels" type="button" title="l">LINEAGE</button>
+        </div>
+        <div id="maptip" role="status" aria-live="polite"></div>
+      </div>
+      <div class="mapfoot">
+        <div class="legend" id="legend"></div>
+        <div class="maphint mono" id="maphint">地図は横にスクロールできます</div>
+        <div class="note" id="mapnote"></div>
+      </div>
+    </div>
+
+    <div class="player" id="player" aria-label="年をたどるプレイヤー">
+      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2021 年から 2026 年まで再生">▶</button>
+      <div class="ytrack">
+        <div class="ybars" id="ybars" aria-hidden="true"></div>
+        <input class="yscrub" id="asof" type="range" min="2021" max="2026" step="1" value="2026" aria-label="年をたどる">
+      </div>
+      <span class="ptime" id="asofval">2026 — 全 10 本</span>
+      <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2026 に戻る">↺</button>
+      <span class="pctl">
+        <button class="cbtn" type="button" data-cmd="d" data-tip="紙 / 暗（d）">◐</button>
+        <button class="cbtn" type="button" data-cmd="y" data-tip="予言モード（y）">＋</button>
+        <button class="cbtn" type="button" data-cmd="s" data-tip="この地図のデータ（s）">{ }</button>
+        <button class="cbtn" id="p-room" type="button" data-tip="作業用房 — 扉を開く">▦</button>
+      </span>
+    </div>
+  </section>
+
+  <section class="fieldnotes" id="fieldnotes" aria-label="研究の見取り図">
+    <div class="shead">
+      <h2><span class="playmark"></span>FIELD NOTES <span class="mono" style="font-size:11.5px;color:var(--muted)">研究の見取り図</span></h2>
+      <p class="lede">数字を並べるだけでは、推薦のふるまいは見えてこない。問い・測り方・戻れなさを同じ画面に置いています。</p>
+    </div>
+    <div class="fieldgrid">
+      <article class="fieldcard">
+        <span class="tag">01 / question</span><span class="mark">Q</span>
+        <h3>「次にこれ」は、誰の選択か。</h3>
+        <p>推薦された再生と、視聴者が本当に選んだ再生を分けて観察する。</p>
+        <div class="signal"><i></i><span>視聴ログ · セッション · 文脈</span></div>
+      </article>
+      <article class="fieldcard">
+        <span class="tag">02 / method</span><span class="mark">M</span>
+        <h3>測定の境界を、先に疑う。</h3>
+        <p>評価指標を変えたとき、改善したのはモデルか、それとも切り方か。</p>
+        <div class="signal"><i></i><span>反実仮想 · 再現 · 分布シフト</span></div>
+      </article>
+      <article class="fieldcard">
+        <span class="tag">03 / now</span><span class="mark">N</span>
+        <h3>再現しない結果を捨てない。</h3>
+        <p>査読中の 1 本では、失敗をノイズではなく次の問いとして記録中。</p>
+        <div class="signal"><i></i><span>2026 · 1 本をレビュー中</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="index" id="index" aria-label="論文一覧">
+    <div class="shead">
+      <h2><span class="playmark"></span>INDEX <span class="mono" style="font-size:11.5px;color:var(--muted)">査読中も省略しない</span></h2>
+      <div class="hint" id="filterstate">全 10 本</div>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="公開状態で絞り込む"></div>
+    <div id="papers"></div>
+  </section>
+
+  <section class="overlap" id="about" aria-label="研究の重なり">
+    <div class="card" id="ovcard">
+      <h3>推薦の評価は、切り方で変わる。</h3>
+      <p>ATLAS の <span class="mono">推薦</span> と <span class="mono">計測</span> のクラスタは、同じ根から伸びた枝です。独立に始めたつもりでしたが、2024 年に視聴セッションの切り方を変えると同じ評価が 2 回ひっくり返りました。</p>
+      <p>査読中の 1 本は、その 2 回目の記録です。まだ誰にも読まれていません。ネットワークでは、その点にだけ赤い線が入っています。</p>
+      <div class="src">SOURCE: p4 → p6 / p2 → p7 / p6 → p10 &nbsp;·&nbsp; 詳細は地図の系譜（l）を見てください</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Contact</h4>
+        <p>minato.shirasuna@example.ac.jp<br>東京都 / 研究室なし（在宅）</p>
+        <p>査読依頼・共同研究はお受けします。締切に間に合わない月は先に言います。</p>
+      </div>
+      <div>
+        <h4>Colophon</h4>
+        <p>静的 HTML 1 ファイル。CSS・SVG・JavaScript 同梱、CDN なし、ビルドなし、外部通信 0。</p>
+        <p>地図は force-directed network。同じデータでも <span class="mono">r</span> を押すと別の配置になります。<br>
+        コマンドの一覧は <span class="mono">?</span>。猫は右下にいます（3 回叩くと、何か返します）。扉はその下です。</p>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 MINATO SHIRASUNA — 地図は発表済み・予印・査読中を同じ重さで描きます</span>
+      <span class="k" id="footstate">— 本&nbsp;·&nbsp;— 年</span>
+    </div>
+    <div class="catline">
+      <button id="catbtn" type="button" aria-label="猫" title="猫">
+        <svg viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">
+          <path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M28 20c4 0 8-1.5 9-4.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/>
+        </svg>
+      </button>
+      <span class="catnote mono" id="catnote">— 眠っています</span>
+    </div>
+  </div>
+</footer>
+
+<!-- overlays -->
+<div class="ovl" id="palette" role="dialog" aria-modal="true" aria-label="コマンドパレット">
+  <div class="box">
+    <header><span>COMMANDS</span><span>esc で閉じる</span></header>
+    <ul id="cmdlist" role="listbox" aria-label="コマンド"></ul>
+    <div class="achline" id="achline" aria-label="記録"></div>
+    <footer><span>↑↓ で移動 · enter で実行</span><span id="palnote">記録 0 / 15</span></footer>
+  </div>
+</div>
+
+<div class="ovl" id="drawer" role="dialog" aria-modal="true" aria-label="詳細">
+  <div class="sheet">
+    <header><h3 id="dtitle">—</h3><span><span class="k" id="dkind"></span> <button class="xclose" id="dclose" type="button">esc</button></span></header>
+    <div class="body" id="dbody"></div>
+  </div>
+</div>
+
+<div class="ovl" id="room" role="dialog" aria-modal="true" aria-label="作業用房">
+  <div class="room">
+    <div class="rhead">
+      <div class="t">作業用房 — BACK ROOM</div>
+      <div class="right"><span id="rclock" class="mono">--:--</span><span class="lamp" id="rlamp"></span><span id="rstate">在室</span>
+        <button class="xclose" id="rclose" type="button">esc</button></div>
+    </div>
+    <nav class="rnav" id="rnav" aria-label="部屋の中身"></nav>
+    <div class="rbody" id="rbody"></div>
+    <pre class="rterm" id="rterm" aria-label="端末ログ"></pre>
+    <div class="rfoot">
+      <span id="rgoal"></span>
+      <span class="frag" id="rfrag">断片 <b>0</b> / 4</span>
+    </div>
+  </div>
+</div>
+
+<div id="doordock" hidden>
+  <button id="doorbtn" type="button" aria-label="作業用房の扉" title="作業用房">
+    <svg viewBox="0 0 24 30" width="18" height="24" aria-hidden="true" style="display:block">
+      <path d="M4 29V3.6c0-.9.7-1.6 1.7-1.6h12.6c1 0 1.7.7 1.7 1.6V29" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="16.4" cy="16" r="1.1" fill="currentColor"/>
+      <path d="M2 29h20" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+  </button>
+  <span class="sign">作業用房 — 入る</span>
+</div>
+
+<div id="catdock">
+  <button id="catbtn2" type="button" aria-label="猫（3 回叩くと何か返します）">
+    <span class="badge">?</span>
+    <span class="lbl" id="catlbl">猫 — 3 回叩くと、何か返します</span>
+    <svg viewBox="0 0 40 24" width="30" height="19" aria-hidden="true">
+      <path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M28 20c4 0 8-1.5 9-4.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/>
+    </svg>
+  </button>
+</div>
+
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   ATLAS OF PUBLICATIONS — single file build
+   1 data · 2 state · 3 atlas · 4 index · 5 drawer
+   6 palette · 7 room · 8 experiments · 9 truth-game · 10 foreshadow
+   ============================================================ */
+"use strict";
+
+/* ---------- 1. DATA ------------------------------------------------ */
+const BANDS=["推薦","計測","手法"];
+const THEME_COLOR={"推薦":"#ff5d5d","計測":"#6fd2c0","手法":"#9aa7ff"};
+const PAPERS=[
+ {id:"p1",year:2021,venue:"情報処理学会 全国大会 2021",short:"IPSJ",kind:"会議",state:"accepted",theme:"推薦",oral:false,cites:41,
+  title:"視聴ログから推薦由来の再生を切り分ける",
+  note:"推薦から来た再生と、検索から来た再生は、ログの形が違う。3,200 セッションを人手で見て、まずそこを分けた。",
+  links:["PDF","発表資料"]},
+ {id:"p2",year:2022,venue:"RecSys 2022",short:"RecSys",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:28,
+  title:"視聴セッションの切り方が推薦評価の分散を決める",
+  note:"同じ設定で 3 回評価したら指標が 0.8 ポイント振れた。原因はセッションの切り方。それ以降、自分の実験はすべて 5 分割で回している。",
+  links:["arXiv","PDF"]},
+ {id:"p3",year:2022,venue:"ICWSM 2022",short:"ICWSM",kind:"国際会議",state:"accepted",theme:"推薦",oral:true,cites:96,
+  title:"Recommended but Unwatched: Vertical Video and the 12-Second Drop",
+  note:"縦型の推薦は 12 秒で離脱される。離脱そのものを失敗として扱うと、推薦の評価が歪む。口頭発表の 4 週間後に反論が来て、それが p7 になった。",
+  links:["arXiv","PDF","発表資料"]},
+ {id:"p4",year:2023,venue:"WWW 2023",short:"WWW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:37,
+  title:"評価データの作り方が人気の偏りを生む",
+  note:"データを作り直すと偏りが 6 割減った。推薦の問題だと思っていたものが、測り方の問題だった。",
+  links:["arXiv","PDF"]},
+ {id:"p5",year:2024,venue:"CSCW 2024",short:"CSCW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:18,
+  title:"A Small Replication Study on YouTube Recommendation Benchmarks",
+  note:"p4 の追試。自分の結果は再現したが、他 2 研究の数値は再現しなかった。そのまま書いた。",
+  links:["arXiv","実装"]},
+ {id:"p6",year:2024,venue:"RecSys 2024",short:"RecSys",kind:"国際会議",state:"accepted",theme:"手法",oral:false,cites:52,
+  title:"再現しない推薦をどう扱うか — 2 段の手順",
+  note:"失敗を検出して直す 2 段の手順。p1 の切り分けをそのまま使っている。p2 のセッション問題が、こうして手法になった。",
+  links:["arXiv","実装"]},
+ {id:"p7",year:2025,venue:"TheWebConf 2025",short:"WWW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:11,
+  title:"分布がずれると推薦の緩和は効かない",
+  note:"視聴の分布がずれたとき、効果があるように見える緩和が実際には効かない条件を整理した。p3 への反論に半分だけ同意している。",
+  links:["arXiv","実装"]},
+ {id:"p8",year:2025,venue:"情報処理学会 全国大会 2025",short:"IPSJ",kind:"会議",state:"accepted",theme:"手法",oral:true,cites:7,
+  title:"視聴ログからの失敗パターン自動抽出",
+  note:"クラスタリングで失敗を 5 種に分けた。いまのところ 5 種で足りている。",
+  links:["PDF","発表資料"]},
+ {id:"p9",year:2026,venue:"AAAI 2026",short:"AAAI",kind:"国際会議",state:"accepted",theme:"推薦",oral:true,cites:23,
+  title:"視聴傾向は揺れる — 揺れを無視した推薦評価",
+  note:"好みは時間とともに動く。動きを無視して評価すると、手法の差と時間の差が分けられない。",
+  links:["arXiv","実装","発表資料"]},
+ {id:"p10",year:2026,venue:"—",short:"—",kind:"審査中",state:"review",theme:"推薦",oral:false,cites:null,
+  title:null,
+  note:"学会名も題名も出していません。査読中だからです。ネットワークには点だけがあり、赤い線が 2 本入っています。",
+  links:[]}
+];
+const LINEAGE=[["p1","p2"],["p3","p7"],["p1","p6"],["p4","p5"],["p5","p9"],["p6","p8"],["p6","p10"],["p9","p10"]];
+const SUBMIT={p10:"2025-12-08"};
+const VERSIONS={
+ p1:[["2021-09-30","初稿。クリックログだけを見ていた"],["2021-11-12","査読の指摘でセッションの同定を追加。推薦由来の割合が思ったより低かった"],["2021-12-20","掲載"]],
+ p2:[["2022-10-02","2 分割で実験。差が出ないことを書こうとしていた"],["2022-11-04","3 回目を回したら指標が変わった。切り方そのものを主題に変更"],["2022-12-15","掲載"]],
+ p3:[["2022-05-09","投稿。題名は違った（Watching Verticals …）"],["2022-07-24","査読者 2 に離脱の定義が曖昧だと指摘され、12 秒の根拠を追加"],["2022-09-01","口頭採択。4 分短くしろと言われて 3 枚削った"],["2022-12-07","発表"]],
+ p4:[["2023-04-18","初稿"],["2023-07-02","査読の指摘でデータ作成手順を全部書き直し、偏りが 6 割減った。この作業が結論になった"],["2024-01-30","掲載"]],
+ p5:[["2023-11-20","追試の計画だけ書いて寝かせた"],["2024-02-14","実行。他研究の数値が再現しないと分かった"],["2024-04-02","差し戻し。結論が『否定的』すぎると指摘された"],["2024-05-30","否定的ではなく記述的に書き直して受理"]],
+ p6:[["2023-06-30","p2 のセッション問題を手法として書き始めた"],["2024-03-11","初稿"],["2024-06-02","査読者 1 が手法名を嫌ったので名前を変えた"],["2024-11-15","掲載"]],
+ p7:[["2024-06-20","p3 への反論への応答として書き始めた"],["2024-12-01","初稿"],["2025-03-08","差し戻し。『実験 3 の表 3 が再現できません』"],["2025-06-25","追加実験。緩和が効かない領域の境界がはっきりした"],["2025-09-02","掲載"]],
+ p8:[["2025-01-20","視聴ログを眺めていて書き始めた"],["2025-03-02","初稿"],["2025-05-05","クラスタ数 5 で足りると決めるまで 7 回やり直した"],["2025-06-30","掲載"]],
+ p9:[["2024-08-01","アイデアのみ"],["2025-02-10","初稿"],["2025-08-14","投稿"],["2026-02-27","掲載"]],
+ p10:[["2025-12-08","初稿"],["2026-01-11","投稿"],["2026-03-05","レビュー開始"],["2026-05-22","差し戻し: 実験 3 の表 3 が再現できません。セッション分割の手順を書き直し中（v3）"],["2026-06-30","返信していない 1 人へ"]]
+};
+const FAILED=[
+ {id:"#0338",cat:"発散",steps:"12,400",out:"12,400 歩で反転。原因不明",
+  note:"推薦モデルの学習で、損失が下がり続けたあと突然反転して、そのまま上がりきった。視聴ログを 1 年分に増やした直後だった。原因は 8 か月たったいまも分かっていない。",
+  msg:"反転した理由は、いまも分かりません。記録だけ残します。"},
+ {id:"#0302",cat:"振動",steps:"8,000",out:"同じ seed で 3 回別の結果",
+  note:"同じ seed・同じ設定で 3 回回して、3 回とも違う形になった。ログの読み込み順に依存していた。この実験以降、報告する数値はすべて 5 分割の平均にしている。",
+  msg:"再現しない実験を、再現しないまま残しています。"},
+ {id:"#0291",cat:"プラトー",steps:"22,000",out:"検証ラベルが 0 だったことに 2 週間気づかず",
+  note:"平坦な検証曲線。ハイパーパラメータを疑って 2 週間つぶした。実際はデータ読み込みで検証ラベルが全部 0 になっていた。虚無を学習していた 2 週間。",
+  msg:"虚無を 2 週間学習していました。平坦な曲線はいまでも疑って見ます。"},
+ {id:"#0411",cat:"成功しすぎ",steps:"6,300",out:"検証 loss 0.004 → リーク",
+  note:"検証損失が 0.004 まで下がった。喜んで 2 日後に、学習データと検証データの視聴者が重複していたことに気づいた。作り直して 0.31。そちらが正しい値。",
+  msg:"良すぎる数値は、だいたい間違っています。"},
+ {id:"#0399",cat:"NaN",steps:"1,200",out:"attention の softmax。版を 1 つ戻したら動いた",
+  note:"1,200 歩で NaN。原因は attention 内の softmax。ライブラリの版を 1 つ戻したら動いた。理由は説明できない。",
+  msg:"説明できないことのほうが多い。版を戻したら動いた、以上です。"}
+];
+const GAME_SENTENCES=[
+ {jp:"猫が机の上で眠っている。",en:"The cat is sleeping on the desk.",
+  key:[["猫が",1],["机の上で",4],["眠っている",1]]},
+ {jp:"彼は読みかけの本を閉じて、窓の外を見た。",en:"He closed the half-read book and looked outside the window.",
+  key:[["彼は",1],["読みかけの",1],["本を",3],["閉じて",2],["窓の外を",1],["見た",2]]},
+ {jp:"査読者は、実験の再現性についてしか尋ねなかった。",en:"The reviewer asked only about the reproducibility of the experiment.",
+  key:[["査読者は",1],["実験の",3],["再現性について",2],["しか",1],["尋ねなかった",4]]}
+];
+const ACHIEVEMENTS=[
+ {id:"curious",name:"好奇心",desc:"? パレットを開く"},
+ {id:"key",name:"鍵",desc:"猫を 3 回叩く"},
+ {id:"visit",name:"内見",desc:"作業用房に入る"},
+ {id:"read",name:"読了",desc:"実験 5 本を読み終える"},
+ {id:"reviewer",name:"査読者",desc:"論文の変遷を読む"},
+ {id:"cite",name:"引用",desc:"表示中の引用の合計が 100 を超える"},
+ {id:"relayout",name:"組み替え",desc:"r で地図を作り直す"},
+ {id:"replay",name:"再生",desc:"プレイヤーで年を再生する"},
+ {id:"sub",name:"登録",desc:"チャンネルを登録する"},
+ {id:"experimenter",name:"実験者",desc:"#0399 の分まで読む"},
+ {id:"core",name:"核心",desc:"注視のゲームで 70 以上"},
+ {id:"back",name:"さかのぼり",desc:"AS OF で 2023 以前に戻す"},
+ {id:"failed",name:"失敗",desc:"失敗した実験を 3 本読む"},
+ {id:"night",name:"夜間",desc:"深夜に開く"},
+ {id:"oracle",name:"予言",desc:"地図に自分の 1 点を置く"}
+];
+
+/* ---------- 2. STATE (declared first — TDZ guard) ------------------ */
+const KEY={ach:"atlas-ach",frag:"atlas-frag",choice:"atlas-choice",oracle:"atlas-oracle",last:"atlas-last",
+           theme:"atlas-theme",seen:"atlas-seen",ncr:"atlas-ncr",ncr2:"atlas-ncr2",done:"atlas-done",asof:"atlas-asof",
+           sub:"atlas-sub",motion:"atlas-motion"};
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const ST={RENDER:"settle",frag:new Set(LS.get(KEY.frag,[])),ach:new Set(LS.get(KEY.ach,[])),
+  choice:LS.get(KEY.choice,null),oracle:LS.get(KEY.oracle,[]),theme:LS.get(KEY.theme,null),
+  ncr:LS.get(KEY.ncr,0),ncr2:LS.get(KEY.ncr2,0),seen:new Set(LS.get(KEY.seen,[])),sub:LS.get(KEY.sub,false),
+  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2026,t:0,now:new Date(),
+  playing:false,playTimer:null,
+  inlineWrite:false,inkInit:false,game:{sent:0,scores:[],rows:[],draft:{},final:false},
+  msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,myPts:LS.get(KEY.oracle,[]),gap:null,gapLabel:"初回",oracleMode:false};
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const E=id=>document.getElementById(id);
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
+const paper=id=>PAPERS.find(p=>p.id===id);
+const colorOf=t=>THEME_COLOR[t]||"#888";
+const DAYS=()=>Math.floor((Date.now()-new Date(SUBMIT.p10+"T00:00:00+09:00").getTime())/864e5);
+const REDUCED=()=>ST.motion==="off"||(ST.motion!=="on"&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+const TOTAL_PUBLISHED=PAPERS.filter(p=>p.state!=="review").length;
+const TOTAL_CITES=PAPERS.reduce((a,p)=>a+(p.cites||0),0);
+
+function toast(t,b){
+  if(ST.quiet)return;
+  const w=E("toasts");
+  while(w.children.length>=2)w.removeChild(w.firstChild);
+  const el=document.createElement("div");el.className="t";
+  el.innerHTML=b?t+" <b>"+b+"</b>":t;w.appendChild(el);
+  setTimeout(()=>{el.style.transition="opacity .4s";el.style.opacity="0";setTimeout(()=>el.remove(),420)},3200);
+}
+function unlocked(){for(const a of ACHIEVEMENTS){if(ST.ach.has(a.id))return true}return false}
+function readFrag(id){if(ST.frag.has(id))return;ST.frag.add(id);LS.set(KEY.frag,[...ST.frag]);syncFrag();
+  toast("断片 +1  —  "+FRAG[id].src,ST.frag.size+" / 4 本目");checkReveal();}
+function revealFrag(){const b=E("fragline");if(b&&!b.textContent.trim()&&hasChain()){b.textContent="投稿から "+DAYS()+" 日";b.hidden=false}}
+function syncFrag(){const n=ST.frag.size;const f=E("rfrag");if(f)f.innerHTML="断片 <b>"+n+"</b> / 4";
+  document.body.dataset.frag=n;revealFrag();}
+function checkReveal(){if(ST.frag.has("a")&&ST.frag.has("c")&&ST.frag.has("d"))openChain();}
+function unlock(a){if(ST.ach.has(a))return;ST.ach.add(a);LS.set(KEY.ach,[...ST.ach]);const d=ACHIEVEMENTS.find(x=>x.id===a);
+  toast("記録 — "+d.name);renderAch();}
+function applyChain(){
+  document.body.dataset.chain="1";
+  const o=E("ovline");
+  if(o){o.hidden=false;o.textContent="↳ 投稿から "+DAYS()+" 日。返事はいまだ 1 つだけです（3 日前ではありません。ずっと待っています）。"}
+  revealFrag();
+  if(ST.done.has("chainrow"))return;
+  ST.done.add("chainrow");LS.set(KEY.done,[...ST.done]);
+  const box=E("papers");if(!box)return;
+  const row=document.createElement("div");row.className="paper";row.id="pc-row";
+  row.innerHTML='<div class="yr"><b>糸</b>'+String(SUBMIT.p10).slice(0,7)+'</div>'+
+    '<div><h3 style="font-weight:500;color:var(--ink2);font-size:15px">査読中 1 本の記録に、投稿から '+DAYS()+
+    " 日の行が 1 つ増えました。</h3>"+
+    '<div class="sub"><span>'+SUBMIT.p10+' 投稿</span><span>返事 1 通</span><span>v3 未送信</span><span>'+DAYS()+
+    ' 日</span></div></div><div class="aside"><span class="cites">'+DAYS()+' 日</span></div>';
+  box.appendChild(row);
+}
+function openChain(){if(ST.done.has("l3"))return;ST.done.add("l3");LS.set(KEY.done,[...ST.done]);
+  toast("回収 — 糸がつながりました");applyChain();renderAtlas();
+  if(ST.room)renderRoom();}
+
+/* ---------- 3. ATLAS ---------------------------------------------- */
+const W=1000,H=440,PADL=40,PADR=30,PADT=46,AXIS_Y=404,YEAR_Y=0;
+const XC={min:2021,max:2026.9}, FLOORY=[166,262,358];
+const BRAND=[];
+function xPos(y){return PADL+(y-XC.min)/(XC.max-XC.min)*(W-PADL-PADR)}
+function nodeR(c){return 5+Math.sqrt(c||0)*0.85}
+function place(n,i,seed){
+  const rnd=mulberry(seed+i*977);const band=BANDS.indexOf(n.theme);
+  const x=xPos(n.year)+ (rnd()-0.5)*46;
+  const y=FLOORY[band]+(rnd()-0.5)*56;
+  return{x,y,vx:0,vy:0,seedI:i};
+}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const ANCHOR={"推薦":[282,150],"計測":[600,326],"手法":[812,186]};
+function netSim(nodes,edges,seed){
+  /* 初期配置 — 発表順に螺旋へ置く。ここから力学で有機的に崩す */
+  const cx=W/2, cy=226, rnd=mulberry(seed||1);
+  nodes.forEach((n,i)=>{
+    const a=i*2.399963+(seed%997)/997*Math.PI*2;
+    const rad=74+Math.sqrt(i+1)*62+(rnd()-0.5)*30;
+    n.x=cx+Math.cos(a)*rad*1.30; n.y=cy+Math.sin(a)*rad*0.78;
+    n.vx=0; n.vy=0;
+  });
+  const iters=420;
+  for(let it=0;it<iters;it++){
+    const al=1-it/iters;
+    /* 反発 */
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j];
+      let dx=b.x-a.x,dy=b.y-a.y;const d2=dx*dx+dy*dy||.01,d=Math.sqrt(d2);
+      const f=((34+nodeR(a.cites)+nodeR(b.cites))**2)/d2;
+      const ux=dx/d,uy=dy/d;
+      a.vx-=ux*f; a.vy-=uy*f; b.vx+=ux*f; b.vy+=uy*f;
+    }
+    /* ばね（系譜） */
+    edges.forEach(e=>{
+      const a=e.a,b=e.b;let dx=b.x-a.x,dy=b.y-a.y;const d=Math.sqrt(dx*dx+dy*dy)||.01;
+      const rest=74+(nodeR(a.cites)+nodeR(b.cites))*1.5;
+      const f=(d-rest)/d*0.055;
+      a.vx+=dx*f; a.vy+=dy*f; b.vx-=dx*f; b.vy-=dy*f;
+    });
+    /* テーマの重心（クラスタ）へ弱く引く */
+    nodes.forEach(n=>{
+      const an=ANCHOR[n.theme];if(!an)return;
+      n.vx+=(an[0]-n.x)*0.0115; n.vy+=(an[1]-n.y)*0.0115;
+      n.vx+=(cx-n.x)*0.0016; n.vy+=(cy-n.y)*0.0016;
+    });
+    /* 積分・減衰・境界 */
+    nodes.forEach(n=>{
+      n.vx*=0.80; n.vy*=0.80;
+      const v=Math.hypot(n.vx,n.vy);if(v>18){n.vx=n.vx/v*18;n.vy=n.vy/v*18}
+      n.x+=n.vx; n.y+=n.vy;
+      n.x=Math.max(PADL+10,Math.min(W-PADR-16,n.x));
+      n.y=Math.max(46,Math.min(AXIS_Y-4,n.y));
+    });
+  }
+  labelLanes(nodes);
+  fitView(nodes);
+  return nodes;
+}
+/* ラベルの重なりを、テーマごとの「レーン」に逃がしてほどく */
+function labelLanes(nodes){
+  nodes.forEach(n=>n.labDy=0);
+  BANDS.forEach(bd=>{
+    const m=nodes.filter(n=>n.theme===bd).sort((a,b)=>a.x-b.x);
+    for(let i=0;i<m.length;i++)for(let j=0;j<i;j++){
+      if(Math.abs(m[i].x-m[j].x)<112 && Math.abs((m[i].y+m[i].labDy)-(m[j].y+m[j].labDy))<15)
+        m[i].labDy=(m[j].labDy||0)+15;
+    }
+  });
+}
+/* 力学の結果を、額（キャンバス）に収めて中央へ */
+function fitView(nodes){
+  const xs=nodes.map(n=>n.x),ys=nodes.map(n=>n.y);
+  const x0=Math.min.apply(null,xs)-80,x1=Math.max.apply(null,xs)+80;
+  const y0=Math.min.apply(null,ys)-50,y1=Math.max.apply(null,ys)+58;
+  const boxW=W-2*(PADL+8), boxH=(AXIS_Y-24)-PADT;
+  const sc=Math.min(1.5,boxW/(x1-x0),boxH/(y1-y0));
+  const cx=(x0+x1)/2, cy=(y0+y1)/2, tx=W/2, ty=PADT+(AXIS_Y-24-PADT)/2;
+  nodes.forEach(n=>{n.x=tx+(n.x-cx)*sc;n.y=ty+(n.y-cy)*sc});
+}
+function svgEl(t,a){const e=document.createElementNS("http://www.w3.org/2000/svg",t);for(const k in a)e.setAttribute(k,a[k]);return e}
+function renderAtlas(seed){
+  const t0=performance.now();ST.seed=seed==null?(ST.seed||20260601):seed;
+  const svg=E("mapsvg");while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const g=s=>svgEl("g",{class:s});
+  // grid
+  const gg=g("g");svg.appendChild(gg);
+  /* ネットワークなので軸は引かない。目盛の代わりに薄いドット格子だけ残す */
+  for(let gx=120;gx<W-40;gx+=120)for(let gy=90;gy<AXIS_Y-30;gy+=90)
+    gg.appendChild(svgEl("circle",{class:"dots",cx:gx,cy:gy,r:1}));
+  // edges
+  const byId={};PAPERS.forEach(p=>byId[p.id]=p);
+  const nodes=PAPERS.map(p=>({id:p.id,cites:p.cites||4,theme:p.theme,year:p.year,p}));
+  netSim(nodes,LINEAGE.map(([a,b])=>({a:nodes.find(n=>n.id===a),b:nodes.find(n=>n.id===b)})),ST.seed);
+  /* クラスタの輪郭（テーマ） */
+  const hg=g("g");svg.appendChild(hg);
+  BANDS.forEach((bd,bi)=>{
+    const m=nodes.filter(n=>n.theme===bd);if(!m.length)return;
+    const xs=m.map(n=>n.x),ys=m.map(n=>n.y);
+    const x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys);
+    const pad=38;
+    hg.appendChild(svgEl("ellipse",{class:"hull",cx:(x0+x1)/2,cy:(y0+y1)/2,
+      rx:(x1-x0)/2+pad,ry:(y1-y0)/2+pad*0.85,style:"color:"+colorOf(bd)}));
+    const ccx=(x0+x1)/2,ccy=(y0+y1)/2,rx=(x1-x0)/2+pad,ry=(y1-y0)/2+pad*0.85;
+    let best=null,bestD=-1;
+    for(let a=0;a<24;a++)for(const k of [0.62,0.8,0.98]){
+      const ang=a/24*Math.PI*2,px=ccx+Math.cos(ang)*rx*k,py=ccy+Math.sin(ang)*ry*k;
+      if(px<26||px>W-26||py<26||py>AXIS_Y-8)continue;
+      let d=1e9;m.forEach(n=>{d=Math.min(d,Math.hypot(n.x-px,n.y-py))});
+      if(d>bestD){bestD=d;best=[px,py]}
+    }
+    if(best&&bestD>26){const lt=svgEl("text",{class:"clab",x:best[0],y:best[1]+4,"text-anchor":"middle",style:"fill:"+colorOf(bd)});
+      lt.textContent=bd;hg.appendChild(lt)}
+  });
+  const eg=g("g");svg.appendChild(eg);
+  const lbl=ST.labels;
+  LINEAGE.forEach(([a,b],ei)=>{
+    const na=nodes.find(n=>n.id===a),nb=nodes.find(n=>n.id===b);
+    const mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2-8;
+    const live=(a==="p10"||b==="p10");
+    const cls="edge"+(live?" live":"")+((byId[a].year>=byId[b].year)?" back":"");
+    eg.appendChild(svgEl("path",{class:cls,"data-e":ei,d:"M"+na.x+" "+na.y+" Q"+mx+" "+my+" "+nb.x+" "+nb.y}));
+    /* 系譜の向き（先行 → 後継）を矢印で示す */
+    const t=0.90,qx=(1-t)*(1-t)*na.x+2*(1-t)*t*mx+t*t*nb.x,qy=(1-t)*(1-t)*na.y+2*(1-t)*t*my+t*t*nb.y;
+    const dx=(1-t)*(mx-na.x)+t*(nb.x-mx),dy=(1-t)*(my-na.y)+t*(nb.y-my);
+    const ang=Math.atan2(dy,dx)*180/Math.PI;
+    eg.appendChild(svgEl("path",{class:cls==="edge"?"earrow":"earrow live"+(live?"":" "),transform:"translate("+qx+" "+qy+") rotate("+ang+")",
+      d:"M0 -3.2 L6 0 L0 3.2 z",style:live?"fill:var(--yt)":""}));
+    if(lbl){const t=svgEl("text",{class:"edgelab",x:mx,y:my-2,"text-anchor":"middle"});
+      const pa=byId[a],pb=byId[b];t.textContent=(pb.year-pa.year)+"y";eg.appendChild(t)}});
+  // nodes
+  const ng=g("g");svg.appendChild(ng);
+  const curYear=ST.asof;
+  nodes.forEach(n=>{
+    const p=n.p,ghost=p.year>curYear,dim=(ST.theme&&p.theme!==ST.theme)||(p.year>curYear);
+    const cls="node"+(ghost?" ghost":"")+(dim?" dim":"")
+      +((p.cites||0)>=50?" glow":"")+((p.year>=2024&&!ghost)?" pulse":"");
+    const gn=g("g");gn.setAttribute("class",cls);gn.style.color=colorOf(p.theme);
+    gn.setAttribute("tabindex","0");gn.setAttribute("role","button");
+    gn.setAttribute("aria-label",ghost?("その年の時点では未発表"):(p.title||"査読中 — 学会名も題名も出ていません"));
+    const r=nodeR(p.cites),c=colorOf(p.theme);
+    if(p.state==="accepted"){
+      gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:r,fill:c,"fill-opacity":p.oral?".26":".92"}));
+      if(p.oral)gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:r,fill:"none",stroke:c,"stroke-width":1.6}));
+    }else if(p.state==="pre"){
+      gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:r,fill:"none",stroke:c,"stroke-width":1.6,"stroke-dasharray":"3 3"}));
+    }else{
+      const ttl=svgEl("title");ttl.textContent="審査中";gn.appendChild(ttl);
+      gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:7,fill:"none",stroke:"var(--danger)","stroke-width":1.4,"stroke-dasharray":"2 3"}));
+    }
+    if(p.state!=="review"&&!ghost){
+      const right=n.x>W-170,lab=svgEl("text",{x:right?n.x-r-8:n.x+r+9,y:n.y+4+(n.labDy||0),"text-anchor":right?"end":"start"});
+      lab.textContent=p.short+" ’"+String(p.year).slice(2);gn.appendChild(lab);
+      const ix=svgEl("text",{class:"idx",x:right?n.x-r-8:n.x+r+9,y:n.y+16+(n.labDy||0),"text-anchor":right?"end":"start"});
+      ix.textContent=p.id.toUpperCase();gn.appendChild(ix);
+    }
+    if(ghost){const t=svgEl("text",{x:n.x+13,y:n.y+4,class:"idx"});t.textContent=p.year;gn.appendChild(t)}
+    if(p.state==="review"&&!ghost){
+      gn.appendChild(svgEl("circle",{class:"halo",cx:n.x,cy:n.y,r:9}));
+      const left=n.x>W-300,ax=left?n.x-13:n.x+13;
+      gn.appendChild(svgEl("line",{class:"leader",x1:n.x+(left?-9:9),y1:n.y,x2:ax-(left?0:4),y2:n.y}));
+      const t1=svgEl("text",{class:"stub a",x:ax,y:n.y-1,"text-anchor":left?"end":"start"});
+      t1.textContent="P10 — 名前がない";gn.appendChild(t1);
+      const t2=svgEl("text",{class:"stub b",x:ax,y:n.y+12,"text-anchor":left?"end":"start"});
+      t2.textContent="題名も学会名も出していません";gn.appendChild(t2);
+    }
+    const hit=svgEl("circle",{class:"hit",cx:n.x,cy:n.y,r:Math.max(r+10,16)});
+    hit.setAttribute("data-id",p.id);hit.setAttribute("data-kind",ghost?"ghost":"node");
+    gn.appendChild(hit);
+    if(ST.dev){gn.appendChild(svgEl("circle",{class:"dbg",cx:n.x,cy:n.y,r:Math.max(r+10,16)}));
+      const dt=svgEl("text",{class:"dbgtext",x:n.x+10,y:n.y-10});dt.textContent="x"+Math.round(n.x)+" y"+Math.round(n.y);gn.appendChild(dt)}
+    if(p.state==="review"&&ST.done.has("l3")){
+      const w=svgEl("text",{class:"edgelab",x:n.x+r+9,y:n.y+22});w.textContent="投稿から "+DAYS()+" 日";gn.appendChild(w)}
+    ng.appendChild(gn);
+  });
+  // my oracle points
+  ST.myPts.forEach((pt,i)=>{const mg=g("g");mg.setAttribute("class","node");
+    mg.appendChild(svgEl("circle",{cx:pt.x,cy:pt.y,r:4,fill:"var(--accent2)",stroke:"var(--bg)","stroke-width":1.5}));
+    const t=svgEl("text",{class:"mylab",x:pt.x+9,y:pt.y+4,
+      "text-anchor":pt.labelLeft?"end":"start",x:pt.labelLeft?pt.x-9:pt.x+9});
+    t.textContent="予言 "+pt.year+" "+pt.band;mg.appendChild(t);
+    const h=svgEl("circle",{class:"hit",cx:pt.x,cy:pt.y,r:16});h.setAttribute("data-id","or:"+i);h.setAttribute("data-kind","or");
+    mg.appendChild(h);ng.appendChild(mg)});
+  svg.setAttribute("data-mode",ST.dev?"dev":"normal");
+  ST.msText=REDUCED()?"static":String(Math.round(performance.now()-t0));
+  renderNote();updateChips();
+}
+function renderNote(){
+  const el=E("mapnote");if(!el)return;
+  const ms='<b id="renderinfo">'+ST.msText+"</b>";
+  const n=PAPERS.length, e=LINEAGE.length, dens=(e/(n*(n-1)/2)).toFixed(2);
+  const lin='ノード <b>'+n+"</b> · エッジ <b id=\"lcount\">"+e+"</b> · 密度 "+dens;
+  if(ST.metro){
+    el.innerHTML='<span style="color:var(--accent)">METRIC</span> 描画 '+ms+"ms · "+lin+
+      " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日";
+  }else if(ST.asof<2026){
+    el.innerHTML=lin+" · "+ST.asof+" 年までの部分グラフ · 描画 "+ms+"ms";
+  }else{
+    el.innerHTML=lin+" · 描画 "+ms+"ms";
+  }
+  renderYearBars();
+}
+function renderYearBars(){
+  const box=E("ybars");if(!box)return;
+  box.innerHTML="";
+  for(let y=2021;y<=2026;y++){
+    const i=document.createElement("i");
+    const inYear=PAPERS.filter(p=>p.year===y);
+    if(y<=ST.asof)i.className="on";
+    if(inYear.some(p=>p.state==="review"))i.className+=" rev";
+    box.appendChild(i);
+  }
+}
+/* hover / select on map */
+let curSel=null;
+function showTip(p,ev){
+  const tip=E("maptip");
+  if(p===null){tip.classList.remove("on");return}
+  if(typeof p==="string"){tip.innerHTML='<div class="t">その年の時点では未発表</div><div class="m">'+p+' 年の地図には、まだ点がありません</div>';
+    tip.classList.add("on");posTip(ev);return}
+  if(p.oracle!=null){const pt=ST.myPts[p.oracle];
+    tip.innerHTML='<div class="t cat">予言 — あなたの 1 点</div><div class="m">'+pt.year+' / '+pt.band+'</div>'+
+      '<div>地図に置いた予測です。クリックで消せます。どこにも送信していません。</div>';tip.classList.add("on");posTip(ev);return}
+  const st={accepted:"発表済み",pre:"予印",review:"査読中"}[p.state];
+  tip.innerHTML='<div class="t">'+fmt(p.cites||0)+' citations</div><div class="m">'+st+'</div>'+
+    (p.state!=="review"?('<div>'+p.title+'</div>'):'<div>学会名も題名も出ていません。</div>');
+  tip.classList.add("on");posTip(ev);
+}
+function posTip(ev){
+  const tip=E("maptip"),wrap=E("mapwrap");
+  const r=wrap.getBoundingClientRect();
+  const x=Math.min(Math.max(10,(ev.clientX-r.left)+14),r.width-300);
+  const y=Math.min(Math.max(8,(ev.clientY-r.top)+14),r.height-90);
+  tip.style.left=x+"px";tip.style.top=y+"px";
+}
+function selectNode(id,mode){
+  const p=paper(id);if(!p)return;curSel=id;
+  document.body.dataset.sel=id;
+  if(mode==="hover")return;
+  $$("#mapsvg .node").forEach(n=>n.classList.remove("sel"));
+  openDrawer("paper",id);
+}
+function focusPaper(id,scroll){
+  const el=E("p-"+id);if(!el)return;
+  el.style.transition="background .3s";el.style.background="color-mix(in srgb,var(--accent) 12%,transparent)";
+  setTimeout(()=>el.style.background="",1600);
+  if(scroll!==false)el.scrollIntoView({block:"center",behavior:REDUCED()?"auto":"smooth"});
+}
+E("mapsvg").addEventListener("pointerover",e=>{
+  const hit=e.target.closest(".hit");if(!hit)return;
+  const id=hit.dataset.id,kind=hit.dataset.kind;
+  if(kind==="ghost"){showTip(paper(id).year+"",e)}
+  else if(kind==="or"){showTip({oracle:parseInt(id.slice(3),10)},e)}
+  else showTip(paper(id),e);
+});
+E("mapsvg").addEventListener("pointerout",e=>{if(e.target.closest(".hit"))showTip(null)});
+E("mapsvg").addEventListener("pointermove",e=>{const hit=e.target.closest(".hit");
+  if(hit){E("mapwrap").classList.add("mappointer")}else{E("mapwrap").classList.remove("mappointer")}});
+E("mapsvg").addEventListener("click",e=>{
+  const hit=e.target.closest(".hit");if(!hit)return;
+  const id=hit.dataset.id,kind=hit.dataset.kind;
+  if(kind==="ghost"){readFrag("b");
+    toast("その年の時点では、この 1 本は査読者を 1 人も選んでいません","");
+    return}
+  if(kind==="or"){ST.myPts.splice(parseInt(id.slice(3),10),1);LS.set(KEY.oracle,ST.myPts);renderAtlas();return}
+  openDrawer("paper",id);
+});
+E("mapsvg").addEventListener("keydown",e=>{
+  const hit=e.target.closest(".node");if(!hit)return;
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();const h=hit.querySelector(".hit");h.dispatchEvent(new MouseEvent("click",{bubbles:true}))}
+});
+/* oracle placement */
+function mapPoint(ev){
+  const svg=E("mapsvg"),r=svg.getBoundingClientRect();
+  return{x:ev.clientX-r.left,y:ev.clientY-r.top};
+}
+E("mapwrap").addEventListener("contextmenu",e=>{if(e.shiftKey||ST.oracleMode)e.preventDefault()});
+function placeOracle(pt){
+  const vb=1000,relX=pt.x/E("mapsvg").getBoundingClientRect().width*W;
+  const year=Math.max(2021,Math.min(2026,Math.round(XC.min+(relX-PADL)/(W-PADL-PADR)*(XC.max-XC.min))));
+  let band=BANDS[0],best=1e9;FLOORY.forEach((fy,i)=>{const d=Math.abs(fy-pt.y);if(d<best){best=d;band=BANDS[i]}});
+  ST.myPts.push({x:pt.x,y:pt.y,year,band,labelLeft:relX>W-190});
+  LS.set(KEY.oracle,ST.myPts);renderAtlas();unlock("oracle");
+  toast("予言モード — 自分の点を置きました（shift+クリックで追加・点自体で削除）","");
+}
+/* chips + filters */
+function updateChips(){
+  const box=E("chips");box.innerHTML="";
+  BANDS.forEach(b=>{const c=document.createElement("button");c.className="chip";c.type="button";
+    c.setAttribute("aria-pressed",ST.theme===b?"true":"false");
+    const n=PAPERS.filter(p=>p.theme===b&&!(ST.asof<p.year)).length;
+    c.innerHTML=b+'<span class="n">'+n+"</span>";
+    c.onclick=()=>{ST.theme=ST.theme===b?null:b;LS.set(KEY.theme,ST.theme);renderAtlas();renderPapers();
+      if(ST.theme===b)toast("絞り込み — "+b)}
+    box.appendChild(c)});
+  const bd=document.createElement("span");bd.className="chipboard";bd.id="chipboard";
+  bd.textContent=ST.theme?("FILTER: "+ST.theme):(ST.oracleMode?"ORACLE: 地図をクリック":"");
+  box.appendChild(bd);
+}
+/* filters in index */
+const FILTERS=[["all","すべて"],["accepted","発表済み"],["pre","予印"],["review","査読中"]];
+let curFilter="all";
+function renderFilters(){
+  const f=E("filters");f.innerHTML="";
+  FILTERS.forEach(([k,l])=>{const c=document.createElement("button");c.className="chip";c.type="button";
+    c.setAttribute("aria-pressed",curFilter===k?"true":"false");c.textContent=l;
+    c.onclick=()=>{curFilter=k;renderFilters();renderPapers()};
+    f.appendChild(c)});
+}
+function linkCount(id){return LINEAGE.filter(([a,b])=>a===id||b===id).length}
+function renderPapers(){
+  const box=E("papers");box.innerHTML="";
+  const list=PAPERS.filter(p=>(curFilter==="all"||p.state===curFilter)&&(!ST.theme||p.theme===ST.theme)&&!(ST.asof<p.year));
+  const sorted=list.slice().sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
+  const totalCites=list.reduce((a,p)=>a+(p.cites||0),0);
+  E("filterstate").textContent=list.length+" 本 · 引用 "+fmt(totalCites)+(ST.theme?" · "+ST.theme:"");
+  sorted.forEach(p=>{
+    const el=document.createElement("article");el.className="paper";el.id="p-"+p.id;
+    el.dataset.state=p.state;el.dataset.theme=p.theme;if(p.oral)el.dataset.oral="1";
+    const st=stateBadge(p);
+    const hist=hasHistory(p)?'<button type="button" data-hist="'+p.id+'">変遷を見る '+VERSIONS[p.id].length+" 版</button>":"";
+    let extra="";
+    if(p.id==="p10"){extra='<span class="revline" id="fragline" hidden></span><span class="revline" id="ovline" hidden></span>';}
+    el.innerHTML=
+     '<div class="yr"><b>'+String(p.year)+'</b>'+p.theme+"</div>"+
+     '<div><h3><span class="idx">'+(p.state==="review"?"R?":p.id.toUpperCase())+'</span>'+
+       (p.title||'<span style="color:var(--muted)">(査読中 — 題名は伏せています)</span>')+"</h3>"+
+       '<div class="sub"><span>'+p.venue+"</span><span>"+p.kind+"</span>"+st+
+         '<span style="color:var(--muted)">系譜 '+linkCount(p.id)+" 本</span></div>"+
+       '<p class="note">'+p.note+extra+"</p></div>"+
+     '<div class="aside"><span class="cites">'+(p.cites==null?"—":fmt(p.cites)+" cites")+"</span>"+
+       (p.links.length?'<div class="links">'+p.links.map(l=>'<span class="lk" title="デモ用（リンク先はありません）">'+l+"</span>").join("")+"</div>":"")+
+       '<div class="hist">'+hist+"</div></div>";
+    box.appendChild(el);
+  });
+  renderFilters();
+  if(totalCites>100)unlock("cite");
+  document.body.dataset.count=list.length;
+  document.body.classList.toggle("only",list.length===0);
+  revealFrag();
+}
+function stateBadge(p){
+  if(p.state==="accepted")return '<span class="st '+(p.oral?"oral":"accepted")+'"><i></i>'+(p.oral?"発表済み · 口頭":"発表済み")+"</span>";
+  if(p.state==="pre")return '<span class="st pre"><i></i>予印</span>';
+  return '<span class="st review"><i></i>査読中</span>';
+}
+const hasHistory=p=>!!VERSIONS[p.id];
+function renderMeta(){
+  E("mPub").textContent=TOTAL_PUBLISHED;
+  E("mYears").textContent="2021 – 2026";
+  E("mCites").textContent=fmt(TOTAL_CITES);
+  E("mRev").textContent=PAPERS.filter(p=>p.state==="review").length;
+  E("footstate").textContent=TOTAL_PUBLISHED+" 本 · 6 年 · 外部通信 0 · 最終更新 2026-10-03";
+  const lg=E("legend");
+  lg.innerHTML=
+   '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></i>発表済み</span>'+
+   '<span><i style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--accent);display:inline-block"></i>口頭発表</span>'+
+   '<span><i style="width:11px;height:11px;border-radius:50%;border:1.5px dashed var(--accent2);display:inline-block"></i>予印</span>'+
+   '<span><i style="width:9px;height:9px;border-radius:50%;border:1.5px dashed var(--danger);display:inline-block"></i>査読中</span>'+
+   BANDS.map(b=>'<span><i style="width:9px;height:9px;border-radius:50%;background:'+colorOf(b)+';display:inline-block"></i>'+b+"</span>").join("")+
+   '<span>大きさ = 引用数 '+
+     '<i style="width:5px;height:5px;border-radius:50%;background:var(--ink2);display:inline-block"></i>10'+
+     '<i style="width:8px;height:8px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>30'+
+     '<i style="width:12px;height:12px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>100</span>'+
+   '<span><i style="width:14px;height:0;border-top:1px dashed var(--yt);display:inline-block"></i>査読中に入る系譜（未解決）</span>'+
+   '<span style="color:var(--muted)">— 系譜（矢印は 先行 → 後継）</span>';
+}
+/* ---------- channel header: 登録ボタンとタブ ---------- */
+function renderSub(){
+  const on=!!ST.sub,b=E("subbtn");
+  b.classList.toggle("on",on);
+  b.setAttribute("aria-pressed",on?"true":"false");
+  E("subtxt").textContent=on?"登録済み":"更新を受け取る";
+}
+E("subbtn").addEventListener("click",()=>{
+  ST.sub=!ST.sub;LS.set(KEY.sub,ST.sub);renderSub();
+  if(ST.sub){unlock("sub");toast("登録しました","更新はどこにも送信されません（0 bytes）")}
+  else toast("登録を解除しました","");
+});
+const TABTARGET={top:"top",atlas:"atlas",index:"index",about:"about"};
+function setTab(id){
+  $$("#ctabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===id?"true":"false"));
+}
+$$("#ctabs button").forEach(b=>b.addEventListener("click",()=>{
+  const id=b.dataset.tab;setTab(id);
+  const el=document.getElementById(TABTARGET[id]);
+  if(!el)return;
+  const y=id==="top"?0:el.getBoundingClientRect().top+window.scrollY-92;
+  window.scrollTo({top:y,behavior:REDUCED()?"auto":"smooth"});
+  if(id==="atlas")toast("地図 — 点を選ぶと詳細が出ます");
+  if(id==="index")toast("論文 — 査読中も省略しません");
+  if(id==="about")toast("概要 — 研究の重なりと連絡先");
+}));
+let spyTick=false;
+window.addEventListener("scroll",()=>{
+  if(spyTick)return;spyTick=true;
+  requestAnimationFrame(()=>{
+    spyTick=false;
+    const y=window.scrollY+140;let cur="top";
+    ["atlas","index","about"].forEach(id=>{const el=document.getElementById(id);
+      if(el&&el.offsetTop<=y)cur=id});
+    setTab(cur);
+  });
+},{passive:true});
+
+/* AS OF */
+E("asof").addEventListener("input",e=>{
+  ST.asof=parseInt(e.target.value,10);LS.set(KEY.asof,ST.asof);
+  const n=PAPERS.filter(p=>p.year<=ST.asof).length;
+  E("asofval").textContent=ST.asof+" — "+(ST.asof===2026?"全 10 本":n+" 本");
+  renderNote();
+  if(ST.asof<2026){unlock("back")}
+  renderAtlas();renderPapers();
+});
+E("asofreset").onclick=()=>{E("asof").value=2026;E("asof").dispatchEvent(new Event("input"))};
+E("btnRelayout").onclick=()=>relayout();
+function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);unlock("relayout");toast("配置を作り直しました","seed "+ST.seed)}
+
+/* ---------- 5. DRAWER --------------------------------------------- */
+const D={open:false};
+function openDrawer(kind,arg){
+  D.kind=kind;D.arg=arg;const b=E("dbody"),t=E("dtitle"),k=E("dkind");
+  E("drawer").classList.add("on");b.scrollTop=0;
+  if(kind==="paper"){
+    const p=paper(arg);t.textContent=p.id.toUpperCase()+(p.state==="review"?"（査読中）":"");
+    k.textContent=p.year+" / "+p.theme+" / "+(p.state==="review"?"審査中":"発表済み");
+    let h="";
+    if(p.id==="p10"){
+      h+='<div class="unresolved"><b>この 1 本について分かっていること。</b><br>'+
+        "投稿は "+SUBMIT.p10+" で、返事は 1 つだけ返ってきています。返ってこなかった側の話は、書きかけのまま残っています。</div>"+
+        '<p style="color:var(--ink2);font-size:13.5px">学会名も題名も出していません。査読中だからです。この地図では、査読中の点も発表済みの点と同じ重さで描いています。</p>';
+      h+='<h4>未解決</h4><div class="unresolved">返信していない 1 人へ — v3 は書いてありますが、送っていません。締切は自分では決められません。</div>';
+    }else{
+      h+='<h3 style="font-size:17px;line-height:1.65;margin:0 0 12px">'+p.title+"</h3>";
+      h+='<p style="font-size:14.5px">'+p.note+"</p>";
+      h+='<h4>書誌</h4><div class="mono" style="font-size:12px;color:var(--ink2)">'+
+        p.venue+" / "+p.kind+" / "+p.year+"<br>cites: "+(p.cites==null?"—":fmt(p.cites))+"<br>"+
+        "links: "+(p.links.join(" · ")||"—")+"</div>";
+    }
+    if(VERSIONS[p.id]){
+      h+='<h4>変遷</h4><div class="histpaper" style="border:0"><div class="steps" style="border:0;padding:0"><ol style="list-style:none;padding:0;margin:0">';
+      VERSIONS[p.id].forEach(([d,txt])=>{h+='<li style="display:grid;grid-template-columns:96px 1fr;gap:14px;font-size:13px;color:var(--ink2);margin:10px 0">'+
+        '<span class="mono" style="font-size:10.5px;color:var(--muted)">'+d+"</span><span>"+txt+"</span></li>"});
+      h+="</ol></div></div>";
+      if(p.id==="p7"||p.id==="p8"){
+        h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— Reviewer 2（原文）</div></div>';
+      }
+      h+='<div style="margin-top:16px"><button class="btn" data-openroom="history">変遷を全部読む（03）</button></div>';
+      unlock("reviewer");
+    }
+    if(p.id==="p1")h+='<p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:14px">この論文の誤り分析が、3 年後に p6 の手法になります（地図の線）。</p>';
+    if(ST.theme&&p.theme!==ST.theme)h+='<p class="mono" style="font-size:11.5px;color:var(--accent2);margin-top:14px">いま「'+ST.theme+'」で絞り込んでいます。この論文は地図では減光されています。</p>';
+    h+='<div style="margin-top:22px;display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="btn" data-goto="'+p.id+'">一覧で見る</button>'+
+      (VERSIONS[p.id]?'<button class="btn" data-goroom="'+p.id+'">変遷を見る（作業用房 03）</button>':"")+
+      "</div>";
+    b.innerHTML=h;
+  }
+  else if(kind==="text"){t.textContent=arg.title;k.textContent=arg.kind||"";b.innerHTML=arg.html}
+  else if(kind==="json"){t.textContent="MAP DATA — JSON";k.textContent="s";b.innerHTML=
+    '<p class="mono" style="font-size:11.5px;color:var(--muted)">公開している 3 つの配列をそのまま出しています。コピーして差し替えれば、この地図はあなたの地図になります。</p>'+
+    '<pre class="mono" style="font-size:11px;line-height:1.7;white-space:pre-wrap;color:var(--ink2);border:1px solid var(--line);padding:14px;border-radius:3px;background:var(--panel2)">'+
+    esc(JSON.stringify({PAPERS,LINEAGE,BANDS},null,1))+"</pre>"+
+    '<button class="btn primary" id="copyjson">JSON をコピー</button>'}
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+E("dclose").onclick=()=>closeDrawer();
+function closeDrawer(){E("drawer").classList.remove("on");D.open=false}
+E("drawer").addEventListener("click",e=>{if(e.target===E("drawer"))closeDrawer();
+  const cp=e.target.closest("#copyjson");if(cp){const pre=cp.parentElement.querySelector("pre");
+    navigator.clipboard&&navigator.clipboard.writeText(pre.textContent);cp.textContent="コピーしました"}
+  const gt=e.target.closest("[data-goto]");if(gt){closeDrawer();focusPaper(gt.dataset.goto);return}
+  const gr=e.target.closest("[data-goroom]");if(gr){
+    if(!ST.ach.has("key")){toast("扉には鍵がかかっています","猫が持っています");return}
+    closeDrawer();E("room").classList.add("on");ST.room=true;ST.roomTab="hist";ST.histOpen=gr.dataset.goroom;
+    unlock("visit");renderRoom();if(ST.roomTab==="hist"&&ST.histOpen==="p10")readFrag("d");return}
+});
+
+/* ---------- 6. PALETTE -------------------------------------------- */
+const CMDS=[
+ {k:"d",label:"紙（ライト）と暗を切り替える。印刷向き",fmt:"THEME"},
+ {k:"l",label:"系譜ラベルの経過年数を出す",fmt:"LABELS"},
+ {k:"r",label:"network layout を組み直す",fmt:"LAYOUT"},
+ {k:"s",label:"この地図のデータ（JSON）を見る",fmt:"DATA"},
+ {k:"m",label:"動きを入れる／止める",fmt:"MOTION"},
+ {k:"k",label:"開発者モード（座標と当たり判定）",fmt:"DEBUG"},
+ {k:"g",label:"計測表示（F3 でも同じ）",fmt:"METRIC"},
+ {k:"y",label:"予言モード — 地図に自分の 1 点を置く",fmt:"ORACLE"},
+ {k:"▶",label:"PLAY — 2021 年から順にたどる（プレイヤーの左端）",fmt:"TIMELINE"}
+];
+let palOpen=false,palIdx=0,palQ="";
+function openPalette(){palOpen=true;palQ="";palIdx=0;E("palette").classList.add("on");renderPalette();unlock("curious")}
+function closePalette(){palOpen=false;E("palette").classList.remove("on")}
+function palItems(){
+  const list=CMDS;
+  return palQ?list.filter(c=>(c.k+" "+c.label+" "+c.fmt).toLowerCase().includes(palQ.toLowerCase())):list;
+}
+function renderPalette(){
+  const ul=E("cmdlist");ul.innerHTML="";
+  const items=palItems();
+  if(palIdx>items.length-1)palIdx=Math.max(0,items.length-1);
+  items.forEach((c,i)=>{const li=document.createElement("li");li.setAttribute("role","option");
+    li.setAttribute("aria-selected",i===palIdx?"true":"false");li.className=i===palIdx?"sel":"";
+    li.innerHTML='<span class="cmd">'+c.k+'</span><span class="lb">'+c.label+'</span><span class="fmt">'+c.fmt+"</span>";
+    li.onclick=()=>{palIdx=i;runCmd(c.k);closePalette()};
+    ul.appendChild(li)});
+  if(!items.length){const li=document.createElement("li");li.innerHTML='<span class="cmd">—</span><span class="lb">該当するコマンドがありません</span><span class="fmt"></span>';ul.appendChild(li)}
+  renderAch();
+}
+function renderAch(){
+  const box=E("achline");if(!box)return;
+  const got=ACHIEVEMENTS.filter(a=>ST.ach.has(a.id));
+  const miss=ACHIEVEMENTS.length-got.length;
+  box.innerHTML=got.map(a=>'<span class="a">'+a.name+'</span>').join("")+
+    (miss?'<span class="a off">？ ×'+miss+"</span>":"")+
+    '<span style="margin-left:auto">記録 '+got.length+" / "+ACHIEVEMENTS.length+"</span>";
+  const pn=E("palnote");if(pn)pn.textContent="記録 "+got.length+" / "+ACHIEVEMENTS.length+" · 未獲得 "+miss+" 種";
+}
+function runCmd(k){
+  switch(k){
+    case "d":toggleTheme();break;
+    case "l":ST.labels=!ST.labels;renderAtlas();toast(ST.labels?"系譜ラベル — 経過年数を出しました":"系譜ラベル — 消しました");break;
+    case "r":relayout();break;
+    case "s":openDrawer("json");break;
+    case "m":toggleMotion();break;
+    case "k":ST.dev=!ST.dev;renderAtlas();toast(ST.dev?"開発者モード — 当たり判定と座標を描いています":"開発者モード — 解除");break;
+    case "g":case "F3":toggleMetric();break;
+    case "y":oracleMode();break;
+    case "▶":playTimeline();break;
+  }
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute("data-theme");
+  const n=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",n);LS.set(KEY.theme,n);
+  toast(n==="light"?"紙 — 印刷でそのまま出ます":"暗 — 夜の作業用");
+}
+function toggleMotion(){
+  const wasReduced=REDUCED();
+  ST.motion=wasReduced?"on":"off";LS.set(KEY.motion,ST.motion);
+  document.body.classList.toggle("no-motion",REDUCED());
+  renderAtlas();if(ST.room)renderRoom();
+  toast(wasReduced?"動きを入れました":"動きを止めました","prefers-reduced-motion: "+ST.motion);
+}
+function toggleMetric(){
+  ST.metro=!ST.metro;renderNote();
+  if(!ST.metro){toast("計測 — 解除");return}
+  toast("計測 — 描画 "+ST.msText+"ms · ノード "+PAPERS.length+" · 系譜 "+LINEAGE.length+
+    " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日");
+}
+function oracleMode(){
+  ST.oracleMode=!ST.oracleMode;
+  if(ST.oracleMode){toast("予言モード — 地図の空きをクリックすると、自分の 1 点を置けます");}
+  else toast("予言モード — 解除");
+  renderAtlas();updateChips();if(ST.room)renderRoom();
+}
+function playTimeline(){
+  if(ST.playing)return;ST.playing=true;
+  unlock("replay");
+  const el=E("asof");let y=2021;
+  el.value=y;el.dispatchEvent(new Event("input"));
+  toast("PLAY — 2021 年から順にたどります","esc で止まります");
+  ST.playTimer=setInterval(()=>{
+    y++;
+    if(y>2026){clearInterval(ST.playTimer);ST.playing=false;el.value=2026;el.dispatchEvent(new Event("input"));
+      unlock("replay");toast("最後まで来ました — 2026 年、全 10 本");return}
+    el.value=y;el.dispatchEvent(new Event("input"));
+  },900);
+}
+function stopPlay(){if(ST.playTimer)clearInterval(ST.playTimer);ST.playTimer=null;ST.playing=false}
+
+/* ---------- 7. ROOM ------------------------------------------------ */
+const RTABS=[["game","01","注視のゲーム"],["exp","02","失敗した実験"],["hist","03","論文の変遷"],["about","04","棚"]];
+function openRoom(){
+  E("room").classList.add("on");document.body.classList.add("room-open");ST.room=true;unlock("visit");
+  if(ST.roomTab==="game"&&(!ST.game.pred||!ST.game.pred.length))newSentence();
+  else renderRoom();
+}
+function closeRoom(){E("room").classList.remove("on");document.body.classList.remove("room-open");ST.room=false}
+function hourState(){const h=new Date().getHours();if(h>=23||h<5)return"deep";if(h<9)return"morning";if(h>=18)return"evening";return"day"}
+function tickClock(){
+  const d=new Date(),hh=String(d.getHours()).padStart(2,"0"),mm=String(d.getMinutes()).padStart(2,"0");
+  const hs=hourState();
+  const clock=E("rclock");if(!clock)return;
+  clock.textContent=hh+":"+mm;
+  E("rstate").textContent=hs==="deep"?"深夜 — 灯りを落としています":hs==="morning"?"朝 — 誰もいません":"在室";
+  E("room").dataset.h=hs;
+  const lamp=E("rlamp");if(lamp)lamp.style.background=hs==="deep"?"var(--muted)":hs==="evening"?"var(--accent2)":"var(--accent)";
+}
+function renderRoomNight(){tickClock()}
+function renderRoom(){renderRoomNav();renderRoomBody();renderTerm();tickClock()}
+function renderRoomNav(){
+  const n=E("rnav");n.innerHTML="";
+  RTABS.forEach(([id,no,label])=>{const b=document.createElement("button");b.type="button";
+    b.setAttribute("aria-current",ST.roomTab===id?"true":"false");
+    b.innerHTML='<span class="d">'+no+'</span><span>'+label+"</span>";
+    b.onclick=()=>{ST.roomTab=id;renderRoom()};n.appendChild(b)});
+}
+function renderRoomBody(){
+  const b=E("rbody");
+  if(ST.roomTab==="game")renderGame(b);
+  else if(ST.roomTab==="exp")renderExp(b);
+  else if(ST.roomTab==="hist")renderHist(b);
+  else renderAbout(b);
+}
+function renderTerm(){
+  const t=E("rterm");if(!t)return;
+  const d=new Date(),hh=String(d.getHours()).padStart(2,"0"),mm=String(d.getMinutes()).padStart(2,"0");
+  const L=[];
+  L.push("$ tail -f 作業用房.log                 "+hh+":"+mm+" 在室");
+  L.push(ST.gap==null?"前回来たのは、初めてです"
+       :ST.gap===0?"前回来たのは、今日です（"+ST.gapLabel+"）"
+       :"前回来たのは "+ST.gap+" 日前（"+ST.gapLabel+"）");
+  L.push("投稿から "+DAYS()+" 日 — 返事 1 通 / v3 は未送信");
+  if(ST.sub)L.push("チャンネル登録: 済み（送信 0 bytes — どこにも届きません）");
+  L.push("断片 "+ST.frag.size+" / 4"+(!ST.frag.size?" — なし":""));
+  if(ST.theme)L.push("絞り込み中: "+ST.theme);
+  if(ST.asof<2026)L.push("AS OF "+ST.asof+" に戻っています");
+  if(ST.myPts.length)L.push("あなたの予言: "+ST.myPts.length+" 点");
+  if(hourState()==="deep")L.push("深夜です。端末の輝度を落としています。");
+  L.push("");
+  if(ST.frag.size){L.push("— 集めた断片 —");
+    [...ST.frag].map(id=>FRAG[id]).sort((a,b)=>a.n-b.n).forEach(f=>L.push("▍"+f.text+"   ("+f.src+")"));}
+  if(ST.done.has("l3")){L.push("");L.push("▍糸 — 4 本が 1 本につながりました。審査はまだ終わっていません。")}
+  if(ST.choice){L.push("▍選択 — "+(ST.choice==="log"?"log（ログと seed を送った）":"wait（もう 1 週間見る）"))}
+  if(!ST.frag.size&&!ST.done.has("l3"))L.push("（断片は、表のどこかに落ちています）");
+  t.innerHTML=esc(L.join("\n"))+'<span class="cursor"></span>';
+  t.scrollTop=t.scrollHeight;
+  const rf=E("rfrag");if(rf)rf.innerHTML="断片 <b>"+ST.frag.size+"</b> / 4";
+}
+function roomGoal(){
+  if(ST.done.has("l3"))return"糸はつながりました。返事はまだ 1 通だけです。";
+  if(ST.frag.size)return"断片が "+ST.frag.size+" 本。端末に溜まっています。";
+  return"この部屋のものは、公開面の評価には加点されません。";
+}
+
+/* ---------- 8. EXPERIMENTS ---------------------------------------- */
+const XANN={
+ "#0338":{t:0.70,kind:"point",label:"12,400 歩 — ここで反転"},
+ "#0302":{t:0.50,kind:"point",label:"同じ seed で 3 回、3 通り"},
+ "#0291":{t:0.30,t2:0.92,kind:"band",label:"平坦 — 検証 label は 0 のまま"},
+ "#0411":{t:0.10,kind:"point",label:"リーク（検証 loss 0.004）"},
+ "#0399":{t:0.42,kind:"stop",label:"NaN — ここで停止"}
+};
+function curve(f,id){
+  const rnd=mulberry(id.split("").reduce((a,c)=>a+c.charCodeAt(0),7));
+  const pts=[];const N=160;
+  for(let i=0;i<=N;i++){const t=i/N;let y;
+    if(f.cat==="発散"){y=t<0.55?0.10+0.75*Math.exp(-3.4*t):0.10+0.75*Math.exp(-3.4*0.55)+(t-0.55)*3.1}
+    else if(f.cat==="振動"){y=0.30+0.55*Math.exp(-1.5*t)+0.16*Math.sin(t*26)*Math.exp(-0.9*t)}
+    else if(f.cat==="プラトー"){y=t<0.26?0.16+0.72*Math.exp(-5.5*t):0.16+0.72*Math.exp(-5.5*0.26)-0.012*(t-0.26)}
+    else if(f.cat==="成功しすぎ"){y=0.015+0.92*Math.exp(-5.2*t)}
+    else {y=0.14+0.72*Math.exp(-2.4*t);if(t>0.42)break}
+    y+= (rnd()-.5)*0.006;
+    pts.push([t,Math.max(0.012,y)])}
+  return pts;
+}
+function renderExp(b){
+  let h='<h3>02 失敗した実験</h3><div class="lead">WORKLOG — 5 本。形が全部違う。読んだ本数は記録されます（'+ST.seen.size+' / 5）</div>';
+  h+='<div id="xstage"><ul class="xlist" id="flist">';
+  FAILED.forEach(f=>{h+='<li data-x="'+f.id+'" aria-current="'+(ST.xActive===f.id?"true":"false")+'">'+
+    '<span class="rid">'+f.id+'</span><span class="shape">'+f.cat+'</span><span class="out">'+f.out+"</span></li>"});
+  h+='</ul><div id="xdetail"></div></div>';
+  b.innerHTML=h;
+  renderXDetail();
+}
+function renderXDetail(){
+  const box=E("xdetail");if(!box)return;
+  const f=FAILED.find(x=>x.id===ST.xActive)||FAILED[0];
+  const pts=curve(f,f.id);
+  const X=t=>26+t*520,Y=y=>168-Math.min(y,1.15)*135;
+  const d=pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" ");
+  const a=XANN[f.id];
+  let ann="";
+  if(a){
+    if(a.kind==="point")ann='<line x1="'+X(a.t)+'" y1="'+Y(0.6)+'" x2="'+X(a.t)+'" y2="'+Y(0.12)+'" stroke="var(--danger)" stroke-width="1" stroke-dasharray="2 3"/>'+
+      '<text class="tick" x="'+X(a.t)+'" y="'+(Y(1.1)-4)+'" fill="var(--danger)">'+a.label+"</text>";
+    if(a.kind==="band")ann='<rect x="'+X(a.t)+'" y="'+Y(0.9)+'" width="'+(X(a.t2)-X(a.t))+'" height="'+(Y(0.05)-Y(0.9))+'" fill="none" stroke="var(--danger)" stroke-width="1" stroke-dasharray="3 3"/>'+
+      '<text class="tick" x="'+X(a.t)+'" y="'+(Y(0.95)-2)+'" fill="var(--danger)">'+a.label+"</text>";
+    if(a.kind==="stop"){const p=pts[pts.length-1];ann='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="3.4" fill="none" stroke="var(--danger)" stroke-width="1.4"/>'+
+      '<text class="tick" x="'+X(p[0])+'" y="'+(Y(p[1])-12)+'" fill="var(--danger)" text-anchor="middle">'+a.label+"</text>"}
+  }
+  box.innerHTML='<div class="xchart"><svg viewBox="0 0 560 200" role="img" aria-label="'+f.id+' の学習曲線（'+f.cat+'）">'+
+    '<line class="ax" x1="26" y1="168" x2="552" y2="168"/><line class="ax" x1="26" y1="20" x2="26" y2="168"/>'+
+    '<text class="tick" x="26" y="188">0</text><text class="tick" x="500" y="188" text-anchor="end">'+f.steps+" step</text>"+
+    '<text class="tick" x="6" y="26">loss</text><text class="tick" x="6" y="166">0</text>'+
+    '<path class="curve" d="'+d+'"/>'+ann+"</svg></div>"+
+    '<div class="mono" style="font-size:11.5px;color:var(--ink2);display:flex;gap:18px;flex-wrap:wrap"><span>'+f.id+"</span><span>"+f.cat+"</span><span>"+f.steps+" steps</span><span>"+f.out+"</span></div>"+
+    '<div class="xnote">'+f.note+'</div>'+
+    (hasChain()&&f.id==="#0291"?'<div class="xmsg"><span class="s1">↳ 相互リンク</span> この平坦な曲線が、いま審査中の 1 本の差し戻し理由と同じものです。<a href="#" data-openpaper="p10">その 1 本を見る</a></div>':"")+
+    '<div class="xmsg">'+f.msg+"</div>";
+}
+function markSeen(id){
+  if(!ST.seen.has(id)){ST.seen.add(id);LS.set(KEY.seen,[...ST.seen]);
+    if(id==="#0291"){readFrag("c")}
+    if(ST.seen.size>=3)unlock("failed");
+    if(id==="#0399")unlock("experimenter");
+    renderExp(E("rbody"))}
+}
+
+/* ---------- 9. ATTENTION GAME ------------------------------------- */
+const PUNCT=/^[、。！？「」（）]+$/;
+function tokensOf(s){
+  const out=[];let i=0;
+  s.key.forEach(([tok,n])=>{const at=s.jp.indexOf(tok,i);
+    if(at>i)out.push({t:s.jp.slice(i,at),key:0});
+    out.push({t:tok,key:n});i=at+tok.length});
+  if(i<s.jp.length)out.push({t:s.jp.slice(i),key:0});
+  // 句読点だけの断片は前の語に付ける（「眠っている」+「。」）
+  for(let j=out.length-1;j>0;j--){
+    if(PUNCT.test(out[j].t)&&out[j].key===0){out[j-1].t+=out[j].t;out.splice(j,1)}
+  }
+  return out;
+}
+function newSentence(){const g=ST.game;g.scored=false;g.final=false;
+  g.pred=tokensOf(GAME_SENTENCES[g.sent]).map(()=>0);renderRoom()}
+function scaleHtml(){
+  let bar="",ax="";
+  ['0','25','50','75','100'].forEach((n,i)=>{
+    if(i<4)bar+='<span class="seg" style="background:'+(i%2?"repeating-linear-gradient(135deg,var(--hatch) 0 2px,transparent 2px 5px)":"color-mix(in srgb,var(--accent) 24%,transparent)")+'"></span>';
+    ax+='<span>'+n+"</span>";
+  });
+  return '<div class="gscale2">'+bar+'</div><div class="gaxis">'+ax+'</div>'+
+    '<p class="mono" style="font-size:10px;color:var(--muted);margin:-6px 0 12px">'+
+    '<span style="color:var(--accent)">■</span> あなたの予測 &nbsp; <span style="color:var(--accent2)">■</span> 実測（n=214 の読み手）'+
+    ' &nbsp; <span style="color:var(--danger)">▁</span> 下の赤い帯 = 外した幅</p>';
+}
+function renderGame(b){
+  const g=ST.game,s=GAME_SENTENCES[g.sent],toks=tokensOf(s);
+  if(!g.pred||g.pred.length!==toks.length)g.pred=toks.map(()=>0);
+  const totalKey=toks.reduce((a,t)=>a+t.key,0);
+  const sum=g.pred.reduce((a,v)=>a+(v||0),0);
+  let h='<h3>01 注視のゲーム</h3><div class="lead">この文のどこに注意が集まるか、配分で予測してください（合計 100）。実測は、その語で読み手が実際に止まった回数の比です。</div>';
+  h+='<div class="inviewbox">'+(g.sent+1)+" / "+GAME_SENTENCES.length+"</div>";
+  h+='<p class="gsent">'+toks.map((t,i)=>'<span class="w '+(g.scored?(t.key?"hit":"miss"):"")+'">'+esc(t.t)+"</span>").join("")+"</p>";
+  h+='<p class="mono" style="font-size:10.5px;color:var(--muted);margin:-6px 0 12px">'+esc(s.en)+"</p>";
+  h+=scaleHtml();
+  toks.forEach((t,i)=>{
+    const p=g.pred[i]||0,act=g.scored?Math.round(t.key/totalKey*100):0;
+    const lo=Math.min(p,act),hi=Math.max(p,act);
+    h+='<div class="grow" data-row="'+i+'"><span class="gl" title="'+esc(t.t)+'">'+esc(t.t)+"</span>"+
+      '<span class="gtrack">'+
+        '<span class="sgl" style="left:25%"></span><span class="sgl" style="left:50%"></span><span class="sgl" style="left:75%"></span>'+
+        '<span class="fp" style="width:'+p+'%"></span>'+
+        (g.scored?'<span class="fa" style="width:'+act+'%"></span><span class="err" style="left:'+lo+'%;width:'+(hi-lo)+'%"></span>':"")+
+      "</span>"+
+      '<input class="gv" type="number" min="0" max="100" step="5" data-i="'+i+'" value="'+(g.scored?p:p)+'" aria-label="'+esc(t.t)+' の予測" '+(g.scored?"disabled":"")+">"+
+      "</div>";
+  });
+  const rest=100-sum;
+  h+='<div class="gscore"><span>合計 <b id="gsum">'+sum+'</b> / 100</span>'+
+    '<span id="ghint">'+(g.scored?"":rest===0?"採点できます":rest>0?"あと "+rest+" を配ると採点できます":Math.abs(rest)+" オーバーしています")+"</span></div>";
+  if(!g.scored){
+    h+='<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="btn primary" id="gscorebtn"'+(sum===100?"":" disabled style=\"opacity:.45\"")+">採点する</button>"+
+      '<button class="btn" id="geven">均等に配る</button>'+
+      (sum<100?'<button class="btn" id="gfill">端数を配る</button>':"")+
+      '<button class="btn" id="gzero">0 に戻す</button></div>';
+  }
+  if(g.scored){
+    const sc=g.scores[g.scores.length-1];
+    h+='<div class="gpass on" style="border-color:var(--line2);background:var(--panel2)"><b>この文 — '+sc+" / 100</b><br>"+
+      '<span style="color:var(--ink2);font-size:12.5px">'+g.feedback[g.feedback.length-1]+"</span></div>";
+    h+='<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">'+
+      (g.sent<GAME_SENTENCES.length-1?'<button class="btn primary" id="gnext">次の文へ</button>':'<button class="btn primary" id="gfinish">結果を見る</button>')+
+      '<button class="btn" id="gredo">もう一度（同じ文）</button></div>';
+  }
+  if(g.final){
+    const avg=Math.round(g.scores.reduce((a,v)=>a+v,0)/g.scores.length);
+    h+='<div class="gpass '+(avg>=70?"on":"")+'" style="'+(avg>=70?"":"border-color:var(--line2)")+'">'+
+      "<b>平均 "+avg+" / 100</b><br>"+g.scores.map((v,i)=>(i+1)+" 文目 "+v).join(" · ")+
+      "<br>"+(avg>=70?"合格 — あなたは注意の行き先をほぼ当てています。この予測の仕方で、私は 3 本目の実験を組み直しました。"
+        :"70 に届きませんでした。帯の幅より、外したセグメントのほうが大事です。もう一度どうぞ。")+"</div>";
+    if(avg>=70)unlock("core");
+    h+='<div style="margin-top:12px"><button class="btn" id="greset">最初から</button></div>';
+  }
+  b.innerHTML=h;
+}
+function gameUpdateVisual(){
+  const g=ST.game,s=GAME_SENTENCES[g.sent],toks=tokensOf(s);
+  const sum=g.pred.reduce((a,v)=>a+(v||0),0);
+  const b=E("rbody");
+  b.querySelectorAll(".grow").forEach(row=>{const i=+row.dataset.row;const p=g.pred[i]||0;
+    row.querySelector(".fp").style.width=p+"%"});
+  const gs=E("gsum");if(gs)gs.textContent=sum;
+  const hint=E("ghint");
+  if(hint)hint.textContent=sum===100?"採点できます":sum<100?"あと "+(100-sum)+" を配ると採点できます":(sum-100)+" オーバーしています";
+  const btn=E("gscorebtn");
+  if(btn){const ok=sum===100;btn.disabled=!ok;btn.style.opacity=ok?"1":".45"}
+  const fill=E("gfill");
+  if(fill&&sum>=100)fill.style.display="none";
+  if(!fill&&sum<100&&!g.scored)renderRoom();
+}
+function scoreSentence(){
+  const g=ST.game,s=GAME_SENTENCES[g.sent],toks=tokensOf(s);
+  const totalKey=toks.reduce((a,t)=>a+t.key,0);
+  const act=toks.map(t=>t.key/totalKey*100);
+  let dist=0;act.forEach((a,i)=>dist+=Math.abs(a-(g.pred[i]||0)));
+  const sc=Math.max(0,Math.round(100-dist/2));
+  g.scores.push(sc);g.scored=true;
+  const worst=toks.map((t,i)=>({t:t.t,d:Math.abs(act[i]-(g.pred[i]||0))})).sort((a,b)=>b.d-a.d)[0];
+  g.feedback=g.feedback||[];
+  g.feedback.push("いちばん外したのは「"+worst.t+"」（差 "+Math.round(worst.d)+" ポイント）。"+
+    (sc>=90?"ほぼ完全です。":sc>=75?"良い読みです。":"帯の位置を、もう一度見てください。"));
+  renderRoom();
+}
+function finishGame(){ST.game.final=true;renderRoom()}
+function resetGame(){ST.game={sent:0,scores:[],rows:[],pred:[],draft:{},final:false,scored:false,init:true,feedback:[]};newSentence()}
+
+/* ---------- 10. HISTORY (03) -------------------------------------- */
+function hasChain(){return ST.done.has("l3")}
+function renderHist(b){
+  const list=PAPERS.filter(p=>VERSIONS[p.id]).slice().sort((a,b)=>b.year-a.year);
+  let h='<h3>03 論文の変遷</h3><div class="lead">全 10 本の投稿から掲載まで。査読者からの指摘は、原文のまま置いてあります。</div>';
+  list.forEach(p=>{
+    const open=ST.histOpen===p.id;
+    h+='<div class="histpaper"><button class="h" type="button" data-hist2="'+p.id+'" aria-expanded="'+open+'">'+
+      '<span class="ht">'+esc(p.title||"(査読中 — 題名は伏せています)")+"</span>"+
+      '<span class="hm">'+p.id.toUpperCase()+" · "+p.year+" · "+VERSIONS[p.id].length+" 版</span></button>";
+    if(open){
+      h+='<div class="steps"><ol style="list-style:none;padding:0;margin:0">';
+      VERSIONS[p.id].forEach(([d,txt])=>h+='<li><span class="d">'+d+"</span><span>"+esc(txt)+"</span></li>");
+      h+="</ol>";
+      if(p.id==="p7")h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— Reviewer 2（原文。引用は統計的に薄い、という指摘も同時に来た）</div></div>';
+      if(p.id==="p8")h+='<div class="rev"><div class="q">「5 種で足りている証拠が弱い。7 種に増やして差が出ないことを示してほしい」</div><div class="a">— Reviewer 1（原文。7 回やり直して 5 種に戻した、が結論）</div></div>';
+      if(p.id==="p10"){
+        h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— 差し戻し理由（原文）</div></div>';
+        h+='<div class="unresolved">返信していない 1 人へ — v3 は書いてあります。送る日を決めていないだけです。</div>';
+        if(hasChain()){
+          h+='<div class="xmsg" style="margin-top:12px"><span class="s1">↳ 相互リンク</span> この差し戻しは 02 の #0291 と同じ失敗です。<a href="#" data-openexp="#0291">実験ログを見る</a></div>';
+          h+=choiceHtml();
+        }
+      }
+      h+="</div>";
+    }
+    h+="</div>";
+  });
+  h+='<div style="margin-top:26px"><h4 style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)">糸 — 集めた断片</h4>';
+  const got=[...ST.frag].map(id=>FRAG[id]).sort((a,b)=>a.n-b.n);
+  if(!got.length)h+='<p style="color:var(--muted);font-size:13px">まだ 0 本です。断片は、表のどこかに落ちています。</p>';
+  else{h+='<ol style="list-style:none;padding:0;margin:0">'+got.map(f=>'<li style="font-size:13px;color:var(--ink2);margin:9px 0;display:grid;grid-template-columns:72px 1fr;gap:12px"><span class="mono" style="font-size:10.5px;color:var(--muted)">'+f.src+"</span><span>▍"+esc(f.text)+"</span></li>").join("")+"</ol>";}
+  if(hasChain())h+='<p class="mono" style="font-size:11.5px;color:var(--accent)">4 本のうち 3 本が 1 本につながりました。「投稿から '+DAYS()+' 日」は、毎日 1 ずつ増えます。</p>';
+  else h+='<p class="mono" style="font-size:11.5px;color:var(--muted)">同じ事実が 4 箇所に散らばっています。3 本そろうと、糸になります。</p>';
+  h+="</div>";
+  b.innerHTML=h;
+  if(ST.histOpen)unlock("reviewer");
+}
+function choiceHtml(){
+  if(ST.choice){
+    const t=ST.choice==="log"
+      ?"Reviewer 2 が 1 行返しました。「表 3 の件、こちらでも再現しました。あと 1 週間もらえますか」— そのあと数字はまた進みました。"
+      :"v3 の文面だけは書いて、送りませんでした。宛先は入っています。";
+    return '<div class="choice"><span class="picked">'+(ST.choice==="log"?"log":"wait")+"</span><span style=\"color:var(--ink2);font-size:12.5px;align-self:center\">"+t+"</span></div>"+
+      '<p class="mono" style="font-size:11px;color:var(--muted)">どちらを選んでも待ちは続きます。救済ではなく、選んだことが記録されるだけです。</p>';
+  }
+  return '<div class="choice"><button class="btn primary" data-choice="log">log — ログと seed を送る</button>'+
+    '<button class="btn" data-choice="wait">wait — もう 1 週間見る</button></div>'+
+    '<p class="mono" style="font-size:11px;color:var(--muted)">選んだことは、このブラウザの中だけに残ります。</p>';
+}
+
+/* ---------- 11. SHELF (04) ---------------------------------------- */
+function renderAbout(b){
+  b.innerHTML='<h3>04 棚</h3><div class="lead">ここは、表に出さないものの置き場です。</div>'+
+   '<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">'+
+     '<button id="catbig" class="btn" style="width:96px;height:66px;display:flex;align-items:center;justify-content:center" aria-label="猫">'+
+       '<svg viewBox="0 0 40 24" width="56" height="34" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2">'+
+       '<path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z"/><path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4"/>'+
+       '<path d="M28 20c4 0 8-1.5 9-4.5" stroke-linecap="round"/></g>'+
+       '<circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/></svg></button>'+
+     '<p style="flex:1;min-width:240px;font-size:13.5px;color:var(--ink2);margin:0">この部屋のものは、公開面の研究業績の評価には加点されません。'+
+     '表は計測で、裏は工房です。隠し部屋はオーバーレイなので、ネットワークのノードやエッジは 1 つも増えていません。<br>'+
+     '<span class="mono" style="font-size:11.5px;color:var(--muted)">入口：右下の猫を 3 回 ／ プレイヤーの ▦ ／ 画面右下の扉</span></p>'+
+   "</div>"+
+   '<h4>記録</h4><div class="achline" style="border:0;padding:0">'+ACHIEVEMENTS.map(a=>'<span class="a'+(ST.ach.has(a.id)?"":" off")+'" title="'+a.desc+'">'+(ST.ach.has(a.id)?a.name:"？")+"</span>").join("")+"</div>"+
+   '<h4>データの差し替え</h4><p style="font-size:13.5px;color:var(--ink2)">直すのは 3 つの配列が中心（PAPERS / LINEAGE / BANDS）。ネットワーク・凡例・動画リスト・統計・JSON・サムネイルがまとめて更新されます。伏線の人物設定は VERSIONS と SUBMIT に集約してあります。</p>'+
+   '<h4>保存しているもの</h4><p class="mono" style="font-size:11.5px;color:var(--muted)">atlas-ach / atlas-frag / atlas-choice / atlas-oracle / atlas-last / atlas-theme / atlas-seen<br>削除はブラウザの保存データ削除のみ。リセットボタンは置いていません。</p>'+
+   '<h4>一覧</h4><p style="font-size:13.5px;color:var(--ink2)">コマンドの一覧は <button class="btn" id="openpal2">?</button> にだけあります。それ以外は、発見される前提で設計していません。</p>';
+}
+
+/* ---------- 12. CAT / DOOR / FRAGMENTS ----------------------------- */
+const FRAG={
+ a:{n:1,text:"2026 の 1 本、まだ返事は 1 つだけ。あと 2 日で 300 日目になります",src:"猫を 3 回叩く"},
+ b:{n:2,text:"この年の時点では、この 1 本は査読者を 1 人も選んでいません",src:"AS OF の幽霊点"},
+ c:{n:3,text:"検証ラベルが 0 だったまま 2 週間気づかなかった plateau",src:"#0291"},
+ d:{n:4,text:"差し戻し理由「実験 3 の表 3 が再現できません」",src:"03 の査読中"}
+};
+function catLine(){
+  const h=hourState(),c=[];
+  if(ST.theme)c.push("いまは「"+ST.theme+"」だけ見ています。絞り込むと、ネットワークが少し静かになります。");
+  if(ST.asof<2026)c.push(ST.asof+" 年までの部分グラフです。まだ "+PAPERS.filter(p=>p.year>ST.asof).length+" 本ぶんの空きがあります。");
+  if(ST.myPts.length)c.push("あなたの予言が "+ST.myPts.length+" 点。ネットワークのすみに置いてあります。");
+  if(ST.frag.size>=2&&!hasChain())c.push("断片が "+ST.frag.size+" 本。集めた断片は、この部屋の端末に溜まります。");
+  if(hasChain())c.push("糸はつながりましたね。まだ返事は 1 つだけです。");
+  if(ST.sub)c.push("登録ありがとうございます。どこにも送っていません。");
+  if(h==="deep")c.push("深夜ですね。灯りを落としています。");
+  c.push("この部屋のことは、表では説明していません。");
+  c.push("名前がない点には、赤い線が 2 本入っています。");
+  c.push("鍵はもう渡しました。扉は右下にあります。");
+  c.push("推薦は、あなたのログを見ていません。");
+  c.push("YouTube の推薦は、同じ入力を 2 回返しません。");
+  c.push("査読中の 1 本には、まだ名前がありません。");
+  return c[(Math.random()*c.length)|0];
+}
+function strokeCat(){
+  if(!ST.ach.has("key")){
+    ST.ncr2++;LS.set(KEY.ncr2,ST.ncr2);
+    if(ST.ncr2>=3){
+      unlock("key");document.body.classList.add("keyed");readFrag("a");
+      toast(FRAG.a.text,"");
+      catNotes();showDoor();
+      toast("鍵を受け取りました — 右下の扉が開きます");
+      return;
+    }
+    catNotes();
+    toast("猫を叩いた（"+ST.ncr2+" 回目）","あと "+(3-ST.ncr2)+" 回");
+    return;
+  }
+  toast(catLine());
+}
+function showDoor(){const d=E("doordock");if(d)d.hidden=false}
+E("catbtn").addEventListener("click",strokeCat);
+E("catbtn2").addEventListener("click",strokeCat);
+E("doorbtn").addEventListener("click",()=>visitRoom());
+function visitRoom(){
+  if(!ST.ach.has("key")){toast("扉には鍵がかかっています","右下の猫が持っています");return}
+  openRoom();
+}
+E("p-room").addEventListener("click",()=>visitRoom());
+E("p-play").addEventListener("click",()=>{ST.playing?stopPlay():playTimeline()});
+$$("#player [data-cmd]").forEach(b=>b.addEventListener("click",()=>runCmd(b.dataset.cmd)));
+function catNotes(){
+  const c=E("catnote"),l=E("catlbl");
+  if(!ST.ach.has("key")){
+    if(c)c.textContent=ST.ncr2===0?"— 眠っています":ST.ncr2===1?"— 目を少し開けました":"— 鍵を探しています…";
+  }else{
+    if(c)c.textContent="— 鍵は渡しました。扉は右下です";
+    if(l)l.textContent="猫 — 鍵は渡しました。扉は右下です";
+  }
+}
+setInterval(()=>{
+  const b=E("catbtn2");if(!b||ST.ach.has("key"))return;
+  b.classList.add("wig");setTimeout(()=>b.classList.remove("wig"),2400);
+},14000);
+E("rclose").onclick=()=>closeRoom();
+E("room").addEventListener("click",e=>{if(e.target===E("room"))closeRoom()});
+E("rbody").addEventListener("click",e=>{
+  const hist=e.target.closest("[data-hist2]");
+  if(hist){const id=hist.dataset.hist2;ST.histOpen=ST.histOpen===id?null:id;renderHist(E("rbody"));
+    if(ST.histOpen==="p10")readFrag("d");renderTerm();return}
+  const x=e.target.closest("li[data-x]");
+  if(x){ST.xActive=x.dataset.x;renderExp(E("rbody"));markSeen(ST.xActive);return}
+  const ch=e.target.closest("[data-choice]");
+  if(ch){ST.choice=ch.dataset.choice;LS.set(KEY.choice,ST.choice);renderHist(E("rbody"));renderTerm();
+    toast(ST.choice==="log"?"記録しました — log":"記録しました — wait");return}
+  const gp=e.target.closest("[data-openpaper]");
+  if(gp){e.preventDefault();openDrawer("paper",gp.dataset.openpaper);return}
+  const gx=e.target.closest("[data-openexp]");
+  if(gx){e.preventDefault();ST.roomTab="exp";renderRoom();markSeen(gx.dataset.openexp);return}
+  if(e.target.closest("#catbig")){strokeCat();return}
+  if(e.target.closest("#openpal2")){closeRoom();openPalette();return}
+});
+/* game interactions delegated */
+E("rbody").addEventListener("input",e=>{
+  const inp=e.target.closest("input[data-i]");if(!inp)return;
+  const i=+inp.dataset.i;let v=parseInt(inp.value||"0",10);if(isNaN(v))v=0;
+  v=Math.max(0,Math.min(100,v));ST.game.pred[i]=v;gameUpdateVisual();
+});
+E("rbody").addEventListener("click",e=>{
+  if(!e.target.closest("#gscorebtn,#geven,#gzero,#gnext,#gredo,#gfinish,#greset"))return;
+  const g=ST.game;
+  if(e.target.closest("#gscorebtn")){scoreSentence();return}
+  if(e.target.closest("#geven")){const t=tokensOf(GAME_SENTENCES[g.sent]);const base=Math.floor(100/t.length);
+    g.pred=t.map((_,i)=>i===0?100-base*(t.length-1):base);renderRoom();return}
+  if(e.target.closest("#gzero")){g.pred=g.pred.map(()=>0);renderRoom();return}
+  if(e.target.closest("#gfill")){const sum=g.pred.reduce((a,v)=>a+(v||0),0);const rest=100-sum;if(rest>0){
+    let idx=0;g.pred.forEach((v,i)=>{if((v||0)>g.pred[idx])idx=i});
+    if(g.pred.reduce((a,v)=>a+(v||0),0)===0)idx=0;
+    g.pred[idx]=(g.pred[idx]||0)+rest;renderRoom()}return}
+  if(e.target.closest("#gnext")){g.sent++;newSentence();return}
+  if(e.target.closest("#gredo")){g.scored=false;g.final=false;renderRoom();return}
+  if(e.target.closest("#gfinish")){finishGame();return}
+  if(e.target.closest("#greset")){resetGame();return}
+});
+
+/* ---------- 13. ORACLE + MAP MODE HOOKS --------------------------- */
+const _pd=E("mapwrap").addEventListener("pointerdown",e=>{
+  if(e.button!==0)return;
+  if(!(e.shiftKey||ST.oracleMode))return;
+  if(e.target.closest(".hit"))return;
+  e.preventDefault();placeOracle(mapPoint(e));
+});
+
+/* ---------- 14. KEYBOARD ------------------------------------------ */
+document.addEventListener("keydown",e=>{
+  const tag=(e.target.tagName||"").toLowerCase(),typing=tag==="input"||tag==="textarea";
+  if(ST.playing&&e.key==="Escape"){stopPlay();toast("PLAY — 止めました")}
+  if(e.key==="Escape"){
+    if(palOpen)closePalette();
+    else if(E("drawer").classList.contains("on"))closeDrawer();
+    else if(ST.room)closeRoom();
+    return;
+  }
+  if(e.key==="?"||(e.key==="/"&&e.shiftKey)){e.preventDefault();palOpen?closePalette():openPalette();return}
+  if(palOpen){
+    const items=palItems();
+    if(e.key==="ArrowDown"){e.preventDefault();palIdx=Math.min(items.length-1,palIdx+1);renderPalette();return}
+    if(e.key==="ArrowUp"){e.preventDefault();palIdx=Math.max(0,palIdx-1);renderPalette();return}
+    if(e.key==="Enter"){e.preventDefault();if(items[palIdx]){const k=items[palIdx].k;closePalette();runCmd(k)}return}
+    if(e.key==="Backspace"){e.preventDefault();palQ=palQ.slice(0,-1);palIdx=0;renderPalette();return}
+    if(e.key.length===1&&/[a-z0-9F3]/i.test(e.key)&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+      e.preventDefault();palQ+=e.key;palIdx=0;renderPalette();return}
+    return;
+  }
+  if(typing)return;
+  if(e.key==="F3"){e.preventDefault();toggleMetric();return}
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key.toLowerCase();
+  if("dlrsmkgy".includes(k)&&k.length===1){e.preventDefault();runCmd(k)}
+});
+E("presshint").addEventListener("click",()=>openPalette());
+
+/* ---------- 15. MEMORY / INIT ------------------------------------- */
+function memoryOnLoad(){
+  const last=ST.last;
+  if(last&&last.t){
+    const gap=Math.floor((Date.now()-last.t)/864e5);
+    ST.gap=gap;
+    const d=new Date(last.t);
+    ST.gapLabel=(d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+    if(gap>=2)toast(gap+" 日ぶり。","その数字は、また "+gap+" 日進みました");
+  }else{ST.gap=null;ST.gapLabel="初回"}
+  LS.set(KEY.last,{t:Date.now()});
+}
+function init(){
+  ST.quiet=true;
+  const th=LS.get(KEY.theme,null);if(th)document.documentElement.setAttribute("data-theme",th);
+  ST.motion=LS.get(KEY.motion,null);
+  document.body.classList.toggle("no-motion",REDUCED());
+  memoryOnLoad();
+  renderMeta();renderSub();renderAtlas();renderPapers();renderPalette();renderTerm();
+  const a=LS.get(KEY.asof,2026);
+  if(a!==2026){E("asof").value=a;E("asof").dispatchEvent(new Event("input"))}
+  if(hourState()==="deep")unlock("night");
+  if(ST.ach.has("key")){showDoor();document.body.classList.add("keyed")}
+  catNotes();
+  syncFrag();
+  if(hasChain()){applyChain();}
+  tickClock();setInterval(tickClock,30000);
+  ST.quiet=false;
+  if(ST.frag.size===4&&!ST.done.has("allfrag")){ST.done.add("allfrag");LS.set(KEY.done,[...ST.done]);toast("断片 4 本 — 全部そろいました","")}
+}
+/* テスト用の読み取り口（書き換えはしない） */
+window.ATLAS={tokensOf,perfect:i=>{
+  const t=tokensOf(GAME_SENTENCES[i]),tot=t.reduce((a,x)=>a+x.key,0);
+  const out=t.map(x=>Math.floor(x.key/tot*100));
+  const rest=100-out.reduce((a,b)=>a+b,0);
+  out[out.indexOf(Math.max.apply(null,out))]+=rest;return out},
+  state:()=>({frag:[...ST.frag],done:[...ST.done],days:DAYS()})};
+init();
+
+</script>
+</body>
+</html>
