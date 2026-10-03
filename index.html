@@ -935,6 +935,7 @@ const E=id=>document.getElementById(id);
 let secretBuffer="";
 function toggleAtlasView(){
   const playful=document.body.classList.toggle("playful-mode");
+  document.title=playful?"ATLAS OF RESEARCH OUTPUTS — Koki Ota":"Koki Ota — Researcher";
   if(playful){window.scrollTo({top:0,behavior:"smooth"});toast("ATLAS view — hidden mode");}
   else{window.scrollTo({top:0,behavior:"smooth"});toast("Profile view");}
 }
@@ -2019,6 +2020,7 @@ function memoryOnLoad(){
 }
 function init(){
   ST.quiet=true;
+  document.title="Koki Ota — Researcher";
   const th=LS.get(KEY.theme,null);if(th)document.documentElement.setAttribute("data-theme",th);
   ST.motion=LS.get(KEY.motion,null);
   document.body.classList.toggle("no-motion",REDUCED());
