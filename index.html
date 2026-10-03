@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ATLAS OF PUBLICATIONS — 推薦のネットワーク</title>
-<meta name="description" content="2021–2026。YouTube の推薦を測った 10 本を、引用関係のネットワークとして置いた個人研究者サイト。査読中の点には、まだ名前がない。">
+<title>ATLAS OF PUBLICATIONS — Koki Ota</title>
+<meta name="description" content="Koki Ota の研究業績。YouTube上の偽情報・陰謀論・社会ネットワークを分析する研究を、公開情報にもとづく地図として整理。">
 <meta name="color-scheme" content="dark light">
 <style>
 /* ============================================================
@@ -581,10 +581,10 @@ body.no-motion *{animation:none!important;transition:none!important}
       <div class="chanrow">
         <div class="avatar" aria-hidden="true">MS</div>
         <div class="chinfo">
-          <h1>白沙 ミナト
+          <h1>太田 光紀
             <svg class="check" viewBox="0 0 20 20" role="img" aria-label="本人確認済み"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 10.4l2.7 2.6L14.2 7.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </h1>
-          <div class="handle">@minato.shirasuna&nbsp;&nbsp;·&nbsp;&nbsp;博士課程 3 年&nbsp;&nbsp;·&nbsp;&nbsp;推薦システムの計測</div>
+          <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
             <span>論文 <b id="mPub">—</b> 本</span><i>|</i>
             <span>引用 <b id="mCites">—</b></span><i>|</i>
@@ -592,7 +592,7 @@ body.no-motion *{animation:none!important;transition:none!important}
             <span><b id="mYears">—</b></span><i>|</i>
             <span>送信 <b>0</b> bytes</span>
           </div>
-          <p class="def"><b>YouTube の「次にこれ」が、なぜ毎回違うのかを測っています。</b>視聴セッションの切り方、推薦由来の再生、そして再現しない実験。2021 年から 2026 年までに出した 10 本を、引用関係のネットワークとして置きました。</p>
+          <p class="def"><b>YouTube上で偽情報や陰謀論が広がる経路を分析しています。</b>動画・コメント・投稿者・視聴者のネットワークを手がかりに、誰が発信し、誰が受け取り、どのように過激化へ進むのかを調べています。</p>
         </div>
         <div class="chact">
           <button class="subbtn" id="subbtn" type="button" aria-pressed="false">
@@ -614,7 +614,7 @@ body.no-motion *{animation:none!important;transition:none!important}
 <main class="wrap">
   <section class="atlas" id="atlas" aria-label="ATLAS OF PUBLICATIONS">
     <div class="shead">
-      <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">NETWORK VIEW · 2021 — 2026</span></h2>
+      <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">NETWORK VIEW · 2020 — 2025</span></h2>
       <div class="hint">点 = 論文&nbsp;&nbsp;·&nbsp;&nbsp;線 = 系譜（引用・引き継ぎ）&nbsp;&nbsp;·&nbsp;&nbsp;大きさ = 引用数&nbsp;&nbsp;·&nbsp;&nbsp;色 = テーマ<br>
         <b>点を選ぶ</b>と詳細が出ます&nbsp;&nbsp;<b>r</b> でネットワークを組み直す</div>
     </div>
@@ -626,7 +626,7 @@ body.no-motion *{animation:none!important;transition:none!important}
     <div class="mapscroll">
       <div id="mapwrap">
         <div id="mapinner">
-          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2021年から2026年までの論文を年と研究テーマで配置した地図" tabindex="0"></svg>
+          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2020年から2025年までの研究業績をテーマと系譜で配置した地図" tabindex="0"></svg>
         </div>
         <div id="mapcontrols">
           <button id="btnRelayout" type="button" title="r">RECOMPUTE</button>
@@ -642,13 +642,13 @@ body.no-motion *{animation:none!important;transition:none!important}
     </div>
 
     <div class="player" id="player" aria-label="年をたどるプレイヤー">
-      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2021 年から 2026 年まで再生">▶</button>
+      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2020 年から 2025 年まで再生">▶</button>
       <div class="ytrack">
         <div class="ybars" id="ybars" aria-hidden="true"></div>
-        <input class="yscrub" id="asof" type="range" min="2021" max="2026" step="1" value="2026" aria-label="年をたどる">
+        <input class="yscrub" id="asof" type="range" min="2020" max="2025" step="1" value="2025" aria-label="年をたどる">
       </div>
-      <span class="ptime" id="asofval">2026 — 全 10 本</span>
-      <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2026 に戻る">↺</button>
+      <span class="ptime" id="asofval">2025 — 全 5 本</span>
+      <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2025 に戻る">↺</button>
       <span class="pctl">
         <button class="cbtn" type="button" data-cmd="d" data-tip="紙 / 暗（d）">◐</button>
         <button class="cbtn" type="button" data-cmd="y" data-tip="予言モード（y）">＋</button>
@@ -661,26 +661,26 @@ body.no-motion *{animation:none!important;transition:none!important}
   <section class="fieldnotes" id="fieldnotes" aria-label="研究の見取り図">
     <div class="shead">
       <h2><span class="playmark"></span>FIELD NOTES <span class="mono" style="font-size:11.5px;color:var(--muted)">研究の見取り図</span></h2>
-      <p class="lede">数字を並べるだけでは、推薦のふるまいは見えてこない。問い・測り方・戻れなさを同じ画面に置いています。</p>
+      <p class="lede">動画・コメント・ユーザーの関係から、偽情報が広がる経路を見ています。</p>
     </div>
     <div class="fieldgrid">
       <article class="fieldcard">
         <span class="tag">01 / question</span><span class="mark">Q</span>
-        <h3>「次にこれ」は、誰の選択か。</h3>
-        <p>推薦された再生と、視聴者が本当に選んだ再生を分けて観察する。</p>
-        <div class="signal"><i></i><span>視聴ログ · セッション · 文脈</span></div>
+        <h3>誰が、偽情報を発信するのか。</h3>
+        <p>一般地震動画と人工地震動画を比較し、発信者と視聴者の重なりを調べる。</p>
+        <div class="signal"><i></i><span>JSAI 2024 · YouTube · 偽情報</span></div>
       </article>
       <article class="fieldcard">
         <span class="tag">02 / method</span><span class="mark">M</span>
-        <h3>測定の境界を、先に疑う。</h3>
-        <p>評価指標を変えたとき、改善したのはモデルか、それとも切り方か。</p>
-        <div class="signal"><i></i><span>反実仮想 · 再現 · 分布シフト</span></div>
+        <h3>検出手法は、どこまで届くか。</h3>
+        <p>ネットワークベースとNLPベースの手法を比較し、コミュニティ検出の違いを見る。</p>
+        <div class="signal"><i></i><span>IEEE BigData 2024 · ネットワーク · NLP</span></div>
       </article>
       <article class="fieldcard">
         <span class="tag">03 / now</span><span class="mark">N</span>
-        <h3>再現しない結果を捨てない。</h3>
-        <p>査読中の 1 本では、失敗をノイズではなく次の問いとして記録中。</p>
-        <div class="signal"><i></i><span>2026 · 1 本をレビュー中</span></div>
+        <h3>陰謀論へ至る経路を追う。</h3>
+        <p>収益化や娯楽・スピリチュアルな形式が、より極端な内容への入口になるかを分析する。</p>
+        <div class="signal"><i></i><span>ICWSM 2025 · 日本のYouTube</span></div>
       </article>
     </div>
   </section>
@@ -688,7 +688,7 @@ body.no-motion *{animation:none!important;transition:none!important}
   <section class="index" id="index" aria-label="論文一覧">
     <div class="shead">
       <h2><span class="playmark"></span>INDEX <span class="mono" style="font-size:11.5px;color:var(--muted)">査読中も省略しない</span></h2>
-      <div class="hint" id="filterstate">全 10 本</div>
+      <div class="hint" id="filterstate">全 5 本 + 確認中 1 本</div>
     </div>
     <div class="filters" id="filters" role="group" aria-label="公開状態で絞り込む"></div>
     <div id="papers"></div>
@@ -696,10 +696,11 @@ body.no-motion *{animation:none!important;transition:none!important}
 
   <section class="overlap" id="about" aria-label="研究の重なり">
     <div class="card" id="ovcard">
-      <h3>推薦の評価は、切り方で変わる。</h3>
-      <p>ATLAS の <span class="mono">推薦</span> と <span class="mono">計測</span> のクラスタは、同じ根から伸びた枝です。独立に始めたつもりでしたが、2024 年に視聴セッションの切り方を変えると同じ評価が 2 回ひっくり返りました。</p>
-      <p>査読中の 1 本は、その 2 回目の記録です。まだ誰にも読まれていません。ネットワークでは、その点にだけ赤い線が入っています。</p>
-      <div class="src">SOURCE: p4 → p6 / p2 → p7 / p6 → p10 &nbsp;·&nbsp; 詳細は地図の系譜（l）を見てください</div>
+      <h3>YouTubeの偽情報は、ネットワークの中で育つ。</h3>
+      <p>ATLAS の <span class="mono">偽情報</span>・<span class="mono">ネットワーク</span>・<span class="mono">社会分析</span> は、YouTube上の発信者・視聴者・動画・コメントを別の角度から見たものです。</p>
+      <p>2024年の人工知能学会から2025年のICWSMまで、偽情報の発信者の特徴、検出手法、陰謀論へ至る経路を追っています。</p>
+      <div class="src">SOURCE: JSAI 2024 → BigData 2024 → ICWSM 2025 &nbsp;·&nbsp; 詳細は地図の系譜（l）を見てください</div>
+      <div class="src" style="margin-top:10px">公開情報: <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2024/0/JSAI2024_2I4OS1b01/_article/-char/ja/" target="_blank" rel="noreferrer">J-STAGE</a> · <a href="https://ojs.aaai.org/index.php/ICWSM/article/download/35965/38119/40033" target="_blank" rel="noreferrer">ICWSM 2025 PDF</a> · <a href="https://dblp.org/rec/conf/bigdataconf/OtaT24" target="_blank" rel="noreferrer">DBLP</a></div>
     </div>
   </section>
 </main>
@@ -709,7 +710,7 @@ body.no-motion *{animation:none!important;transition:none!important}
     <div class="cols">
       <div>
         <h4>Contact</h4>
-        <p>minato.shirasuna@example.ac.jp<br>東京都 / 研究室なし（在宅）</p>
+        <p>koki@torilab.net<br>東京大学 / 鳥海研究室</p>
         <p>査読依頼・共同研究はお受けします。締切に間に合わない月は先に言います。</p>
       </div>
       <div>
@@ -720,7 +721,7 @@ body.no-motion *{animation:none!important;transition:none!important}
       </div>
     </div>
     <div class="fine">
-      <span>© 2026 MINATO SHIRASUNA — 地図は発表済み・予印・査読中を同じ重さで描きます</span>
+      <span>© KOKI OTA — 公開情報にもとづく研究業績の地図</span>
       <span class="k" id="footstate">— 本&nbsp;·&nbsp;— 年</span>
     </div>
     <div class="catline">
@@ -806,51 +807,35 @@ body.no-motion *{animation:none!important;transition:none!important}
 "use strict";
 
 /* ---------- 1. DATA ------------------------------------------------ */
-const BANDS=["推薦","計測","手法"];
-const THEME_COLOR={"推薦":"#ff5d5d","計測":"#6fd2c0","手法":"#9aa7ff"};
+const BANDS=["偽情報","ネットワーク","社会分析"];
+const THEME_COLOR={"偽情報":"#ff5d5d","ネットワーク":"#6fd2c0","社会分析":"#9aa7ff"};
 const PAPERS=[
- {id:"p1",year:2021,venue:"情報処理学会 全国大会 2021",short:"IPSJ",kind:"会議",state:"accepted",theme:"推薦",oral:false,cites:41,
-  title:"視聴ログから推薦由来の再生を切り分ける",
-  note:"推薦から来た再生と、検索から来た再生は、ログの形が違う。3,200 セッションを人手で見て、まずそこを分けた。",
-  links:["PDF","発表資料"]},
- {id:"p2",year:2022,venue:"RecSys 2022",short:"RecSys",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:28,
-  title:"視聴セッションの切り方が推薦評価の分散を決める",
-  note:"同じ設定で 3 回評価したら指標が 0.8 ポイント振れた。原因はセッションの切り方。それ以降、自分の実験はすべて 5 分割で回している。",
-  links:["arXiv","PDF"]},
- {id:"p3",year:2022,venue:"ICWSM 2022",short:"ICWSM",kind:"国際会議",state:"accepted",theme:"推薦",oral:true,cites:96,
-  title:"Recommended but Unwatched: Vertical Video and the 12-Second Drop",
-  note:"縦型の推薦は 12 秒で離脱される。離脱そのものを失敗として扱うと、推薦の評価が歪む。口頭発表の 4 週間後に反論が来て、それが p7 になった。",
-  links:["arXiv","PDF","発表資料"]},
- {id:"p4",year:2023,venue:"WWW 2023",short:"WWW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:37,
-  title:"評価データの作り方が人気の偏りを生む",
-  note:"データを作り直すと偏りが 6 割減った。推薦の問題だと思っていたものが、測り方の問題だった。",
-  links:["arXiv","PDF"]},
- {id:"p5",year:2024,venue:"CSCW 2024",short:"CSCW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:18,
-  title:"A Small Replication Study on YouTube Recommendation Benchmarks",
-  note:"p4 の追試。自分の結果は再現したが、他 2 研究の数値は再現しなかった。そのまま書いた。",
-  links:["arXiv","実装"]},
- {id:"p6",year:2024,venue:"RecSys 2024",short:"RecSys",kind:"国際会議",state:"accepted",theme:"手法",oral:false,cites:52,
-  title:"再現しない推薦をどう扱うか — 2 段の手順",
-  note:"失敗を検出して直す 2 段の手順。p1 の切り分けをそのまま使っている。p2 のセッション問題が、こうして手法になった。",
-  links:["arXiv","実装"]},
- {id:"p7",year:2025,venue:"TheWebConf 2025",short:"WWW",kind:"国際会議",state:"accepted",theme:"計測",oral:false,cites:11,
-  title:"分布がずれると推薦の緩和は効かない",
-  note:"視聴の分布がずれたとき、効果があるように見える緩和が実際には効かない条件を整理した。p3 への反論に半分だけ同意している。",
-  links:["arXiv","実装"]},
- {id:"p8",year:2025,venue:"情報処理学会 全国大会 2025",short:"IPSJ",kind:"会議",state:"accepted",theme:"手法",oral:true,cites:7,
-  title:"視聴ログからの失敗パターン自動抽出",
-  note:"クラスタリングで失敗を 5 種に分けた。いまのところ 5 種で足りている。",
-  links:["PDF","発表資料"]},
- {id:"p9",year:2026,venue:"AAAI 2026",short:"AAAI",kind:"国際会議",state:"accepted",theme:"推薦",oral:true,cites:23,
-  title:"視聴傾向は揺れる — 揺れを無視した推薦評価",
-  note:"好みは時間とともに動く。動きを無視して評価すると、手法の差と時間の差が分けられない。",
-  links:["arXiv","実装","発表資料"]},
- {id:"p10",year:2026,venue:"—",short:"—",kind:"審査中",state:"review",theme:"推薦",oral:false,cites:null,
+ {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内会議",state:"accepted",theme:"偽情報",oral:false,cites:null,
+  title:"YouTubeでの偽情報を発信するユーザの特徴分析",
+  note:"地震動画と人工地震動画を比較し、投稿者・視聴者の重なりと偽情報コミュニティの特徴を分析した。DOI: 10.11517/pjsai.JSAI2024.0_2I4OS1b01",
+  links:["J-STAGE","DOI"]},
+ {id:"p2",year:2024,venue:"IEEE Big Data 2024",short:"BigData",kind:"国際会議",state:"accepted",theme:"ネットワーク",oral:false,cites:null,
+  title:"Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube",
+  note:"YouTube上の陰謀論コミュニティ検出について、ネットワークベース手法とNLPベース手法を比較評価した。pp. 3042–3050。",
+  links:["IEEE","DBLP"]},
+ {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会",state:"accepted",theme:"社会分析",oral:false,cites:null,
+  title:"陰謀論動画における受発信ユーザーの行動分析",
+  note:"陰謀論動画をめぐる発信者と受信者の行動を、ネットワークと動画・コメントの関係から分析した。",
+  links:["プログラム"]},
+ {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"国際会議",state:"accepted",theme:"社会分析",oral:true,cites:null,
+  title:"Pathways to Conspiracy Theorizing on YouTube in Japan",
+  note:"日本のYouTubeチャンネルを、思想的・金銭的動機とエンゲージメントで分類。収益化された陰謀論チャンネルが、視聴者をより極端な内容へ導く経路を分析した。pp. 2635–2641。",
+  links:["AAAI","PDF"]},
+ {id:"p5",year:2020,venue:"IEEE COMPSAC 2020",short:"COMPSAC",kind:"国際会議",state:"accepted",theme:"社会分析",oral:false,cites:null,
+  title:"A Short-Term Course of STEAM Education through IoT Exercises for High School Students",
+  note:"IoT演習を通じた高校生向けSTEAM教育の短期コースを報告した。現在のYouTube研究以前の教育実践研究。",
+  links:["IEEE","著者一覧"]},
+ {id:"p10",year:2025,venue:"—",short:"—",kind:"確認中",state:"review",theme:"偽情報",oral:false,cites:null,
   title:null,
-  note:"学会名も題名も出していません。査読中だからです。ネットワークには点だけがあり、赤い線が 2 本入っています。",
+  note:"公開情報だけでは書誌情報を確認できていない研究枠です。確認でき次第、タイトル・会議名・DOIを追加します。",
   links:[]}
 ];
-const LINEAGE=[["p1","p2"],["p3","p7"],["p1","p6"],["p4","p5"],["p5","p9"],["p6","p8"],["p6","p10"],["p9","p10"]];
+const LINEAGE=[["p1","p2"],["p1","p3"],["p2","p4"],["p3","p4"],["p4","p10"]];
 const SUBMIT={p10:"2025-12-08"};
 const VERSIONS={
  p1:[["2021-09-30","初稿。クリックログだけを見ていた"],["2021-11-12","査読の指摘でセッションの同定を追加。推薦由来の割合が思ったより低かった"],["2021-12-20","掲載"]],
@@ -917,7 +902,7 @@ const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.par
 const ST={RENDER:"settle",frag:new Set(LS.get(KEY.frag,[])),ach:new Set(LS.get(KEY.ach,[])),
   choice:LS.get(KEY.choice,null),oracle:LS.get(KEY.oracle,[]),theme:LS.get(KEY.theme,null),
   ncr:LS.get(KEY.ncr,0),ncr2:LS.get(KEY.ncr2,0),seen:new Set(LS.get(KEY.seen,[])),sub:LS.get(KEY.sub,false),
-  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2026,t:0,now:new Date(),
+  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2025,t:0,now:new Date(),
   playing:false,playTimer:null,
   inlineWrite:false,inkInit:false,game:{sent:0,scores:[],rows:[],draft:{},final:false},
   msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,myPts:LS.get(KEY.oracle,[]),gap:null,gapLabel:"初回",oracleMode:false};
@@ -970,7 +955,7 @@ function openChain(){if(ST.done.has("l3"))return;ST.done.add("l3");LS.set(KEY.do
 
 /* ---------- 3. ATLAS ---------------------------------------------- */
 const W=1000,H=440,PADL=40,PADR=30,PADT=46,AXIS_Y=404,YEAR_Y=0;
-const XC={min:2021,max:2026.9}, FLOORY=[166,262,358];
+const XC={min:2020,max:2025.9}, FLOORY=[166,262,358];
 const BRAND=[];
 function xPos(y){return PADL+(y-XC.min)/(XC.max-XC.min)*(W-PADL-PADR)}
 function nodeR(c){return 5+Math.sqrt(c||0)*0.85}
@@ -981,7 +966,7 @@ function place(n,i,seed){
   return{x,y,vx:0,vy:0,seedI:i};
 }
 function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const ANCHOR={"推薦":[282,150],"計測":[600,326],"手法":[812,186]};
+const ANCHOR={"偽情報":[282,150],"ネットワーク":[600,326],"社会分析":[812,186]};
 function netSim(nodes,edges,seed){
   /* 初期配置 — 発表順に螺旋へ置く。ここから力学で有機的に崩す */
   const cx=W/2, cy=226, rnd=mulberry(seed||1);
@@ -1164,7 +1149,7 @@ function renderNote(){
   if(ST.metro){
     el.innerHTML='<span style="color:var(--accent)">METRIC</span> 描画 '+ms+"ms · "+lin+
       " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日";
-  }else if(ST.asof<2026){
+  }else if(ST.asof<2025){
     el.innerHTML=lin+" · "+ST.asof+" 年までの部分グラフ · 描画 "+ms+"ms";
   }else{
     el.innerHTML=lin+" · 描画 "+ms+"ms";
@@ -1174,7 +1159,7 @@ function renderNote(){
 function renderYearBars(){
   const box=E("ybars");if(!box)return;
   box.innerHTML="";
-  for(let y=2021;y<=2026;y++){
+  for(let y=2020;y<=2025;y++){
     const i=document.createElement("i");
     const inYear=PAPERS.filter(p=>p.year===y);
     if(y<=ST.asof)i.className="on";
@@ -1248,7 +1233,7 @@ function mapPoint(ev){
 E("mapwrap").addEventListener("contextmenu",e=>{if(e.shiftKey||ST.oracleMode)e.preventDefault()});
 function placeOracle(pt){
   const vb=1000,relX=pt.x/E("mapsvg").getBoundingClientRect().width*W;
-  const year=Math.max(2021,Math.min(2026,Math.round(XC.min+(relX-PADL)/(W-PADL-PADR)*(XC.max-XC.min))));
+  const year=Math.max(2020,Math.min(2025,Math.round(XC.min+(relX-PADL)/(W-PADL-PADR)*(XC.max-XC.min))));
   let band=BANDS[0],best=1e9;FLOORY.forEach((fy,i)=>{const d=Math.abs(fy-pt.y);if(d<best){best=d;band=BANDS[i]}});
   ST.myPts.push({x:pt.x,y:pt.y,year,band,labelLeft:relX>W-190});
   LS.set(KEY.oracle,ST.myPts);renderAtlas();unlock("oracle");
@@ -1318,10 +1303,10 @@ function stateBadge(p){
 const hasHistory=p=>!!VERSIONS[p.id];
 function renderMeta(){
   E("mPub").textContent=TOTAL_PUBLISHED;
-  E("mYears").textContent="2021 – 2026";
-  E("mCites").textContent=fmt(TOTAL_CITES);
+  E("mYears").textContent="2020 – 2025";
+  E("mCites").textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
   E("mRev").textContent=PAPERS.filter(p=>p.state==="review").length;
-  E("footstate").textContent=TOTAL_PUBLISHED+" 本 · 6 年 · 外部通信 0 · 最終更新 2026-10-03";
+  E("footstate").textContent=TOTAL_PUBLISHED+" 本 · 6 年 · 外部通信 0 · 実データ更新 2026-10-03";
   const lg=E("legend");
   lg.innerHTML=
    '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></i>発表済み</span>'+
@@ -1378,12 +1363,12 @@ window.addEventListener("scroll",()=>{
 E("asof").addEventListener("input",e=>{
   ST.asof=parseInt(e.target.value,10);LS.set(KEY.asof,ST.asof);
   const n=PAPERS.filter(p=>p.year<=ST.asof).length;
-  E("asofval").textContent=ST.asof+" — "+(ST.asof===2026?"全 10 本":n+" 本");
+  E("asofval").textContent=ST.asof+" — "+(ST.asof===2025?"全 5 本":n+" 本");
   renderNote();
-  if(ST.asof<2026){unlock("back")}
+  if(ST.asof<2025){unlock("back")}
   renderAtlas();renderPapers();
 });
-E("asofreset").onclick=()=>{E("asof").value=2026;E("asof").dispatchEvent(new Event("input"))};
+E("asofreset").onclick=()=>{E("asof").value=2025;E("asof").dispatchEvent(new Event("input"))};
 E("btnRelayout").onclick=()=>relayout();
 function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);unlock("relayout");toast("配置を作り直しました","seed "+ST.seed)}
 
@@ -1528,13 +1513,13 @@ function oracleMode(){
 function playTimeline(){
   if(ST.playing)return;ST.playing=true;
   unlock("replay");
-  const el=E("asof");let y=2021;
+  const el=E("asof");let y=2020;
   el.value=y;el.dispatchEvent(new Event("input"));
-  toast("PLAY — 2021 年から順にたどります","esc で止まります");
+  toast("PLAY — 2020 年から順にたどります","esc で止まります");
   ST.playTimer=setInterval(()=>{
     y++;
-    if(y>2026){clearInterval(ST.playTimer);ST.playing=false;el.value=2026;el.dispatchEvent(new Event("input"));
-      unlock("replay");toast("最後まで来ました — 2026 年、全 10 本");return}
+    if(y>2025){clearInterval(ST.playTimer);ST.playing=false;el.value=2025;el.dispatchEvent(new Event("input"));
+      unlock("replay");toast("最後まで来ました — 2025 年、全 5 本");return}
     el.value=y;el.dispatchEvent(new Event("input"));
   },900);
 }
@@ -1586,7 +1571,7 @@ function renderTerm(){
   if(ST.sub)L.push("チャンネル登録: 済み（送信 0 bytes — どこにも届きません）");
   L.push("断片 "+ST.frag.size+" / 4"+(!ST.frag.size?" — なし":""));
   if(ST.theme)L.push("絞り込み中: "+ST.theme);
-  if(ST.asof<2026)L.push("AS OF "+ST.asof+" に戻っています");
+  if(ST.asof<2025)L.push("AS OF "+ST.asof+" に戻っています");
   if(ST.myPts.length)L.push("あなたの予言: "+ST.myPts.length+" 点");
   if(hourState()==="deep")L.push("深夜です。端末の輝度を落としています。");
   L.push("");
@@ -1782,7 +1767,7 @@ function resetGame(){ST.game={sent:0,scores:[],rows:[],pred:[],draft:{},final:fa
 function hasChain(){return ST.done.has("l3")}
 function renderHist(b){
   const list=PAPERS.filter(p=>VERSIONS[p.id]).slice().sort((a,b)=>b.year-a.year);
-  let h='<h3>03 論文の変遷</h3><div class="lead">全 10 本の投稿から掲載まで。査読者からの指摘は、原文のまま置いてあります。</div>';
+  let h='<h3>03 論文の変遷</h3><div class="lead">公開情報で確認できた 5 本の書誌と、現在確認中の研究枠です。</div>';
   list.forEach(p=>{
     const open=ST.histOpen===p.id;
     h+='<div class="histpaper"><button class="h" type="button" data-hist2="'+p.id+'" aria-expanded="'+open+'">'+
@@ -1858,7 +1843,7 @@ const FRAG={
 function catLine(){
   const h=hourState(),c=[];
   if(ST.theme)c.push("いまは「"+ST.theme+"」だけ見ています。絞り込むと、ネットワークが少し静かになります。");
-  if(ST.asof<2026)c.push(ST.asof+" 年までの部分グラフです。まだ "+PAPERS.filter(p=>p.year>ST.asof).length+" 本ぶんの空きがあります。");
+  if(ST.asof<2025)c.push(ST.asof+" 年までの部分グラフです。まだ "+PAPERS.filter(p=>p.year>ST.asof).length+" 本ぶんの空きがあります。");
   if(ST.myPts.length)c.push("あなたの予言が "+ST.myPts.length+" 点。ネットワークのすみに置いてあります。");
   if(ST.frag.size>=2&&!hasChain())c.push("断片が "+ST.frag.size+" 本。集めた断片は、この部屋の端末に溜まります。");
   if(hasChain())c.push("糸はつながりましたね。まだ返事は 1 つだけです。");
@@ -2009,8 +1994,8 @@ function init(){
   document.body.classList.toggle("no-motion",REDUCED());
   memoryOnLoad();
   renderMeta();renderSub();renderAtlas();renderPapers();renderPalette();renderTerm();
-  const a=LS.get(KEY.asof,2026);
-  if(a!==2026){E("asof").value=a;E("asof").dispatchEvent(new Event("input"))}
+  const a=LS.get(KEY.asof,2025);
+  if(a!==2025){E("asof").value=a;E("asof").dispatchEvent(new Event("input"))}
   if(hourState()==="deep")unlock("night");
   if(ST.ach.has("key")){showDoor();document.body.classList.add("keyed")}
   catNotes();
