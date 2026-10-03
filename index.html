@@ -600,12 +600,16 @@ body.playful-mode #playful-site{display:block}
 .simple-brand{font:600 13px var(--mono);letter-spacing:.12em;color:#1c2926;text-decoration:none}
 .simple-navlinks{display:flex;gap:26px;font:12px var(--mono);letter-spacing:.06em}
 .simple-navlinks a{color:#61706b;text-decoration:none}.simple-navlinks a:hover{color:#1c2926}
-.simple-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr);gap:64px;padding:112px 0 104px;border-bottom:1px solid #dfe5e1}
+.simple-hero{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:72px;padding:96px 0 88px;border-bottom:1px solid #dfe5e1}
 .simple-kicker{font:11px var(--mono);letter-spacing:.14em;color:#73837d;text-transform:uppercase;margin:0 0 20px}
 .simple-hero h1{font:500 clamp(42px,6vw,72px);line-height:1.04;letter-spacing:-.065em;margin:0 0 24px;color:#14211e}
 .simple-lead{max-width:600px;font-size:18px;line-height:1.85;color:#50615b;margin:0}
-.simple-aside{align-self:end;border-left:2px solid #b9ccc4;padding-left:22px;color:#60716b;font-size:13px;line-height:1.85}
-.simple-aside strong{display:block;color:#1c2926;font-weight:500;margin-bottom:5px}
+.simple-status{display:flex;align-items:center;gap:9px;margin-top:28px;color:#64756f;font:12px var(--mono)}.simple-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#527c6d;box-shadow:0 0 0 4px rgba(82,124,109,.12)}
+.simple-profile-meta{align-self:stretch;margin:0;padding:4px 0;border-top:1px solid #cad5d0}
+.simple-profile-meta>div{display:grid;grid-template-columns:112px 1fr;gap:18px;padding:17px 0;border-bottom:1px solid #d7dfdb}
+.simple-profile-meta dt{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#81918b}.simple-profile-meta dd{margin:0;color:#40514b;font-size:13px;line-height:1.65}
+.simple-profile-meta a{color:#244f42;text-decoration:underline;text-decoration-color:#a9beb6;text-underline-offset:3px}.simple-profile-meta a:hover{color:#0e382d;text-decoration-color:#0e382d}
+.simple-keywords{display:flex;flex-wrap:wrap;gap:6px}.simple-keywords span{padding:3px 8px;border:1px solid #ccd7d2;border-radius:999px;background:#eef2ef;color:#53655e;font-size:11px;line-height:1.5}
 .simple-section{padding:76px 0;border-bottom:1px solid #dfe5e1}
 .simple-section-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:30px}
 .simple-section h2{font-size:24px;font-weight:500;letter-spacing:-.03em;margin:0;color:#1c2926}
@@ -614,7 +618,7 @@ body.playful-mode #playful-site{display:block}
 .simple-list-group+.simple-list-group{margin-top:30px}.simple-list-heading{font-size:16px;font-weight:500;margin:0 0 14px;color:#1c2926}.simple-publications{margin:0;padding-left:28px}.simple-paper{padding:0 0 14px 5px;color:#3f504a;font-size:14px;line-height:1.85}.simple-paper::marker{color:#7d8c86;font-family:var(--mono);font-size:12px}
 .simple-paper a{color:#244f42;text-decoration:underline;text-decoration-color:#a9beb6;text-underline-offset:3px}.simple-paper a:hover{color:#0e382d;text-decoration-color:#0e382d}.simple-coauthor{white-space:nowrap;color:#75857f;font-size:12px}
 .simple-footer{display:flex;justify-content:space-between;gap:24px;padding:28px 0 42px;color:#82918b;font:11px var(--mono)}
-@media(max-width:720px){.simple-shell{padding:0 20px}.simple-navlinks{gap:12px;font-size:10px}.simple-hero{grid-template-columns:1fr;gap:34px;padding:72px 0 70px}.simple-aside{align-self:start}.simple-section{padding:58px 0}.simple-footer{display:block}.simple-footer span{display:block;margin-top:8px}}
+@media(max-width:720px){.simple-shell{padding:0 20px}.simple-navlinks{gap:12px;font-size:10px}.simple-hero{grid-template-columns:1fr;gap:46px;padding:72px 0 64px}.simple-profile-meta>div{grid-template-columns:96px 1fr}.simple-section{padding:58px 0}.simple-footer{display:block}.simple-footer span{display:block;margin-top:8px}}
 </style>
 </head>
 <body>
@@ -622,15 +626,21 @@ body.playful-mode #playful-site{display:block}
   <div class="simple-shell">
     <nav class="simple-nav" aria-label="Main navigation">
       <a class="simple-brand" href="#simple-top">KOKI OTA</a>
-      <div class="simple-navlinks"><a href="#simple-research">Research</a><a href="#simple-education">Education</a><a href="#simple-top">Profile</a></div>
+      <div class="simple-navlinks"><a href="#simple-research">Research</a><a href="#simple-education">Education</a><a href="#simple-contact">Contact</a></div>
     </nav>
     <section class="simple-hero" id="simple-top">
       <div>
-        <p class="simple-kicker">Researcher · The University of Tokyo</p>
+        <p class="simple-kicker">Doctoral Student · Computational Social Science</p>
         <h1>太田 光紀<br><span>Koki Ota</span></h1>
         <p class="simple-lead">計算社会科学の視点から、YouTube上の偽情報・陰謀論と、そこへ至るネットワークを研究しています。</p>
+        <div class="simple-status">The University of Tokyo · Toriumi Lab</div>
       </div>
-      <aside class="simple-aside"><strong>Research interests</strong>Online misinformation<br>Conspiracy theories<br>Social media networks<br><br><strong>Based in</strong>Tokyo, Japan</aside>
+      <dl class="simple-profile-meta" id="simple-contact">
+        <div><dt>Affiliation</dt><dd>鳥海研究室<br>東京大学大学院 工学系研究科</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:koki@torilab.net">koki@torilab.net</a></dd></div>
+        <div><dt>Location</dt><dd>Tokyo, Japan</dd></div>
+        <div><dt>Research keywords</dt><dd class="simple-keywords"><span>Computational Social Science</span><span>Online Misinformation</span><span>Conspiracy Theories</span><span>Social Media Analysis</span><span>Network Science</span><span>YouTube</span></dd></div>
+      </dl>
     </section>
     <section class="simple-section" id="simple-research" aria-labelledby="simple-research-title">
       <div class="simple-section-head"><h2 id="simple-research-title">Selected research</h2><span class="simple-section-label">2024 — 2026</span></div>
