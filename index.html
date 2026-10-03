@@ -79,6 +79,10 @@ section.atlas{padding:38px 0 8px}
 .chip[aria-pressed="true"]{border-color:var(--accent); color:var(--ink); background:color-mix(in srgb,var(--accent) 12%,transparent)}
 .chip .n{color:var(--muted); margin-left:5px}
 .chipboard{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-left:auto; padding:3px 0}
+.mapmodes{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 12px}
+.mapmode{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:999px;padding:5px 11px;background:var(--panel2)}
+.mapmode[aria-selected="true"]{color:var(--ink);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.mapmode-note{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:4px}
 
 .mapscroll{position:relative}
 #mapwrap{position:relative; border:1px solid var(--line); background:var(--mapbg); border-radius:var(--r); overflow:hidden}
@@ -111,6 +115,15 @@ section.atlas{padding:38px 0 8px}
 #mapsvg .ghost text{fill:var(--muted)}
 #mapsvg .hit{fill:none; pointer-events:all; cursor:pointer}
 #mapsvg .mylab{fill:var(--accent2); font-family:var(--mono); font-size:9.5px}
+#mapsvg .world-water{fill:color-mix(in srgb,var(--mapbg) 72%,var(--accent) 8%)}
+#mapsvg .world-grid{stroke:var(--grid);stroke-width:1;stroke-dasharray:2 8;fill:none;opacity:.65}
+#mapsvg .world-land{fill:color-mix(in srgb,var(--ink) 10%,transparent);stroke:color-mix(in srgb,var(--ink) 25%,transparent);stroke-width:1}
+#mapsvg .world-title{fill:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.12em}
+#mapsvg .place-pin{cursor:pointer}
+#mapsvg .place-pin .pin{fill:var(--accent);stroke:var(--mapbg);stroke-width:2}
+#mapsvg .place-pin .pin-core{fill:var(--mapbg)}
+#mapsvg .place-pin text{fill:var(--ink2);font-family:var(--mono);font-size:10px;pointer-events:none}
+#mapsvg .place-pin:hover .pin{fill:var(--ink);stroke:var(--accent);stroke-width:2.5}
 #mapsvg .dbg{fill:none; stroke:var(--danger); stroke-width:1}
 #mapsvg .dbgtext{fill:var(--danger); font-family:var(--mono); font-size:9px}
 .mappointer #mapcontrols{opacity:.25; pointer-events:none}
@@ -153,10 +166,11 @@ section.index{padding:40px 0 10px}
 .paper h3{font-size:16.5px; line-height:1.6; font-weight:600}
 .paper h3 .idx{font-family:var(--mono); font-size:11px; color:var(--muted); margin-right:9px; font-weight:400}
 .paper .sub{font-family:var(--mono); font-size:11.5px; color:var(--ink2); margin-top:7px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-.paper .note{color:var(--ink2); font-size:13.5px; margin-top:9px; max-width:74ch}
+.paper .authors{color:var(--ink2);font-size:13px;margin-top:8px}
+.paper .note{color:var(--muted); font-size:12.5px; margin-top:7px; max-width:74ch}
 .paper .note .revline{display:block; color:var(--accent2); font-family:var(--mono); font-size:11.5px; margin-top:7px}
 .paper .aside{text-align:right; font-family:var(--mono); font-size:11.5px; color:var(--muted); padding-top:3px}
-.paper .aside .cites{color:var(--ink2); display:block}
+.paper .aside .cites{color:var(--muted); display:block;font-size:10.5px}
 .paper .aside .links{display:flex; gap:10px; justify-content:flex-end; margin-top:9px; flex-wrap:wrap}
 .paper .aside .links span{border-bottom:1px dotted var(--line2); font-size:11px}
 .lk{cursor:help}
@@ -453,7 +467,8 @@ body.room-open #toasts{bottom:auto; top:66px; left:20px}
 }
 
 /* ネットワーク */
-#mapsvg .edge{stroke:color-mix(in srgb,var(--ink) 26%,transparent);stroke-width:1.2;fill:none}
+#mapsvg .edge{stroke:color-mix(in srgb,var(--accent2) 58%,var(--ink) 18%);stroke-width:2.2;fill:none;opacity:.72}
+#mapsvg .edge.coauthor{stroke-linecap:round;filter:drop-shadow(0 0 2px color-mix(in srgb,var(--accent2) 22%,transparent))}
 #mapsvg .earrow{fill:color-mix(in srgb,var(--ink) 34%,transparent)}
 #mapsvg .edge.back{stroke-dasharray:2 3}
 #mapsvg .edge.live{stroke:var(--yt);stroke-width:1.4;opacity:.85;stroke-dasharray:3 6;animation:flow 1.8s linear infinite}
@@ -584,8 +599,7 @@ body.no-motion *{animation:none!important;transition:none!important}
           <h1>太田 光紀</h1>
           <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
-            <span>論文 <b id="mPub">—</b> 本</span><i>|</i>
-            <span>引用 <b id="mCites">—</b></span><i>|</i>
+            <span>業績 <b id="mPub">—</b> 件</span><i>|</i>
             <span>査読中 <b id="mRev">—</b> 本</span><i>|</i>
             <span><b id="mYears">—</b></span><i>|</i>
             <span>送信 <b>0</b> bytes</span>
@@ -613,12 +627,18 @@ body.no-motion *{animation:none!important;transition:none!important}
   <section class="atlas" id="atlas" aria-label="研究業績マップ">
     <div class="shead">
       <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">RESEARCH OUTPUTS · 2020 — 2025</span></h2>
-      <div class="hint">点 = 研究業績&nbsp;&nbsp;·&nbsp;&nbsp;線 = 関連&nbsp;&nbsp;·&nbsp;&nbsp;大きさ = 引用数&nbsp;&nbsp;·&nbsp;&nbsp;色 = テーマ<br>
-        <b>点を選ぶ</b>と詳細が出ます&nbsp;&nbsp;<b>r</b> でネットワークを組み直す</div>
+      <div class="hint">クラスタ = 研究テーマ&nbsp;&nbsp;·&nbsp;&nbsp;線 = 共著者の重なり&nbsp;&nbsp;·&nbsp;&nbsp;ピン = 発表地<br>
+        <b>点を選ぶ</b>と詳細が出ます</div>
     </div>
 
     <div class="chipline" id="chips" role="group" aria-label="テーマで絞り込む">
       <span class="chipboard" id="chipboard"></span>
+    </div>
+
+    <div class="mapmodes" role="tablist" aria-label="地図の表示方法">
+      <button type="button" class="mapmode" data-mapmode="cluster" aria-selected="true">テーマ・クラスタ</button>
+      <button type="button" class="mapmode" data-mapmode="places" aria-selected="false">発表地・世界地図</button>
+      <span class="mapmode-note">同じ業績データを別の視点で表示</span>
     </div>
 
     <div class="mapscroll">
@@ -671,7 +691,7 @@ body.no-motion *{animation:none!important;transition:none!important}
         <span class="tag">02 / method</span><span class="mark">M</span>
         <h3>検出手法は、どこまで届くか。</h3>
         <p>ネットワークベースとNLPベースの手法を比較し、コミュニティ検出の違いを見る。</p>
-        <div class="signal"><i></i><span>IEEE BigData 2024 · ネットワーク · NLP</span></div>
+        <div class="signal"><i></i><span>ABCSS2024 · ワークショップ · ネットワーク / NLP</span></div>
       </article>
       <article class="fieldcard">
         <span class="tag">03 / now</span><span class="mark">N</span>
@@ -696,7 +716,7 @@ body.no-motion *{animation:none!important;transition:none!important}
       <h3>YouTubeの偽情報は、ネットワークの中で育つ。</h3>
       <p>ATLAS の <span class="mono">偽情報</span>・<span class="mono">ネットワーク</span>・<span class="mono">社会分析</span> は、YouTube上の発信者・視聴者・動画・コメントを別の角度から見たものです。</p>
       <p>2024年の人工知能学会から2025年のICWSMまで、偽情報の発信者の特徴、検出手法、陰謀論へ至る経路を追っています。</p>
-      <div class="src">SOURCE: JSAI 2024 · BigData 2024 · ICWSM 2025 · IC2S2 2025 &nbsp;·&nbsp; 詳細は下の一覧で確認できます</div>
+      <div class="src">SOURCE: JSAI 2024 · ABCSS2024 · ICWSM 2025 · IC2S2 2025 &nbsp;·&nbsp; 詳細は下の一覧で確認できます</div>
       <div class="src" style="margin-top:10px">公開情報: <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2024/0/JSAI2024_2I4OS1b01/_article/-char/ja/" target="_blank" rel="noreferrer">J-STAGE</a> · <a href="https://ojs.aaai.org/index.php/ICWSM/article/download/35965/38119/40033" target="_blank" rel="noreferrer">ICWSM 2025 PDF</a> · <a href="https://dblp.org/rec/conf/bigdataconf/OtaT24" target="_blank" rel="noreferrer">DBLP</a></div>
     </div>
   </section>
@@ -807,28 +827,28 @@ body.no-motion *{animation:none!important;transition:none!important}
 const BANDS=["偽情報","ネットワーク","社会分析"];
 const THEME_COLOR={"偽情報":"#ff5d5d","ネットワーク":"#6fd2c0","社会分析":"#9aa7ff"};
 const PAPERS=[
- {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,
+ {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,authors:"太田光紀・鳥海不二夫",authorKeys:["ota","toriumi"],place:{city:"浜松",country:"日本",x:816,y:224},
   title:"YouTubeでの偽情報を発信するユーザの特徴分析",
   note:"地震動画と人工地震動画を比較し、投稿者・視聴者の重なりと偽情報コミュニティの特徴を分析した。DOI: 10.11517/pjsai.JSAI2024.0_2I4OS1b01",
   links:["J-STAGE","DOI"]},
- {id:"p2",year:2024,venue:"IEEE Big Data 2024 / ABCSS2024",short:"BigData",kind:"査読付き国際学会（論文）",state:"accepted",theme:"ネットワーク",oral:false,format:"paper",cites:null,
+ {id:"p2",year:2024,venue:"ABCSS2024（IEEE Big Data 2024併設）",short:"ABCSS",kind:"国際ワークショップ（発表）",state:"accepted",theme:"ネットワーク",oral:false,format:"workshop",cites:null,authors:"Koki Ota・Fujio Toriumi",authorKeys:["ota","toriumi"],place:{city:"Washington, D.C.",country:"USA",x:212,y:176},
   title:"Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube",
   note:"YouTube上の陰謀論コミュニティ検出について、ネットワークベース手法とNLPベース手法を比較評価した。pp. 3042–3050。",
   links:["IEEE","DBLP"]},
- {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",state:"accepted",theme:"社会分析",oral:false,format:"presentation",cites:null,
+ {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",state:"accepted",theme:"社会分析",oral:false,format:"presentation",cites:null,authors:"太田光紀・中条雅貴・鳥海不二夫",authorKeys:["ota","chujyo","toriumi"],place:{city:"石垣島",country:"日本",x:842,y:242},
   title:"陰謀論動画における受発信ユーザーの行動分析",
   note:"陰謀論動画をめぐる発信者と受信者の行動を、ネットワークと動画・コメントの関係から分析した。",
   links:["プログラム"]},
- {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,
+ {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,authors:"Koki Ota・Masaki Chujyo・Fujio Toriumi",authorKeys:["ota","chujyo","toriumi"],place:{city:"Copenhagen",country:"Denmark",x:507,y:124},
   title:"Pathways to Conspiracy Theorizing on YouTube in Japan",
   note:"日本のYouTubeチャンネルを、思想的・金銭的動機とエンゲージメントで分類。収益化された陰謀論チャンネルが、視聴者をより極端な内容へ導く経路を分析した。pp. 2635–2641。",
   links:["AAAI","PDF"]},
- {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,
+ {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,authors:"Koki Ota・Masaki Chujyo・Fujio Toriumi",authorKeys:["ota","chujyo","toriumi"],place:{city:"Norrköping",country:"Sweden",x:524,y:107},
   title:"Exploring the Trajectory to Conspiracy Theories on YouTube in Japan",
   note:"Koki Ota, Masaki Chujyo, Fujio Toriumi。#207 / Poster ID: 25。2021年4月〜2024年9月のYouTube Data APIデータを用い、ワクチン関連チャンネルの分類と、投稿者・視聴者が陰謀論へ進む経路を分析した。",
   links:["IC2S2","Poster #207"]}
 ];
-const LINEAGE=[];
+const LINEAGE=PAPERS.flatMap((a,i)=>PAPERS.slice(i+1).filter(b=>a.authorKeys.some(k=>b.authorKeys.includes(k))).map(b=>[a.id,b.id]));
 const SUBMIT={};
 const VERSIONS={};
 const FAILED=[
@@ -886,7 +906,7 @@ const ST={RENDER:"settle",frag:new Set(LS.get(KEY.frag,[])),ach:new Set(LS.get(K
   done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2025,t:0,now:new Date(),
   playing:false,playTimer:null,
   inlineWrite:false,inkInit:false,game:{sent:0,scores:[],rows:[],draft:{},final:false},
-  msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,myPts:LS.get(KEY.oracle,[]),gap:null,gapLabel:"初回",oracleMode:false};
+  msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,mapMode:"cluster",myPts:LS.get(KEY.oracle,[]),gap:null,gapLabel:"初回",oracleMode:false};
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const E=id=>document.getElementById(id);
 const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
@@ -939,7 +959,7 @@ const W=1000,H=440,PADL=40,PADR=30,PADT=46,AXIS_Y=404,YEAR_Y=0;
 const XC={min:2020,max:2025.9}, FLOORY=[166,262,358];
 const BRAND=[];
 function xPos(y){return PADL+(y-XC.min)/(XC.max-XC.min)*(W-PADL-PADR)}
-function nodeR(c){return 5+Math.sqrt(c||0)*0.85}
+function nodeR(){return 7}
 function place(n,i,seed){
   const rnd=mulberry(seed+i*977);const band=BANDS.indexOf(n.theme);
   const x=xPos(n.year)+ (rnd()-0.5)*46;
@@ -1016,9 +1036,42 @@ function fitView(nodes){
   nodes.forEach(n=>{n.x=tx+(n.x-cx)*sc;n.y=ty+(n.y-cy)*sc});
 }
 function svgEl(t,a){const e=document.createElementNS("http://www.w3.org/2000/svg",t);for(const k in a)e.setAttribute(k,a[k]);return e}
+function renderWorldMap(svg){
+  svg.appendChild(svgEl("rect",{class:"world-water",x:0,y:0,width:W,height:AXIS_Y,rx:8}));
+  const grid=svgEl("g");
+  for(let x=80;x<W;x+=120)grid.appendChild(svgEl("path",{class:"world-grid",d:"M"+x+" 24 V"+(AXIS_Y-24)}));
+  for(let y=70;y<AXIS_Y;y+=82)grid.appendChild(svgEl("path",{class:"world-grid",d:"M32 "+y+" H"+(W-32)}));
+  svg.appendChild(grid);
+  const land=svgEl("g");
+  ["M92 116 L127 82 185 72 225 93 244 129 219 151 177 146 153 170 113 156 Z",
+   "M235 214 L274 201 300 226 289 268 265 306 242 292 249 254 224 233 Z",
+   "M432 90 L484 65 553 70 590 98 628 102 658 126 638 153 595 150 579 177 532 172 501 143 458 144 424 120 Z",
+   "M616 177 L663 165 721 184 756 215 735 244 693 250 670 286 628 276 637 235 603 213 Z",
+   "M795 194 L829 184 850 199 836 219 805 216 Z"].forEach(d=>land.appendChild(svgEl("path",{class:"world-land",d:d})));
+  svg.appendChild(land);
+  const title=svgEl("text",{class:"world-title",x:28,y:30});title.textContent="PRESENTATION PLACES / 2024 — 2025";svg.appendChild(title);
+  const pins=svgEl("g");
+  PAPERS.filter(p=>!(ST.asof<p.year)).forEach((p,i)=>{
+    const q=p.place, g=svgEl("g",{class:"place-pin",tabindex:"0",role:"button"});
+    g.style.color=colorOf(p.theme);g.setAttribute("aria-label",p.title+" / "+q.city);
+    g.appendChild(svgEl("line",{x1:q.x,y1:q.y+7,x2:q.x,y2:q.y+22,stroke:"currentColor","stroke-width":1.2,opacity:.8}));
+    g.appendChild(svgEl("circle",{class:"pin",cx:q.x,cy:q.y,r:9}));
+    g.appendChild(svgEl("circle",{class:"pin-core",cx:q.x,cy:q.y,r:2.5}));
+    const t=svgEl("text",{x:q.x+13,y:q.y+4});t.textContent=p.short+" · "+q.city;g.appendChild(t);
+    const hit=svgEl("circle",{class:"hit",cx:q.x,cy:q.y,r:22});hit.setAttribute("data-id",p.id);hit.setAttribute("data-kind","place");g.appendChild(hit);
+    pins.appendChild(g);
+  });
+  svg.appendChild(pins);
+}
 function renderAtlas(seed){
   const t0=performance.now();ST.seed=seed==null?(ST.seed||20260601):seed;
   const svg=E("mapsvg");while(svg.firstChild)svg.removeChild(svg.firstChild);
+  if(ST.mapMode==="places"){
+    renderWorldMap(svg);svg.setAttribute("data-mode","places");
+    ST.msText=REDUCED()?"static":String(Math.round(performance.now()-t0));
+    E("mapnote").innerHTML='<b>'+PAPERS.filter(p=>!(ST.asof<p.year)).length+'</b> 件の発表地 · 日本 / 北米 / 欧州';
+    renderYearBars();updateChips();return;
+  }
   const g=s=>svgEl("g",{class:s});
   // grid
   const gg=g("g");svg.appendChild(gg);
@@ -1027,7 +1080,7 @@ function renderAtlas(seed){
     gg.appendChild(svgEl("circle",{class:"dots",cx:gx,cy:gy,r:1}));
   // edges
   const byId={};PAPERS.forEach(p=>byId[p.id]=p);
-  const nodes=PAPERS.map(p=>({id:p.id,cites:p.cites||4,theme:p.theme,year:p.year,p}));
+  const nodes=PAPERS.map(p=>({id:p.id,cites:4,theme:p.theme,year:p.year,p}));
   netSim(nodes,LINEAGE.map(([a,b])=>({a:nodes.find(n=>n.id===a),b:nodes.find(n=>n.id===b)})),ST.seed);
   /* クラスタの輪郭（テーマ） */
   const hg=g("g");svg.appendChild(hg);
@@ -1050,21 +1103,11 @@ function renderAtlas(seed){
       lt.textContent=bd;hg.appendChild(lt)}
   });
   const eg=g("g");svg.appendChild(eg);
-  const lbl=ST.labels;
   LINEAGE.forEach(([a,b],ei)=>{
     const na=nodes.find(n=>n.id===a),nb=nodes.find(n=>n.id===b);
     const mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2-8;
-    const live=(a==="p10"||b==="p10");
-    const cls="edge"+(live?" live":"")+((byId[a].year>=byId[b].year)?" back":"");
-    eg.appendChild(svgEl("path",{class:cls,"data-e":ei,d:"M"+na.x+" "+na.y+" Q"+mx+" "+my+" "+nb.x+" "+nb.y}));
-    /* 系譜の向き（先行 → 後継）を矢印で示す */
-    const t=0.90,qx=(1-t)*(1-t)*na.x+2*(1-t)*t*mx+t*t*nb.x,qy=(1-t)*(1-t)*na.y+2*(1-t)*t*my+t*t*nb.y;
-    const dx=(1-t)*(mx-na.x)+t*(nb.x-mx),dy=(1-t)*(my-na.y)+t*(nb.y-my);
-    const ang=Math.atan2(dy,dx)*180/Math.PI;
-    eg.appendChild(svgEl("path",{class:cls==="edge"?"earrow":"earrow live"+(live?"":" "),transform:"translate("+qx+" "+qy+") rotate("+ang+")",
-      d:"M0 -3.2 L6 0 L0 3.2 z",style:live?"fill:var(--yt)":""}));
-    if(lbl){const t=svgEl("text",{class:"edgelab",x:mx,y:my-2,"text-anchor":"middle"});
-      const pa=byId[a],pb=byId[b];t.textContent=(pb.year-pa.year)+"y";eg.appendChild(t)}});
+    eg.appendChild(svgEl("path",{class:"edge coauthor","data-e":ei,d:"M"+na.x+" "+na.y+" Q"+mx+" "+my+" "+nb.x+" "+nb.y}));
+  });
   // nodes
   const ng=g("g");svg.appendChild(ng);
   const curYear=ST.asof;
@@ -1159,7 +1202,7 @@ function showTip(p,ev){
     tip.innerHTML='<div class="t cat">予言 — あなたの 1 点</div><div class="m">'+pt.year+' / '+pt.band+'</div>'+
       '<div>地図に置いた予測です。クリックで消せます。どこにも送信していません。</div>';tip.classList.add("on");posTip(ev);return}
   const st={accepted:"発表済み",pre:"予印",review:"査読中"}[p.state];
-  tip.innerHTML='<div class="t">'+fmt(p.cites||0)+' citations</div><div class="m">'+st+'</div>'+
+  tip.innerHTML='<div class="t">'+p.venue+'</div><div class="m">'+st+' · '+p.kind+'</div>'+
     (p.state!=="review"?('<div>'+p.title+'</div>'):'<div>学会名も題名も出ていません。</div>');
   tip.classList.add("on");posTip(ev);
 }
@@ -1203,7 +1246,7 @@ E("mapsvg").addEventListener("click",e=>{
   openDrawer("paper",id);
 });
 E("mapsvg").addEventListener("keydown",e=>{
-  const hit=e.target.closest(".node");if(!hit)return;
+  const hit=e.target.closest(".node,.place-pin");if(!hit)return;
   if(e.key==="Enter"||e.key===" "){e.preventDefault();const h=hit.querySelector(".hit");h.dispatchEvent(new MouseEvent("click",{bubbles:true}))}
 });
 /* oracle placement */
@@ -1220,6 +1263,12 @@ function placeOracle(pt){
   LS.set(KEY.oracle,ST.myPts);renderAtlas();unlock("oracle");
   toast("予言モード — 自分の点を置きました（shift+クリックで追加・点自体で削除）","");
 }
+$$('.mapmode').forEach(btn=>btn.addEventListener('click',()=>{
+  ST.mapMode=btn.dataset.mapmode;
+  $$('.mapmode').forEach(b=>b.setAttribute('aria-selected',b===btn?'true':'false'));
+  renderAtlas();
+  toast(ST.mapMode==='places'?"発表地 — 世界地図に切り替えました":"テーマ — クラスタ表示に戻しました","");
+}));
 /* chips + filters */
 function updateChips(){
   const box=E("chips");box.innerHTML="";
@@ -1250,7 +1299,7 @@ function renderPapers(){
   const list=PAPERS.filter(p=>(curFilter==="all"||p.state===curFilter)&&(!ST.theme||p.theme===ST.theme)&&!(ST.asof<p.year));
   const sorted=list.slice().sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
   const totalCites=list.reduce((a,p)=>a+(p.cites||0),0);
-  E("filterstate").textContent=list.length+" 本 · 引用 "+fmt(totalCites)+(ST.theme?" · "+ST.theme:"");
+  E("filterstate").textContent=list.length+" 件"+(ST.theme?" · "+ST.theme:"");
   sorted.forEach(p=>{
     const el=document.createElement("article");el.className="paper";el.id="p-"+p.id;
     el.dataset.state=p.state;el.dataset.theme=p.theme;if(p.oral)el.dataset.oral="1";
@@ -1262,10 +1311,11 @@ function renderPapers(){
      '<div class="yr"><b>'+String(p.year)+'</b>'+p.theme+"</div>"+
      '<div><h3><span class="idx">'+(p.state==="review"?"R?":p.id.toUpperCase())+'</span>'+
        (p.title||'<span style="color:var(--muted)">(査読中 — 題名は伏せています)</span>')+"</h3>"+
+       '<div class="authors">'+(p.authors||"")+'</div>'+
        '<div class="sub"><span>'+p.venue+"</span><span>"+p.kind+"</span>"+st+
          (linkCount(p.id)?'<span style="color:var(--muted)">関連 '+linkCount(p.id)+' 件</span>':"")+"</div>"+
        '<p class="note">'+p.note+extra+"</p></div>"+
-     '<div class="aside"><span class="cites">'+(p.cites==null?"—":fmt(p.cites)+" cites")+"</span>"+
+     '<div class="aside"><span class="cites">'+(p.place?p.place.city+" · "+p.place.country:"")+'</span>'+
        (p.links.length?'<div class="links">'+p.links.map(l=>'<span class="lk" title="デモ用（リンク先はありません）">'+l+"</span>").join("")+"</div>":"")+
        '<div class="hist">'+hist+"</div></div>";
     box.appendChild(el);
@@ -1278,7 +1328,7 @@ function renderPapers(){
 }
 function stateBadge(p){
   if(p.state==="accepted"){
-    const label=p.format==="poster"?"発表済み · ポスター":p.format==="paper"?"採択済み · 論文":p.oral?"発表済み · 口頭":"発表済み";
+    const label=p.format==="poster"?"発表済み · ポスター":p.format==="paper"?"発表済み · 論文":p.format==="workshop"?"発表済み · WS":p.oral?"発表済み · 口頭":"発表済み";
     const cls=p.format==="poster"||p.oral?"oral":p.format==="paper"?"accepted":"accepted";
     return '<span class="st '+cls+'"><i></i>'+label+"</span>";
   }
@@ -1289,7 +1339,7 @@ const hasHistory=p=>!!VERSIONS[p.id];
 function renderMeta(){
   E("mPub").textContent=TOTAL_PUBLISHED;
   E("mYears").textContent="2020 – 2025";
-  E("mCites").textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
+  const cite=E("mCites");if(cite)cite.textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
   E("mRev").textContent=PAPERS.filter(p=>p.state==="review").length;
   E("footstate").textContent=TOTAL_PUBLISHED+" 本 · 6 年 · 外部通信 0 · 実データ更新 2026-10-03";
   const lg=E("legend");
@@ -1299,11 +1349,8 @@ function renderMeta(){
    '<span><i style="width:11px;height:11px;border-radius:50%;border:1.5px dashed var(--accent2);display:inline-block"></i>予印</span>'+
    '<span><i style="width:9px;height:9px;border-radius:50%;border:1.5px dashed var(--danger);display:inline-block"></i>査読中</span>'+
    BANDS.map(b=>'<span><i style="width:9px;height:9px;border-radius:50%;background:'+colorOf(b)+';display:inline-block"></i>'+b+"</span>").join("")+
-   '<span>大きさ = 引用数 '+
-     '<i style="width:5px;height:5px;border-radius:50%;background:var(--ink2);display:inline-block"></i>10'+
-     '<i style="width:8px;height:8px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>30'+
-     '<i style="width:12px;height:12px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>100</span>'+
-   '<span style="color:var(--muted)">— 研究間の関連線は未登録</span>';
+   '<span>点の大きさ = 同じサイズ（引用数は未表示）</span>'+
+   '<span style="color:var(--muted)">— 線 = 共著者の重なり</span>';
 }
 /* ---------- channel header: 登録ボタンとタブ ---------- */
 function renderSub(){
@@ -1374,7 +1421,7 @@ function openDrawer(kind,arg){
       h+='<h3 style="font-size:17px;line-height:1.65;margin:0 0 12px">'+p.title+"</h3>";
       h+='<p style="font-size:14.5px">'+p.note+"</p>";
       h+='<h4>書誌</h4><div class="mono" style="font-size:12px;color:var(--ink2)">'+
-        p.venue+" / "+p.kind+" / "+p.year+"<br>cites: "+(p.cites==null?"—":fmt(p.cites))+"<br>"+
+        p.authors+"<br>"+p.venue+" / "+p.kind+" / "+p.year+"<br>"+
         "links: "+(p.links.join(" · ")||"—")+"</div>";
     }
     if(VERSIONS[p.id]){
