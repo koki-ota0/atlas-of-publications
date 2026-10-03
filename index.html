@@ -1023,11 +1023,12 @@ function renderAtlas(seed){
   const t0=performance.now();ST.seed=seed==null?(ST.seed||20260601):seed;
   const svg=E("mapsvg");while(svg.firstChild)svg.removeChild(svg.firstChild);
   if(ST.mapMode==="places"){
-    renderWorldMap(svg);svg.setAttribute("data-mode","places");
+    renderWorldMap(svg);svg.setAttribute("data-mode","places");svg.setAttribute("aria-label","2023年から2025年までの発表地を示す世界地図");
     ST.msText=REDUCED()?"static":String(Math.round(performance.now()-t0));
     E("mapnote").innerHTML='<b>'+PAPERS.filter(p=>!(ST.asof<p.year)).length+'</b> 件の発表地 · 日本 / 北米 / 欧州';
     renderYearBars();updateChips();return;
   }
+  svg.setAttribute("aria-label","2023年から2025年までの研究業績をテーマ別に配置した地図");
   const g=s=>svgEl("g",{class:s});
   // grid
   const gg=g("g");svg.appendChild(gg);
