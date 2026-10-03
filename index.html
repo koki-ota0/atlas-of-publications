@@ -624,11 +624,10 @@ body.no-motion *{animation:none!important;transition:none!important}
     <div class="mapscroll">
       <div id="mapwrap">
         <div id="mapinner">
-          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2020年から2025年までの研究業績をテーマと系譜で配置した地図" tabindex="0"></svg>
+          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2020年から2025年までの研究業績をテーマ別に配置した地図" tabindex="0"></svg>
         </div>
         <div id="mapcontrols">
           <button id="btnRelayout" type="button" title="r">RECOMPUTE</button>
-          <button id="btnLabels" type="button" title="l">LINEAGE</button>
         </div>
         <div id="maptip" role="status" aria-live="polite"></div>
       </div>
@@ -645,7 +644,7 @@ body.no-motion *{animation:none!important;transition:none!important}
         <div class="ybars" id="ybars" aria-hidden="true"></div>
         <input class="yscrub" id="asof" type="range" min="2020" max="2025" step="1" value="2025" aria-label="年をたどる">
       </div>
-      <span class="ptime" id="asofval">2025 — 全 4 本</span>
+      <span class="ptime" id="asofval">2025 — 全 5 本</span>
       <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2025 に戻る">↺</button>
       <span class="pctl">
         <button class="cbtn" type="button" data-cmd="d" data-tip="紙 / 暗（d）">◐</button>
@@ -686,7 +685,7 @@ body.no-motion *{animation:none!important;transition:none!important}
   <section class="index" id="index" aria-label="研究業績一覧">
     <div class="shead">
       <h2><span class="playmark"></span>INDEX <span class="mono" style="font-size:11.5px;color:var(--muted)">研究業績 · 論文 / 発表を区別</span></h2>
-      <div class="hint" id="filterstate">全 4 本</div>
+      <div class="hint" id="filterstate">全 5 本</div>
     </div>
     <div class="filters" id="filters" role="group" aria-label="公開状態で絞り込む"></div>
     <div id="papers"></div>
@@ -697,7 +696,7 @@ body.no-motion *{animation:none!important;transition:none!important}
       <h3>YouTubeの偽情報は、ネットワークの中で育つ。</h3>
       <p>ATLAS の <span class="mono">偽情報</span>・<span class="mono">ネットワーク</span>・<span class="mono">社会分析</span> は、YouTube上の発信者・視聴者・動画・コメントを別の角度から見たものです。</p>
       <p>2024年の人工知能学会から2025年のICWSMまで、偽情報の発信者の特徴、検出手法、陰謀論へ至る経路を追っています。</p>
-      <div class="src">SOURCE: JSAI 2024 → BigData 2024 → ICWSM 2025 &nbsp;·&nbsp; 詳細は地図の系譜（l）を見てください</div>
+      <div class="src">SOURCE: JSAI 2024 · BigData 2024 · ICWSM 2025 · IC2S2 2025 &nbsp;·&nbsp; 詳細は下の一覧で確認できます</div>
       <div class="src" style="margin-top:10px">公開情報: <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2024/0/JSAI2024_2I4OS1b01/_article/-char/ja/" target="_blank" rel="noreferrer">J-STAGE</a> · <a href="https://ojs.aaai.org/index.php/ICWSM/article/download/35965/38119/40033" target="_blank" rel="noreferrer">ICWSM 2025 PDF</a> · <a href="https://dblp.org/rec/conf/bigdataconf/OtaT24" target="_blank" rel="noreferrer">DBLP</a></div>
     </div>
   </section>
@@ -823,9 +822,13 @@ const PAPERS=[
  {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,
   title:"Pathways to Conspiracy Theorizing on YouTube in Japan",
   note:"日本のYouTubeチャンネルを、思想的・金銭的動機とエンゲージメントで分類。収益化された陰謀論チャンネルが、視聴者をより極端な内容へ導く経路を分析した。pp. 2635–2641。",
-  links:["AAAI","PDF"]}
+  links:["AAAI","PDF"]},
+ {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"査読付き国際学会（ポスター）",state:"accepted",theme:"社会分析",oral:false,format:"poster",cites:null,
+  title:"Exploring the Trajectory to Conspiracy Theories on YouTube in Japan",
+  note:"Koki Ota, Masaki Chujyo, Fujio Toriumi。#207 / Poster ID: 25。2021年4月〜2024年9月のYouTube Data APIデータを用い、ワクチン関連チャンネルの分類と、投稿者・視聴者が陰謀論へ進む経路を分析した。",
+  links:["IC2S2","Poster #207"]}
 ];
-const LINEAGE=[["p1","p2"],["p1","p3"],["p2","p4"],["p3","p4"]];
+const LINEAGE=[];
 const SUBMIT={};
 const VERSIONS={};
 const FAILED=[
@@ -1260,7 +1263,7 @@ function renderPapers(){
      '<div><h3><span class="idx">'+(p.state==="review"?"R?":p.id.toUpperCase())+'</span>'+
        (p.title||'<span style="color:var(--muted)">(査読中 — 題名は伏せています)</span>')+"</h3>"+
        '<div class="sub"><span>'+p.venue+"</span><span>"+p.kind+"</span>"+st+
-         '<span style="color:var(--muted)">系譜 '+linkCount(p.id)+" 本</span></div>"+
+         (linkCount(p.id)?'<span style="color:var(--muted)">関連 '+linkCount(p.id)+' 件</span>':"")+"</div>"+
        '<p class="note">'+p.note+extra+"</p></div>"+
      '<div class="aside"><span class="cites">'+(p.cites==null?"—":fmt(p.cites)+" cites")+"</span>"+
        (p.links.length?'<div class="links">'+p.links.map(l=>'<span class="lk" title="デモ用（リンク先はありません）">'+l+"</span>").join("")+"</div>":"")+
@@ -1300,8 +1303,7 @@ function renderMeta(){
      '<i style="width:5px;height:5px;border-radius:50%;background:var(--ink2);display:inline-block"></i>10'+
      '<i style="width:8px;height:8px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>30'+
      '<i style="width:12px;height:12px;border-radius:50%;background:var(--ink2);display:inline-block;margin-left:9px"></i>100</span>'+
-   '<span><i style="width:14px;height:0;border-top:1px dashed var(--yt);display:inline-block"></i>査読中に入る系譜（未解決）</span>'+
-   '<span style="color:var(--muted)">— 系譜（矢印は 先行 → 後継）</span>';
+   '<span style="color:var(--muted)">— 研究間の関連線は未登録</span>';
 }
 /* ---------- channel header: 登録ボタンとタブ ---------- */
 function renderSub(){
@@ -1345,7 +1347,7 @@ window.addEventListener("scroll",()=>{
 E("asof").addEventListener("input",e=>{
   ST.asof=parseInt(e.target.value,10);LS.set(KEY.asof,ST.asof);
   const n=PAPERS.filter(p=>p.year<=ST.asof).length;
-  E("asofval").textContent=ST.asof+" — "+(ST.asof===2025?"全 4 本":n+" 本");
+  E("asofval").textContent=ST.asof+" — "+(ST.asof===2025?"全 5 本":n+" 本");
   renderNote();
   if(ST.asof<2025){unlock("back")}
   renderAtlas();renderPapers();
