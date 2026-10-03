@@ -611,9 +611,10 @@ body.playful-mode #playful-site{display:block}
 .simple-section h2{font-size:24px;font-weight:500;letter-spacing:-.03em;margin:0;color:#1c2926}
 .simple-section-label{font:11px var(--mono);color:#82918b;letter-spacing:.12em;text-transform:uppercase}
 .simple-research{display:block;border-top:1px solid #dfe5e1}
-.simple-paper{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:28px;padding:24px 0;border-bottom:1px solid #dfe5e1}.simple-paper:hover{background:rgba(232,238,234,.45)}
+.simple-list-heading{font-size:14px;font-weight:500;margin:0 0 16px;color:#60716b}.simple-publications{margin:0;padding:0 0 0 34px;border-top:1px solid #dfe5e1}.simple-paper{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:28px;padding:24px 12px 24px 10px;border-bottom:1px solid #dfe5e1}.simple-paper:hover{background:rgba(232,238,234,.45)}
 .simple-paper-meta{font:11px var(--mono);color:#789087;letter-spacing:.06em;line-height:1.6}
 .simple-paper h3{font-size:17px;line-height:1.45;font-weight:500;margin:0 0 9px;color:#1c2926}
+.simple-paper h3 a{color:inherit;text-decoration:underline;text-decoration-color:#b9ccc4;text-underline-offset:4px}.simple-paper h3 a:hover{color:#41675a;text-decoration-color:#41675a}
 .simple-paper p{font-size:13px;line-height:1.75;color:#61706b;margin:0}.simple-paper .simple-kind{font:11px var(--mono);color:#899891;margin-top:10px}
 .simple-education{display:block;border-top:1px solid #dfe5e1}
 .simple-edu{display:grid;grid-template-columns:190px minmax(0,1fr);column-gap:28px;padding:22px 0;border-bottom:1px solid #dfe5e1}.simple-edu-year{font:11px var(--mono);color:#789087}.simple-edu h3{font-size:18px;font-weight:500;margin:0 0 7px}.simple-edu p{margin:0;color:#60716b;font-size:13px}
@@ -638,12 +639,14 @@ body.playful-mode #playful-site{display:block}
     </section>
     <section class="simple-section" id="simple-research" aria-labelledby="simple-research-title">
       <div class="simple-section-head"><h2 id="simple-research-title">Selected research</h2><span class="simple-section-label">2024 — 2025</span></div>
-      <div class="simple-research">
-        <article class="simple-paper"><div class="simple-paper-meta">2025 · INTERNATIONAL CONFERENCE · POSTER</div><h3>Exploring the Trajectory to Conspiracy Theories on YouTube in Japan</h3><p>Koki Ota, Masaki Chujyo, and Fujio Toriumi</p><div class="simple-kind">IC2S2 2025</div></article>
-        <article class="simple-paper"><div class="simple-paper-meta">2025 · INTERNATIONAL CONFERENCE · POSTER</div><h3>Pathways to Conspiracy Theorizing on YouTube in Japan</h3><p>Koki Ota, Masaki Chujyo, and Fujio Toriumi</p><div class="simple-kind">ICWSM 2025</div></article>
-        <article class="simple-paper"><div class="simple-paper-meta">2024 · INTERNATIONAL WORKSHOP</div><h3>Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube</h3><p>Koki Ota and Fujio Toriumi</p><div class="simple-kind">ABCSS2024 · IEEE Big Data 2024</div></article>
-        <article class="simple-paper"><div class="simple-paper-meta">2024 · DOMESTIC CONFERENCE</div><h3>YouTubeでの偽情報を発信するユーザの特徴分析</h3><p>太田光紀・鳥海不二夫</p><div class="simple-kind">2024年度人工知能学会全国大会</div></article>
-      </div>
+      <h3 class="simple-list-heading">学会発表・ワークショップ</h3>
+      <ol class="simple-publications">
+        <li class="simple-paper"><div class="simple-paper-meta">2025 · INTERNATIONAL CONFERENCE · POSTER</div><div><h3>Exploring the Trajectory to Conspiracy Theories on YouTube in Japan</h3><p>Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Exploring the Trajectory to Conspiracy Theories on YouTube in Japan,” IC2S2 2025, Poster (2025).</p></div></li>
+        <li class="simple-paper"><div class="simple-paper-meta">2025 · INTERNATIONAL CONFERENCE · POSTER</div><div><h3><a href="https://doi.org/10.1609/icwsm.v19i1.35965" target="_blank" rel="noreferrer">Pathways to Conspiracy Theorizing on YouTube in Japan</a></h3><p>Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Pathways to Conspiracy Theorizing on YouTube in Japan,” <i>Proceedings of the International AAAI Conference on Web and Social Media</i>, 19(1), 2635–2641 (2025).</p></div></li>
+        <li class="simple-paper"><div class="simple-paper-meta">2024 · INTERNATIONAL WORKSHOP</div><div><h3><a href="https://jglobal.jst.go.jp/en/public/202502256616940397" target="_blank" rel="noreferrer">Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube</a></h3><p>Koki Ota and Fujio Toriumi, “Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube,” <i>IEEE International Conference on Big Data</i>, pp. 3042–3050 (2024).</p></div></li>
+        <li class="simple-paper"><div class="simple-paper-meta">2024 · DOMESTIC CONFERENCE</div><div><h3><a href="https://doi.org/10.11517/pjsai.JSAI2024.0_2I4OS1b01" target="_blank" rel="noreferrer">YouTubeでの偽情報を発信するユーザの特徴分析</a></h3><p>太田光紀・鳥海不二夫「YouTubeでの偽情報を発信するユーザの特徴分析」2024年度人工知能学会全国大会 (2024).</p></div></li>
+        <li class="simple-paper"><div class="simple-paper-meta">2025 · DOMESTIC RESEARCH MEETING</div><div><h3><a href="https://www.torilab.net/people/tori/papers" target="_blank" rel="noreferrer">陰謀論動画における受発信ユーザーの行動分析</a></h3><p>太田光紀・中条雅貴・鳥海不二夫「陰謀論動画における受発信ユーザーの行動分析」第37回社会システム部会研究会 (2025).</p></div></li>
+      </ol>
     </section>
     <section class="simple-section" id="simple-education" aria-labelledby="simple-education-title">
       <div class="simple-section-head"><h2 id="simple-education-title">Education</h2><span class="simple-section-label">Degrees</span></div>
