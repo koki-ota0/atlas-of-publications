@@ -140,6 +140,10 @@ section.atlas{padding:38px 0 8px}
 #maptip .cat{color:var(--accent2)}
 .mapfoot{display:flex; justify-content:space-between; gap:18px; align-items:baseline; margin-top:9px; flex-wrap:wrap}
 .legend{display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--muted)}
+.mapfoot .legend,.mapfoot .note,#maphintcopy{display:none}
+body.map-info-open #maphintcopy{display:block}
+body.map-info-open .mapfoot .legend{display:flex}
+body.map-info-open .mapfoot .note{display:block}
 .legend i{display:inline-block; vertical-align:middle; margin-right:6px}
 .maphint{display:none; font-size:10.5px; color:var(--muted)}
 .mapfoot .note{font-family:var(--mono); font-size:11px; color:var(--muted); text-align:right}
@@ -452,6 +456,16 @@ body.room-open #toasts{bottom:auto; top:66px; left:20px}
 .subbtn.on{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink2);font-weight:500;border-color:var(--line2)}
 .subbtn.on:hover{filter:none;color:var(--ink)}
 .subbtn svg{display:block;flex:none}
+.profilecard{position:relative;border:1px solid var(--line);border-radius:8px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 7%,var(--panel)),var(--panel2));padding:26px 30px 24px;overflow:hidden}
+.profilecard::after{content:"";position:absolute;right:-80px;top:-100px;width:280px;height:280px;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);border-radius:50%;box-shadow:0 0 0 22px color-mix(in srgb,var(--accent) 3%,transparent),0 0 0 44px color-mix(in srgb,var(--accent) 2%,transparent);pointer-events:none}
+.profile-kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent);margin-bottom:18px}
+.profilegrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.8fr);gap:44px;align-items:end;position:relative;z-index:1}
+.profilecard .chinfo h1{font-size:38px;letter-spacing:-.03em}
+.profilefacts{border-left:1px solid var(--line2);padding-left:20px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.profilefacts div{display:flex;justify-content:space-between;gap:18px;padding:7px 0;border-bottom:1px solid var(--line)}
+.profilefacts b{color:var(--ink2);font-weight:400;text-align:right}
+.hidden-cat{position:absolute;right:16px;bottom:9px;color:var(--accent);opacity:.18;font-size:15px;transform:rotate(-12deg);z-index:2;user-select:none}
+.overlap,footer.site,#catdock,.catline{display:none!important}
 .ctabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin-top:20px;padding:0 4px}
 .ctabs button{position:relative;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);padding:11px 1px 10px;border-bottom:2px solid transparent;margin-bottom:-1px}
@@ -464,6 +478,8 @@ body.room-open #toasts{bottom:auto; top:66px; left:20px}
   .chinfo h1{font-size:23px}
   .banner{height:96px}
   .banner .wm{font-size:78px}
+  .profilegrid{grid-template-columns:1fr;gap:20px}
+  .profilefacts{border-left:0;border-top:1px solid var(--line2);padding:12px 0 0}
 }
 
 /* ネットワーク */
@@ -578,46 +594,38 @@ body.no-motion *{animation:none!important;transition:none!important}
   <div class="wrap">
     <div class="bar">
       <div class="left">
-        <span>ATLAS OF RESEARCH OUTPUTS</span><span>REV. 6.0</span><span>2026-10</span>
-      </div>
-      <div class="press">
-        <span>PRESS</span><kbd>?</kbd><span>FOR COMMANDS</span>
-        <button class="press" id="presshint" type="button" aria-label="コマンドパレットを開く" style="all:unset;cursor:pointer"></button>
+        <span>RESEARCH PROFILE</span><span>KOKI OTA</span>
       </div>
     </div>
     <div class="rule"></div>
 
     <div class="chan" id="top">
-        <div class="banner" aria-hidden="true">
-        <span class="wm">MS</span>
-        <span class="playline"><span class="playmark" style="margin:0"></span>ATLAS OF RESEARCH OUTPUTS — PROFILE</span>
-        <span class="sig">REV. 6.0&nbsp;&nbsp;·&nbsp;&nbsp;外部通信 0</span>
-      </div>
-      <div class="chanrow">
-        <div class="avatar" aria-hidden="true">MS</div>
-        <div class="chinfo">
+      <div class="profilecard">
+        <div class="profile-kicker">RESEARCH PROFILE / 研究業績</div>
+        <div class="profilegrid">
+          <div class="chinfo">
           <h1>太田 光紀</h1>
           <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
             <span>業績 <b id="mPub">—</b> 件</span><i>|</i>
             <span>査読中 <b id="mRev">—</b> 本</span><i>|</i>
             <span><b id="mYears">—</b></span><i>|</i>
-            <span>送信 <b>0</b> bytes</span>
+            <span>公開データ</span>
           </div>
-          <p class="def"><b>YouTube上で偽情報や陰謀論が広がる経路を分析しています。</b>動画・コメント・投稿者・視聴者のネットワークを手がかりに、誰が発信し、誰が受け取り、どのように過激化へ進むのかを調べています。</p>
+          <p class="def"><b>YouTube上の偽情報・陰謀論と、そこへ至るネットワークを研究しています。</b>動画・コメント・投稿者・視聴者の関係をデータから分析しています。</p>
+          </div>
+          <div class="profilefacts">
+            <div><span>所属</span><b>東京大学 / 鳥海研究室</b></div>
+            <div><span>主題</span><b>計算社会科学・YouTube研究</b></div>
+            <div><span>対象期間</span><b>2023 — 2025</b></div>
+          </div>
         </div>
-        <div class="chact">
-          <button class="subbtn" id="subbtn" type="button" aria-pressed="false">
-            <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M10 2.6c-2.2 0-3.4 1.5-3.4 3.6v1.6c0 .8-.3 1.4-.9 2l-.6.6v.8h9.8v-.8l-.6-.6c-.6-.6-.9-1.2-.9-2V6.2c0-2.1-1.2-3.6-3.4-3.6z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8.3 13.9a1.7 1.7 0 0 0 3.4 0" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-            <span id="subtxt">更新を受け取る</span>
-          </button>
-        </div>
+        <span id="catbtn" class="hidden-cat" title="猫">⌁</span>
       </div>
       <nav class="ctabs" id="ctabs" aria-label="チャンネル内の移動">
         <button type="button" data-tab="top" aria-current="true">ホーム</button>
         <button type="button" data-tab="atlas">地図</button>
         <button type="button" data-tab="index">業績</button>
-        <button type="button" data-tab="about">概要</button>
       </nav>
     </div>
   </div>
@@ -626,8 +634,8 @@ body.no-motion *{animation:none!important;transition:none!important}
 <main class="wrap">
   <section class="atlas" id="atlas" aria-label="研究業績マップ">
     <div class="shead">
-      <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">RESEARCH OUTPUTS · 2020 — 2025</span></h2>
-      <div class="hint">クラスタ = 研究テーマ&nbsp;&nbsp;·&nbsp;&nbsp;線 = 共著者の重なり&nbsp;&nbsp;·&nbsp;&nbsp;ピン = 発表地<br>
+      <h2><span class="playmark"></span>ATLAS <span class="mono" style="font-size:11.5px;color:var(--muted)">RESEARCH OUTPUTS · 2023 — 2025</span></h2>
+      <div class="hint" id="maphintcopy">クラスタ = 研究テーマ&nbsp;&nbsp;·&nbsp;&nbsp;線 = 共著者の重なり&nbsp;&nbsp;·&nbsp;&nbsp;ピン = 発表地<br>
         <b>点を選ぶ</b>と詳細が出ます</div>
     </div>
 
@@ -644,10 +652,10 @@ body.no-motion *{animation:none!important;transition:none!important}
     <div class="mapscroll">
       <div id="mapwrap">
         <div id="mapinner">
-          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2020年から2025年までの研究業績をテーマ別に配置した地図" tabindex="0"></svg>
+          <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2023年から2025年までの研究業績をテーマ別に配置した地図" tabindex="0"></svg>
         </div>
         <div id="mapcontrols">
-          <button id="btnRelayout" type="button" title="r">RECOMPUTE</button>
+          <button id="btnLegend" type="button">凡例・操作</button>
         </div>
         <div id="maptip" role="status" aria-live="polite"></div>
       </div>
@@ -659,10 +667,10 @@ body.no-motion *{animation:none!important;transition:none!important}
     </div>
 
     <div class="player" id="player" aria-label="年をたどるプレイヤー">
-      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2020 年から 2025 年まで再生">▶</button>
+      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2023 年から 2025 年まで再生">▶</button>
       <div class="ytrack">
         <div class="ybars" id="ybars" aria-hidden="true"></div>
-        <input class="yscrub" id="asof" type="range" min="2020" max="2025" step="1" value="2025" aria-label="年をたどる">
+        <input class="yscrub" id="asof" type="range" min="2023" max="2025" step="1" value="2025" aria-label="年をたどる">
       </div>
       <span class="ptime" id="asofval">2025 — 全 5 本</span>
       <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2025 に戻る">↺</button>
@@ -711,49 +719,7 @@ body.no-motion *{animation:none!important;transition:none!important}
     <div id="papers"></div>
   </section>
 
-  <section class="overlap" id="about" aria-label="研究の重なり">
-    <div class="card" id="ovcard">
-      <h3>YouTubeの偽情報は、ネットワークの中で育つ。</h3>
-      <p>ATLAS の <span class="mono">偽情報</span>・<span class="mono">ネットワーク</span>・<span class="mono">社会分析</span> は、YouTube上の発信者・視聴者・動画・コメントを別の角度から見たものです。</p>
-      <p>2024年の人工知能学会から2025年のICWSMまで、偽情報の発信者の特徴、検出手法、陰謀論へ至る経路を追っています。</p>
-      <div class="src">SOURCE: JSAI 2024 · ABCSS2024 · ICWSM 2025 · IC2S2 2025 &nbsp;·&nbsp; 詳細は下の一覧で確認できます</div>
-      <div class="src" style="margin-top:10px">公開情報: <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2024/0/JSAI2024_2I4OS1b01/_article/-char/ja/" target="_blank" rel="noreferrer">J-STAGE</a> · <a href="https://ojs.aaai.org/index.php/ICWSM/article/download/35965/38119/40033" target="_blank" rel="noreferrer">ICWSM 2025 PDF</a> · <a href="https://dblp.org/rec/conf/bigdataconf/OtaT24" target="_blank" rel="noreferrer">DBLP</a></div>
-    </div>
-  </section>
 </main>
-
-<footer class="site">
-  <div class="wrap">
-    <div class="cols">
-      <div>
-        <h4>Contact</h4>
-        <p>koki@torilab.net<br>東京大学 / 鳥海研究室</p>
-        <p>査読依頼・共同研究はお受けします。締切に間に合わない月は先に言います。</p>
-      </div>
-      <div>
-        <h4>Colophon</h4>
-        <p>静的 HTML 1 ファイル。CSS・SVG・JavaScript 同梱、CDN なし、ビルドなし、外部通信 0。</p>
-        <p>地図は force-directed network。同じデータでも <span class="mono">r</span> を押すと別の配置になります。<br>
-        コマンドの一覧は <span class="mono">?</span>。猫は右下にいます（3 回叩くと、何か返します）。扉はその下です。</p>
-      </div>
-    </div>
-    <div class="fine">
-      <span>© KOKI OTA — 公開情報にもとづく研究業績の地図</span>
-      <span class="k" id="footstate">— 本&nbsp;·&nbsp;— 年</span>
-    </div>
-    <div class="catline">
-      <button id="catbtn" type="button" aria-label="猫" title="猫">
-        <svg viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">
-          <path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z" fill="none" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M28 20c4 0 8-1.5 9-4.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          <circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/>
-        </svg>
-      </button>
-      <span class="catnote mono" id="catnote">— 眠っています</span>
-    </div>
-  </div>
-</footer>
 
 <!-- overlays -->
 <div class="ovl" id="palette" role="dialog" aria-modal="true" aria-label="コマンドパレット">
@@ -798,19 +764,6 @@ body.no-motion *{animation:none!important;transition:none!important}
     </svg>
   </button>
   <span class="sign">作業用房 — 入る</span>
-</div>
-
-<div id="catdock">
-  <button id="catbtn2" type="button" aria-label="猫（3 回叩くと何か返します）">
-    <span class="badge">?</span>
-    <span class="lbl" id="catlbl">猫 — 3 回叩くと、何か返します</span>
-    <svg viewBox="0 0 40 24" width="30" height="19" aria-hidden="true">
-      <path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z" fill="none" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M28 20c4 0 8-1.5 9-4.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      <circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/>
-    </svg>
-  </button>
 </div>
 
 <div id="toasts" aria-live="polite"></div>
@@ -956,7 +909,7 @@ function openChain(){if(ST.done.has("l3"))return;ST.done.add("l3");LS.set(KEY.do
 
 /* ---------- 3. ATLAS ---------------------------------------------- */
 const W=1000,H=440,PADL=40,PADR=30,PADT=46,AXIS_Y=404,YEAR_Y=0;
-const XC={min:2020,max:2025.9}, FLOORY=[166,262,358];
+const XC={min:2023,max:2025.9}, FLOORY=[166,262,358];
 const BRAND=[];
 function xPos(y){return PADL+(y-XC.min)/(XC.max-XC.min)*(W-PADL-PADR)}
 function nodeR(){return 7}
@@ -1183,7 +1136,7 @@ function renderNote(){
 function renderYearBars(){
   const box=E("ybars");if(!box)return;
   box.innerHTML="";
-  for(let y=2020;y<=2025;y++){
+  for(let y=2023;y<=2025;y++){
     const i=document.createElement("i");
     const inYear=PAPERS.filter(p=>p.year===y);
     if(y<=ST.asof)i.className="on";
@@ -1257,7 +1210,7 @@ function mapPoint(ev){
 E("mapwrap").addEventListener("contextmenu",e=>{if(e.shiftKey||ST.oracleMode)e.preventDefault()});
 function placeOracle(pt){
   const vb=1000,relX=pt.x/E("mapsvg").getBoundingClientRect().width*W;
-  const year=Math.max(2020,Math.min(2025,Math.round(XC.min+(relX-PADL)/(W-PADL-PADR)*(XC.max-XC.min))));
+  const year=Math.max(2023,Math.min(2025,Math.round(XC.min+(relX-PADL)/(W-PADL-PADR)*(XC.max-XC.min))));
   let band=BANDS[0],best=1e9;FLOORY.forEach((fy,i)=>{const d=Math.abs(fy-pt.y);if(d<best){best=d;band=BANDS[i]}});
   ST.myPts.push({x:pt.x,y:pt.y,year,band,labelLeft:relX>W-190});
   LS.set(KEY.oracle,ST.myPts);renderAtlas();unlock("oracle");
@@ -1338,10 +1291,10 @@ function stateBadge(p){
 const hasHistory=p=>!!VERSIONS[p.id];
 function renderMeta(){
   E("mPub").textContent=TOTAL_PUBLISHED;
-  E("mYears").textContent="2020 – 2025";
+  E("mYears").textContent="2023 – 2025";
   const cite=E("mCites");if(cite)cite.textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
   E("mRev").textContent=PAPERS.filter(p=>p.state==="review").length;
-  E("footstate").textContent=TOTAL_PUBLISHED+" 本 · 6 年 · 外部通信 0 · 実データ更新 2026-10-03";
+  const foot=E("footstate");if(foot)foot.textContent=TOTAL_PUBLISHED+" 本 · 3 年 · 実データ更新 2026-10-03";
   const lg=E("legend");
   lg.innerHTML=
    '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></i>発表済み</span>'+
@@ -1355,16 +1308,17 @@ function renderMeta(){
 /* ---------- channel header: 登録ボタンとタブ ---------- */
 function renderSub(){
   const on=!!ST.sub,b=E("subbtn");
+  if(!b)return;
   b.classList.toggle("on",on);
   b.setAttribute("aria-pressed",on?"true":"false");
   E("subtxt").textContent=on?"登録済み":"更新を受け取る";
 }
-E("subbtn").addEventListener("click",()=>{
+if(E("subbtn"))E("subbtn").addEventListener("click",()=>{
   ST.sub=!ST.sub;LS.set(KEY.sub,ST.sub);renderSub();
   if(ST.sub){unlock("sub");toast("登録しました","更新はどこにも送信されません（0 bytes）")}
   else toast("登録を解除しました","");
 });
-const TABTARGET={top:"top",atlas:"atlas",index:"index",about:"about"};
+const TABTARGET={top:"top",atlas:"atlas",index:"index"};
 function setTab(id){
   $$("#ctabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===id?"true":"false"));
 }
@@ -1376,15 +1330,18 @@ $$("#ctabs button").forEach(b=>b.addEventListener("click",()=>{
   window.scrollTo({top:y,behavior:REDUCED()?"auto":"smooth"});
   if(id==="atlas")toast("地図 — 点を選ぶと詳細が出ます");
   if(id==="index")toast("研究業績 — 論文と発表を区別しています");
-  if(id==="about")toast("概要 — 研究の重なりと連絡先");
 }));
+E("btnLegend").addEventListener("click",()=>{
+  const open=document.body.classList.toggle("map-info-open");
+  E("btnLegend").textContent=open?"凡例を閉じる":"凡例・操作";
+});
 let spyTick=false;
 window.addEventListener("scroll",()=>{
   if(spyTick)return;spyTick=true;
   requestAnimationFrame(()=>{
     spyTick=false;
     const y=window.scrollY+140;let cur="top";
-    ["atlas","index","about"].forEach(id=>{const el=document.getElementById(id);
+    ["atlas","index"].forEach(id=>{const el=document.getElementById(id);
       if(el&&el.offsetTop<=y)cur=id});
     setTab(cur);
   });
@@ -1400,7 +1357,7 @@ E("asof").addEventListener("input",e=>{
   renderAtlas();renderPapers();
 });
 E("asofreset").onclick=()=>{E("asof").value=2025;E("asof").dispatchEvent(new Event("input"))};
-E("btnRelayout").onclick=()=>relayout();
+if(E("btnRelayout"))E("btnRelayout").onclick=()=>relayout();
 function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);unlock("relayout");toast("配置を作り直しました","seed "+ST.seed)}
 
 /* ---------- 5. DRAWER --------------------------------------------- */
@@ -1473,7 +1430,7 @@ const CMDS=[
  {k:"k",label:"開発者モード（座標と当たり判定）",fmt:"DEBUG"},
  {k:"g",label:"計測表示（F3 でも同じ）",fmt:"METRIC"},
  {k:"y",label:"予言モード — 地図に自分の 1 点を置く",fmt:"ORACLE"},
- {k:"▶",label:"PLAY — 2021 年から順にたどる（プレイヤーの左端）",fmt:"TIMELINE"}
+ {k:"▶",label:"PLAY — 2023 年から順にたどる（プレイヤーの左端）",fmt:"TIMELINE"}
 ];
 let palOpen=false,palIdx=0,palQ="";
 function openPalette(){palOpen=true;palQ="";palIdx=0;E("palette").classList.add("on");renderPalette();unlock("curious")}
@@ -1544,9 +1501,9 @@ function oracleMode(){
 function playTimeline(){
   if(ST.playing)return;ST.playing=true;
   unlock("replay");
-  const el=E("asof");let y=2020;
+  const el=E("asof");let y=2023;
   el.value=y;el.dispatchEvent(new Event("input"));
-  toast("PLAY — 2020 年から順にたどります","esc で止まります");
+  toast("PLAY — 2023 年から順にたどります","esc で止まります");
   ST.playTimer=setInterval(()=>{
     y++;
     if(y>2025){clearInterval(ST.playTimer);ST.playing=false;el.value=2025;el.dispatchEvent(new Event("input"));
@@ -1905,7 +1862,7 @@ function strokeCat(){
 }
 function showDoor(){const d=E("doordock");if(d)d.hidden=false}
 E("catbtn").addEventListener("click",strokeCat);
-E("catbtn2").addEventListener("click",strokeCat);
+if(E("catbtn2"))E("catbtn2").addEventListener("click",strokeCat);
 E("doorbtn").addEventListener("click",()=>visitRoom());
 function visitRoom(){
   if(!ST.ach.has("key")){toast("扉には鍵がかかっています","右下の猫が持っています");return}
@@ -2003,7 +1960,7 @@ document.addEventListener("keydown",e=>{
   const k=e.key.toLowerCase();
   if("dlrsmkgy".includes(k)&&k.length===1){e.preventDefault();runCmd(k)}
 });
-E("presshint").addEventListener("click",()=>openPalette());
+if(E("presshint"))E("presshint").addEventListener("click",()=>openPalette());
 
 /* ---------- 15. MEMORY / INIT ------------------------------------- */
 function memoryOnLoad(){
@@ -2024,7 +1981,7 @@ function init(){
   document.body.classList.toggle("no-motion",REDUCED());
   memoryOnLoad();
   renderMeta();renderSub();renderAtlas();renderPapers();renderPalette();renderTerm();
-  const a=LS.get(KEY.asof,2025);
+  const a=Math.max(2023,Math.min(2025,LS.get(KEY.asof,2025)));
   if(a!==2025){E("asof").value=a;E("asof").dispatchEvent(new Event("input"))}
   if(hourState()==="deep")unlock("night");
   if(ST.ach.has("key")){showDoor();document.body.classList.add("keyed")}
