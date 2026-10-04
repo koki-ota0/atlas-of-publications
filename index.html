@@ -83,6 +83,8 @@ section.atlas{padding:38px 0 8px}
 .mapmode{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:999px;padding:5px 11px;background:var(--panel2)}
 .mapmode[aria-selected="true"]{color:var(--ink);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
 .mapmode-note{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:4px}
+.legend-toggle{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink2);border:1px solid var(--line2);border-radius:999px;padding:5px 12px;background:var(--panel2);transition:border-color .18s,color .18s,background .18s}
+.legend-toggle:hover,.legend-toggle[aria-expanded="true"]{color:var(--ink);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--panel2))}
 
 .mapscroll{position:relative}
 #mapwrap{position:relative; border:1px solid var(--line); background:var(--mapbg); border-radius:var(--r); overflow:hidden}
@@ -208,23 +210,6 @@ section.index{padding:40px 0 10px}
 /* ============================================================
    4. overlap note / footer
    ============================================================ */
-.fieldnotes{padding:42px 0 4px}
-.fieldnotes .shead{margin-bottom:18px}
-.fieldnotes .shead h2{font-size:18px}
-.fieldnotes .lede{max-width:42ch;color:var(--muted);font-size:12px;line-height:1.7;text-align:right}
-.fieldgrid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:10px}
-.fieldcard{min-height:178px;border:1px solid var(--line);background:var(--panel2);padding:18px 18px 16px;position:relative;overflow:hidden}
-.fieldcard::after{content:"";position:absolute;inset:auto -18px -28px auto;width:120px;height:120px;border:1px solid var(--line2);border-radius:50%;opacity:.55}
-.fieldcard:first-child{border-top:2px solid var(--yt)}
-.fieldcard:nth-child(2){border-top:2px solid var(--accent)}
-.fieldcard:nth-child(3){border-top:2px solid var(--accent2)}
-.fieldcard .tag{font-family:var(--mono);font-size:10px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
-.fieldcard h3{font-size:16px;line-height:1.45;margin:18px 0 8px;max-width:18ch}
-.fieldcard p{font-size:12.5px;line-height:1.7;color:var(--ink2);margin:0;max-width:31ch}
-.fieldcard .mark{position:absolute;right:16px;top:15px;font-family:var(--mono);font-size:11px;color:var(--muted)}
-.signal{display:flex;align-items:center;gap:10px;margin-top:12px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
-.signal i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent)}
-@media (max-width:760px){.fieldnotes{padding-top:30px}.fieldnotes .lede{text-align:left;margin-top:5px}.fieldgrid{grid-template-columns:1fr}.fieldcard{min-height:150px}.fieldcard h3{margin-top:14px}}
 .overlap{padding:38px 0 8px}
 .overlap .card{border:1px solid var(--line); border-left:2px solid var(--accent2); background:var(--panel2);
   border-radius:var(--r); padding:20px 24px; max-width:78ch}
@@ -504,8 +489,8 @@ body.about-open{overflow:hidden}
   color:var(--muted);padding:11px 1px 10px;border-bottom:2px solid transparent;margin-bottom:-1px}
 .ctabs button:hover{color:var(--ink2)}
 .ctabs button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--yt)}
-body.tab-atlas #fieldnotes,body.tab-atlas #index{display:none}
-body.tab-index #atlas,body.tab-index #fieldnotes{display:none}
+body.tab-atlas #index{display:none}
+body.tab-index #atlas{display:none}
 body.tab-atlas main.wrap,body.tab-index main.wrap{min-height:60vh}
 #mapsvg .time-stamp{font-family:var(--mono);font-size:28px;font-weight:700;letter-spacing:-.04em;fill:color-mix(in srgb,var(--ink) 76%,transparent);paint-order:stroke;stroke:var(--mapbg);stroke-width:5px}
 #mapsvg .time-stamp-sub{font-family:var(--mono);font-size:9px;letter-spacing:.16em;fill:var(--muted);paint-order:stroke;stroke:var(--mapbg);stroke-width:3px}
@@ -772,6 +757,7 @@ body.playful-mode #playful-site{display:block}
       <button type="button" class="mapmode" data-mapmode="cluster" aria-selected="true">テーマ・クラスタ</button>
       <button type="button" class="mapmode" data-mapmode="places" aria-selected="false">発表地・世界地図</button>
       <span class="mapmode-note">同じ業績データを別の視点で表示</span>
+      <button type="button" class="legend-toggle" id="btnLegend" aria-expanded="false">凡例を表示</button>
     </div>
 
     <div class="mapscroll">
@@ -781,6 +767,10 @@ body.playful-mode #playful-site{display:block}
         </div>
         <div id="maptip" role="status" aria-live="polite"></div>
       </div>
+    </div>
+
+    <div class="mapfoot" aria-live="polite">
+      <div class="legend" id="legend" aria-label="地図の凡例"></div>
     </div>
 
     <div class="player" id="player" aria-label="月をたどるプレイヤー">
@@ -796,33 +786,6 @@ body.playful-mode #playful-site{display:block}
         <button class="cbtn" type="button" data-cmd="s" data-tip="この地図のデータ（s）">{ }</button>
         <button class="cbtn" id="p-room" type="button" data-tip="作業用房 — 扉を開く">▦</button>
       </span>
-    </div>
-  </section>
-
-  <section class="fieldnotes" id="fieldnotes" aria-label="研究の見取り図">
-    <div class="shead">
-      <h2><span class="playmark"></span>FIELD NOTES <span class="mono" style="font-size:11.5px;color:var(--muted)">研究の見取り図</span></h2>
-      <p class="lede">動画・コメント・ユーザーの関係から、偽情報が広がる経路を見ています。</p>
-    </div>
-    <div class="fieldgrid">
-      <article class="fieldcard">
-        <span class="tag">01 / question</span><span class="mark">Q</span>
-        <h3>誰が、偽情報を発信するのか。</h3>
-        <p>一般地震動画と人工地震動画を比較し、発信者と視聴者の重なりを調べる。</p>
-        <div class="signal"><i></i><span>JSAI 2024 · YouTube · 偽情報</span></div>
-      </article>
-      <article class="fieldcard">
-        <span class="tag">02 / method</span><span class="mark">M</span>
-        <h3>検出手法は、どこまで届くか。</h3>
-        <p>ネットワークベースとNLPベースの手法を比較し、コミュニティ検出の違いを見る。</p>
-        <div class="signal"><i></i><span>ABCSS2024 · International Workshop · Network / NLP</span></div>
-      </article>
-      <article class="fieldcard">
-        <span class="tag">03 / now</span><span class="mark">N</span>
-        <h3>陰謀論へ至る経路を追う。</h3>
-        <p>収益化や娯楽・スピリチュアルな形式が、より極端な内容への入口になるかを分析する。</p>
-        <div class="signal"><i></i><span>ICWSM 2025 · 日本のYouTube</span></div>
-      </article>
     </div>
   </section>
 
@@ -856,10 +819,6 @@ body.playful-mode #playful-site{display:block}
         <a class="about-link" href="https://www.torilab.net/" target="_blank" rel="noreferrer">
           <span class="about-link-icon" aria-hidden="true">T</span>
           <span class="about-link-copy"><b>鳥海研究室</b><span>torilab.net</span></span>
-        </a>
-        <a class="about-link" href="#index" data-about-target="index">
-          <span class="about-link-icon" aria-hidden="true">▶</span>
-          <span class="about-link-copy"><b>研究業績</b><span>論文・国際会議・国内会議・ワークショップ</span></span>
         </a>
       </section>
       <section class="about-section">
@@ -1476,14 +1435,11 @@ function renderMeta(){
   const foot=E("footstate");if(foot)foot.textContent=TOTAL_PUBLISHED+" 本 · 4 年 · 実データ更新 2026-10-03";
   const lg=E("legend");if(!lg)return;
   lg.innerHTML=
-   '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></i>発表済み</span>'+
-   '<span><i style="width:12px;height:12px;border-radius:50%;border:1.5px solid var(--accent);display:inline-block"></i>口頭発表</span>'+
-   '<span><i style="width:11px;height:11px;border-radius:50%;border:1.5px dashed var(--accent2);display:inline-block"></i>予印</span>'+
-   '<span><i style="width:9px;height:9px;border-radius:50%;border:1.5px dashed var(--danger);display:inline-block"></i>査読中</span>'+
-   BANDS.map(b=>'<span><i style="width:9px;height:9px;border-radius:50%;background:'+colorOf(b)+';display:inline-block"></i>'+b+"</span>").join("")+
-   '<span>点の大きさ = 同じサイズ（引用数は未表示）</span>'+
-   '<span style="color:var(--muted)">— 実線 = 同じクラスタ</span>'+
-   '<span style="color:var(--muted)">┄ 点線 = テーマ間の関連</span>';
+   '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--ink2)"></i>口頭発表</span>'+
+   '<span><i style="width:10px;height:10px;border-radius:1px;background:var(--ink2)"></i>ポスター発表</span>'+
+   '<span><i style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid var(--ink2)"></i>共同研究</span>'+
+   '<span><i style="width:10px;height:10px;transform:rotate(45deg);border:1.5px dashed var(--ink2)"></i>査読中</span>'+
+   BANDS.map(b=>'<span><i style="width:9px;height:9px;border-radius:50%;background:'+colorOf(b)+'"></i>'+b+"</span>").join("");
 }
 /* ---------- channel header: 登録ボタンとタブ ---------- */
 function renderSub(){
@@ -1521,12 +1477,10 @@ function closeAbout(returnFocus=true){
 aboutMore.addEventListener("click",openAbout);
 aboutClose.addEventListener("click",()=>closeAbout());
 aboutModal.addEventListener("click",e=>{if(e.target===aboutModal)closeAbout()});
-aboutModal.querySelectorAll("[data-about-target]").forEach(link=>link.addEventListener("click",()=>{
-  closeAbout(false);setTab(link.dataset.aboutTarget);window.scrollTo({top:0,behavior:REDUCED()?"auto":"smooth"});
-}));
 if(E("btnLegend"))E("btnLegend").addEventListener("click",()=>{
   const open=document.body.classList.toggle("map-info-open");
-  E("btnLegend").textContent=open?"凡例を閉じる":"凡例・操作";
+  E("btnLegend").setAttribute("aria-expanded",open?"true":"false");
+  E("btnLegend").textContent=open?"凡例を閉じる":"凡例を表示";
 });
 
 /* AS OF */
