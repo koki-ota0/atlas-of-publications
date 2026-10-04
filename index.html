@@ -769,13 +769,13 @@ body.playful-mode #playful-site{display:block}
     </div>
 
     <div class="player" id="player" aria-label="年をたどるプレイヤー">
-      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2023 年から 2026 年まで再生">▶</button>
+      <button class="cbtn playbtn" id="p-play" type="button" data-tip="PLAY — 2023.01 から月単位で再生">▶</button>
       <div class="ytrack">
         <div class="ybars" id="ybars" aria-hidden="true"></div>
-        <input class="yscrub" id="asof" type="range" min="2023" max="2026" step="1" value="2026" aria-label="年をたどる">
+        <input class="yscrub" id="asof" type="range" min="0" max="47" step="1" value="47" aria-label="月をたどる">
       </div>
-      <span class="ptime" id="asofval">2026 — 全 6 本</span>
-      <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2026 に戻る">↺</button>
+      <span class="ptime" id="asofval">2026.12 — 全 6 本</span>
+      <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2026.12 に戻る">↺</button>
       <span class="pctl">
         <button class="cbtn" type="button" data-cmd="d" data-tip="紙 / 暗（d）">◐</button>
         <button class="cbtn" type="button" data-cmd="s" data-tip="この地図のデータ（s）">{ }</button>
@@ -882,31 +882,33 @@ body.playful-mode #playful-site{display:block}
 const BANDS=["偽情報","陰謀論","ネットワーク分析","政治"];
 const THEME_COLOR={"偽情報":"#ff6b6b","陰謀論":"#9aa7ff","ネットワーク分析":"#6fd2c0","政治":"#f2b36d"};
 const PAPERS=[
- {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",pubType:"domestic",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,authors:"太田光紀・鳥海不二夫",citation:"太田光紀・鳥海不二夫「YouTubeでの偽情報を発信するユーザの特徴分析」2024年度人工知能学会全国大会, 2024。",authorKeys:["ota","toriumi"],place:{city:"浜松",country:"日本",x:849,y:157},
+ {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",pubType:"domestic",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,authors:"太田光紀・鳥海不二夫",citation:"太田光紀・鳥海不二夫「YouTubeでの偽情報を発信するユーザの特徴分析」2024年度人工知能学会全国大会, 2024。",authorKeys:["ota","toriumi"],place:{city:"浜松",country:"日本",x:844,y:137},
   title:"YouTubeでの偽情報を発信するユーザの特徴分析",
   note:"地震動画と人工地震動画を比較し、投稿者・視聴者の重なりと偽情報コミュニティの特徴を分析した。DOI: 10.11517/pjsai.JSAI2024.0_2I4OS1b01",
   links:["J-STAGE","DOI"]},
- {id:"p2",year:2024,venue:"ABCSS2024 (co-located with IEEE Big Data 2024)",short:"ABCSS",kind:"International Workshop Presentation",pubType:"workshop",state:"accepted",theme:"ネットワーク分析",oral:false,format:"workshop",cites:null,authors:"Koki Ota and Fujio Toriumi",citation:"Koki Ota and Fujio Toriumi, “Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube,” ABCSS2024 (workshop co-located with IEEE Big Data 2024), 2024.",authorKeys:["ota","toriumi"],place:{city:"Washington, D.C.",country:"USA",x:247,y:158},
+ {id:"p2",year:2024,venue:"ABCSS2024 (co-located with IEEE Big Data 2024)",short:"ABCSS",kind:"International Workshop Presentation",pubType:"workshop",state:"accepted",theme:"ネットワーク分析",oral:false,format:"workshop",cites:null,authors:"Koki Ota and Fujio Toriumi",citation:"Koki Ota and Fujio Toriumi, “Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube,” ABCSS2024 (workshop co-located with IEEE Big Data 2024), 2024.",authorKeys:["ota","toriumi"],place:{city:"Washington, D.C.",country:"USA",x:308,y:130},
   title:"Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube",
   note:"YouTube上の陰謀論コミュニティ検出について、ネットワークベース手法とNLPベース手法を比較評価した。pp. 3042–3050。",
   links:["IEEE","DBLP"]},
- {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",pubType:"domestic",state:"accepted",theme:"陰謀論",oral:false,format:"presentation",cites:null,authors:"太田光紀・中条雅貴・鳥海不二夫",citation:"太田光紀・中条雅貴・鳥海不二夫「陰謀論動画における受発信ユーザーの行動分析」第37回社会システム部会研究会, 2025。",authorKeys:["ota","chujyo","toriumi"],place:{city:"石垣島",country:"日本",x:810,y:202},
+ {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",pubType:"domestic",state:"accepted",theme:"陰謀論",oral:false,format:"presentation",cites:null,authors:"太田光紀・中条雅貴・鳥海不二夫",citation:"太田光紀・中条雅貴・鳥海不二夫「陰謀論動画における受発信ユーザーの行動分析」第37回社会システム部会研究会, 2025。",authorKeys:["ota","chujyo","toriumi"],place:{city:"石垣島",country:"日本",x:811,y:157},
   title:"陰謀論動画における受発信ユーザーの行動分析",
   note:"陰謀論動画をめぐる発信者と受信者の行動を、ネットワークと動画・コメントの関係から分析した。",
   links:["プログラム"]},
- {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Pathways to Conspiracy Theorizing on YouTube in Japan,” ICWSM 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Copenhagen",country:"Denmark",x:520,y:104},
+ {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Pathways to Conspiracy Theorizing on YouTube in Japan,” ICWSM 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Copenhagen",country:"Denmark",x:532,y:98},
   title:"Pathways to Conspiracy Theorizing on YouTube in Japan",
   note:"日本のYouTubeチャンネルを、思想的・金銭的動機とエンゲージメントで分類。収益化された陰謀論チャンネルが、視聴者をより極端な内容へ導く経路を分析した。pp. 2635–2641。",
   links:["AAAI","PDF"]},
- {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Exploring the Trajectory to Conspiracy Theories on YouTube in Japan,” IC2S2 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Norrköping",country:"Sweden",x:537,y:88},
+ {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Exploring the Trajectory to Conspiracy Theories on YouTube in Japan,” IC2S2 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Norrköping",country:"Sweden",x:541,y:93},
   title:"Exploring the Trajectory to Conspiracy Theories on YouTube in Japan",
   note:"Koki Ota, Masaki Chujyo, Fujio Toriumi。#207 / Poster ID: 25。2021年4月〜2024年9月のYouTube Data APIデータを用い、ワクチン関連チャンネルの分類と、投稿者・視聴者が陰謀論へ進む経路を分析した。",
   links:["IC2S2","Poster #207"]},
- {id:"p6",year:2026,venue:"76th Annual International Communication Association Conference",short:"ICA",kind:"International Conference (Co-authored)",pubType:"international",state:"accepted",theme:"政治",oral:false,format:"presentation",coauthor:true,cites:null,authors:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi",citation:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi, “Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’,” 76th Annual International Communication Association Conference, Cape Town, 2026. [Co-authored work]",authorKeys:["lim","ota","chujyo","tanaka","toriumi","park","ohki","ishibashi"],place:{city:"Cape Town",country:"South Africa",x:548,y:301},
+ {id:"p6",year:2026,venue:"76th Annual International Communication Association Conference",short:"ICA",kind:"International Conference (Co-authored)",pubType:"international",state:"accepted",theme:"政治",oral:false,format:"presentation",coauthor:true,cites:null,authors:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi",citation:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi, “Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’,” 76th Annual International Communication Association Conference, Cape Town, 2026. [Co-authored work]",authorKeys:["lim","ota","chujyo","tanaka","toriumi","park","ohki","ishibashi"],place:{city:"Cape Town",country:"South Africa",x:546,y:264},
   title:"Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’",
   note:"韓国の憲政危機における右派言説のハイブリッド・メディア動態を扱う共同研究。Koki Otaは第2著者で、主著ではない。",
   links:["ICA 2026","Public record"]}
 ];
+const PAPER_MONTH={p1:5,p2:12,p3:3,p4:6,p5:7,p6:6};
+PAPERS.forEach(p=>p.month=PAPER_MONTH[p.id]||1);
 const LINEAGE=[["p3","p4"],["p4","p5"],["p3","p5"],["p1","p3"]];
 const SUBMIT={};
 const VERSIONS={};
@@ -961,7 +963,7 @@ const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.par
 const ST={RENDER:"settle",frag:new Set(LS.get(KEY.frag,[])),ach:new Set(LS.get(KEY.ach,[])),
   choice:LS.get(KEY.choice,null),theme:LS.get(KEY.theme,null),
   ncr:LS.get(KEY.ncr,0),ncr2:LS.get(KEY.ncr2,0),seen:new Set(LS.get(KEY.seen,[])),sub:LS.get(KEY.sub,false),
-  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2026,t:0,now:new Date(),
+  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2026+11/12,t:0,now:new Date(),
   playing:false,playTimer:null,
   inlineWrite:false,inkInit:false,game:{sent:0,scores:[],rows:[],draft:{},final:false},
   msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,mapMode:"cluster",gap:null,gapLabel:"初回"};
@@ -997,6 +999,9 @@ document.querySelectorAll("[data-secret-nav]").forEach(link=>{
 const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
 const paper=id=>PAPERS.find(p=>p.id===id);
 const colorOf=t=>THEME_COLOR[t]||"#888";
+const START_YEAR=2023,END_TIME=2026+11/12;
+const paperTime=p=>p.year+(p.month-1)/12;
+const asofLabel=t=>{const y=Math.floor(t),m=Math.round((t-y)*12)+1;return y+"."+String(m).padStart(2,"0")};
 const DAYS=()=>0;
 const REDUCED=()=>ST.motion==="off"||(ST.motion!=="on"&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 const TOTAL_PUBLISHED=PAPERS.filter(p=>p.state!=="review").length;
@@ -1130,26 +1135,12 @@ function renderWorldMap(svg){
   [-2,-1,0,1,2].forEach(i=>radar.appendChild(svgEl("path",{class:"world-grid",d:"M48 "+(207+i*56)+" Q500 "+(207+i*70)+" 952 "+(207+i*56)})));
   [-2,-1,0,1,2].forEach(i=>radar.appendChild(svgEl("path",{class:"world-grid",d:"M"+(500+i*148)+" 40 Q"+(500+i*90)+" 207 "+(500+i*148)+" 374"})));
   svg.appendChild(radar);
-  const land=svgEl("g");
-  [
-   "M61 106 L82 83 L116 70 L150 72 L174 62 L211 68 L229 82 L265 86 L292 104 L303 124 L289 143 L263 147 L245 162 L219 169 L201 187 L177 181 L164 165 L137 161 L123 143 L92 137 L74 121 Z",
-   "M253 191 L276 196 L294 214 L302 239 L296 265 L285 286 L277 315 L259 343 L247 327 L242 296 L228 274 L220 246 L228 218 Z",
-   "M330 66 L353 51 L378 57 L385 78 L371 96 L346 94 Z",
-   "M425 105 L449 88 L477 84 L497 96 L514 91 L531 100 L548 94 L568 102 L593 92 L625 95 L650 87 L688 95 L713 108 L750 111 L779 126 L807 133 L829 150 L824 170 L800 175 L780 164 L755 171 L732 164 L709 178 L681 171 L653 183 L625 174 L605 184 L578 174 L555 181 L531 169 L509 174 L493 159 L469 157 L455 143 L434 139 L420 122 Z",
-   "M493 174 L519 167 L545 175 L563 195 L568 222 L558 248 L550 276 L530 306 L511 291 L501 265 L488 244 L483 215 L476 193 Z",
-   "M811 265 L838 252 L873 255 L896 270 L904 291 L886 309 L854 315 L824 305 L807 286 Z",
-   "M838 130 L847 126 L854 132 L850 140 L841 140 Z",
-   "M849 142 C846 148 847 153 842 158 C838 162 837 169 831 173 L826 170 C831 165 831 159 836 156 C839 151 839 146 844 141 Z",
-   "M824 174 L832 174 L835 178 L827 181 L821 179 Z",
-   "M814 179 L821 183 L818 191 L811 195 L806 190 L808 183 Z",
-   "M800 198 l-3 3 M790 205 l-3 3 M781 212 l-3 3"
-  ].forEach(d=>land.appendChild(svgEl("path",{class:"world-land",d:d})));
-  svg.appendChild(land);
-  [[112,190,"NORTH AMERICA"],[456,76,"EUROPE"],[493,329,"AFRICA"],[858,118,"JAPAN"],[829,334,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
+  svg.appendChild(svgEl("image",{href:"assets/world-land.svg",x:0,y:0,width:W,height:AXIS_Y,preserveAspectRatio:"none",opacity:".92"}));
+  [[111,193,"NORTH AMERICA"],[466,92,"EUROPE"],[505,326,"AFRICA"],[850,126,"JAPAN"],[831,337,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
   const title=svgEl("text",{class:"world-title",x:28,y:30});title.textContent="PRESENTATION RADAR / 2024 — 2026";svg.appendChild(title);
   const pins=svgEl("g");
   const offsets={p1:[14,-8,"start"],p3:[14,18,"start"],p4:[-12,19,"end"],p5:[12,-12,"start"],p6:[13,4,"start"]};
-  PAPERS.filter(p=>!(ST.asof<p.year)).forEach(p=>{
+  PAPERS.filter(p=>!(ST.asof<paperTime(p))).forEach(p=>{
     const q=p.place, g=svgEl("g",{class:"place-pin",tabindex:"0",role:"button"});
     g.style.color=colorOf(p.theme);g.setAttribute("aria-label",p.title+" / "+q.city);
     g.appendChild(svgEl("circle",{class:"pin-halo",cx:q.x,cy:q.y,r:14}));
@@ -1167,7 +1158,7 @@ function renderAtlas(seed){
   if(ST.mapMode==="places"){
     renderWorldMap(svg);svg.setAttribute("data-mode","places");svg.setAttribute("aria-label","2023年から2026年までの発表地を示す世界地図");
     ST.msText=REDUCED()?"static":String(Math.round(performance.now()-t0));
-    E("mapnote").innerHTML='<b>'+PAPERS.filter(p=>!(ST.asof<p.year)).length+'</b> 件の発表地 · 日本 / 北米 / 欧州 / アフリカ';
+    E("mapnote").innerHTML='<b>'+PAPERS.filter(p=>!(ST.asof<paperTime(p))).length+'</b> 件の発表地 · 日本 / 北米 / 欧州 / アフリカ';
     renderYearBars();updateChips();return;
   }
   svg.setAttribute("aria-label","2023年から2026年までの研究業績をテーマ別に配置した地図");
@@ -1211,7 +1202,7 @@ function renderAtlas(seed){
   const ng=g("g");svg.appendChild(ng);
   const curYear=ST.asof;
   nodes.forEach(n=>{
-    const p=n.p,ghost=p.year>curYear,dim=(ST.theme&&p.theme!==ST.theme)||(p.year>curYear);
+    const p=n.p,ghost=paperTime(p)>curYear,dim=(ST.theme&&p.theme!==ST.theme)||(paperTime(p)>curYear);
     const cls="node"+(ghost?" ghost":"")+(dim?" dim":"")
       +((p.cites||0)>=50?" glow":"")+((p.year>=2024&&!ghost)?" pulse":"");
     const gn=g("g");gn.setAttribute("class",cls);gn.style.color=colorOf(p.theme);
@@ -1264,8 +1255,8 @@ function renderNote(){
   if(ST.metro){
     el.innerHTML='<span style="color:var(--accent)">METRIC</span> 描画 '+ms+"ms · "+lin+
       " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日";
-  }else if(ST.asof<2026){
-    el.innerHTML=lin+" · "+ST.asof+" 年までの部分グラフ · 描画 "+ms+"ms";
+  }else if(ST.asof<END_TIME){
+    el.innerHTML=lin+" · "+asofLabel(ST.asof)+" までの部分グラフ · 描画 "+ms+"ms";
   }else{
     el.innerHTML=lin+" · 描画 "+ms+"ms";
   }
@@ -1274,11 +1265,11 @@ function renderNote(){
 function renderYearBars(){
   const box=E("ybars");if(!box)return;
   box.innerHTML="";
-  for(let y=2023;y<=2026;y++){
+  for(let idx=0;idx<48;idx++){
     const i=document.createElement("i");
-    const inYear=PAPERS.filter(p=>p.year===y);
-    if(y<=ST.asof)i.className="on";
-    if(inYear.some(p=>p.state==="review"))i.className+=" rev";
+    const t=START_YEAR+idx/12,inMonth=PAPERS.filter(p=>Math.abs(paperTime(p)-t)<.001);
+    if(t<=ST.asof)i.className="on";
+    if(inMonth.some(p=>p.state==="review"))i.className+=" rev";
     box.appendChild(i);
   }
 }
@@ -1346,7 +1337,7 @@ function updateChips(){
   const box=E("chips");box.innerHTML="";
   BANDS.forEach(b=>{const c=document.createElement("button");c.className="chip";c.type="button";
     c.setAttribute("aria-pressed",ST.theme===b?"true":"false");
-    const n=PAPERS.filter(p=>p.theme===b&&!(ST.asof<p.year)).length;
+    const n=PAPERS.filter(p=>p.theme===b&&!(ST.asof<paperTime(p))).length;
     c.innerHTML=b+'<span class="n">'+n+"</span>";
     c.onclick=()=>{ST.theme=ST.theme===b?null:b;LS.set(KEY.theme,ST.theme);renderAtlas();renderPapers();
       if(ST.theme===b)toast("絞り込み — "+b)}
@@ -1370,7 +1361,7 @@ function renderFilters(){
 function linkCount(id){return LINEAGE.filter(([a,b])=>a===id||b===id).length}
 function renderPapers(){
   const box=E("papers");box.innerHTML="";
-  const list=PAPERS.filter(p=>(curFilter==="all"||p.pubType===curFilter)&&(!ST.theme||p.theme===ST.theme)&&!(ST.asof<p.year));
+  const list=PAPERS.filter(p=>(curFilter==="all"||p.pubType===curFilter)&&(!ST.theme||p.theme===ST.theme)&&!(ST.asof<paperTime(p)));
   const sorted=list.slice().sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
   const totalCites=list.reduce((a,p)=>a+(p.cites||0),0);
   E("filterstate").textContent=list.length+" uploads"+(ST.theme?" · "+ST.theme:"");
@@ -1471,14 +1462,14 @@ window.addEventListener("scroll",()=>{
 
 /* AS OF */
 E("asof").addEventListener("input",e=>{
-  ST.asof=parseInt(e.target.value,10);LS.set(KEY.asof,ST.asof);
-  const n=PAPERS.filter(p=>p.year<=ST.asof).length;
-  E("asofval").textContent=ST.asof+" — "+(ST.asof===2026?"全 6 本":n+" 本");
+  const idx=parseInt(e.target.value,10);ST.asof=START_YEAR+idx/12;LS.set(KEY.asof,ST.asof);
+  const n=PAPERS.filter(p=>paperTime(p)<=ST.asof).length;
+  E("asofval").textContent=asofLabel(ST.asof)+" — "+(idx===47?"全 6 本":n+" 本");
   renderNote();
-  if(ST.asof<2026){unlock("back")}
+  if(ST.asof<END_TIME){unlock("back")}
   renderAtlas();renderPapers();
 });
-E("asofreset").onclick=()=>{E("asof").value=2026;E("asof").dispatchEvent(new Event("input"))};
+E("asofreset").onclick=()=>{E("asof").value=47;E("asof").dispatchEvent(new Event("input"))};
 if(E("btnRelayout"))E("btnRelayout").onclick=()=>relayout();
 function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);unlock("relayout");toast("配置を作り直しました","seed "+ST.seed)}
 
@@ -1615,15 +1606,15 @@ function toggleMetric(){
 function playTimeline(){
   if(ST.playing)return;ST.playing=true;
   unlock("replay");
-  const el=E("asof");let y=2023;
-  el.value=y;el.dispatchEvent(new Event("input"));
-  toast("PLAY — 2023 年から順にたどります","esc で止まります");
+  const el=E("asof");let idx=0;
+  el.value=idx;el.dispatchEvent(new Event("input"));
+  toast("PLAY — 2023.01 から月単位でたどります","約 6 秒 · esc で止まります");
   ST.playTimer=setInterval(()=>{
-    y++;
-    if(y>2026){clearInterval(ST.playTimer);ST.playing=false;el.value=2026;el.dispatchEvent(new Event("input"));
-      unlock("replay");toast("最後まで来ました — 2026 年、全 6 本");return}
-    el.value=y;el.dispatchEvent(new Event("input"));
-  },900);
+    idx++;
+    if(idx>47){clearInterval(ST.playTimer);ST.playing=false;el.value=47;el.dispatchEvent(new Event("input"));
+      unlock("replay");toast("最後まで来ました — 2026.12、全 6 本");return}
+    el.value=idx;el.dispatchEvent(new Event("input"));
+  },125);
 }
 function stopPlay(){if(ST.playTimer)clearInterval(ST.playTimer);ST.playTimer=null;ST.playing=false}
 
@@ -1672,7 +1663,7 @@ function renderTerm(){
   if(ST.sub)L.push("チャンネル登録: 済み（送信 0 bytes — どこにも届きません）");
   L.push("断片 "+ST.frag.size+" / 4"+(!ST.frag.size?" — なし":""));
   if(ST.theme)L.push("絞り込み中: "+ST.theme);
-  if(ST.asof<2026)L.push("AS OF "+ST.asof+" に戻っています");
+  if(ST.asof<END_TIME)L.push("AS OF "+asofLabel(ST.asof)+" に戻っています");
   if(hourState()==="deep")L.push("深夜です。端末の輝度を落としています。");
   L.push("");
   if(ST.frag.size){L.push("— 集めた断片 —");
@@ -1943,7 +1934,7 @@ const FRAG={
 function catLine(){
   const h=hourState(),c=[];
   if(ST.theme)c.push("いまは「"+ST.theme+"」だけ見ています。絞り込むと、ネットワークが少し静かになります。");
-  if(ST.asof<2026)c.push(ST.asof+" 年までの部分グラフです。まだ "+PAPERS.filter(p=>p.year>ST.asof).length+" 本ぶんの空きがあります。");
+  if(ST.asof<END_TIME)c.push(asofLabel(ST.asof)+" までの部分グラフです。まだ "+PAPERS.filter(p=>paperTime(p)>ST.asof).length+" 本ぶんの空きがあります。");
   if(ST.frag.size>=2&&!hasChain())c.push("断片が "+ST.frag.size+" 本。集めた断片は、この部屋の端末に溜まります。");
   if(hasChain())c.push("糸はつながりましたね。まだ返事は 1 つだけです。");
   if(ST.sub)c.push("登録ありがとうございます。どこにも送っていません。");
