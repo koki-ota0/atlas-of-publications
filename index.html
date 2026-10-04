@@ -121,7 +121,6 @@ section.atlas{padding:38px 0 8px}
 #mapsvg .radar-ring{fill:none;stroke:color-mix(in srgb,var(--accent2) 28%,transparent);stroke-width:1;opacity:.58}
 #mapsvg .radar-axis{fill:none;stroke:color-mix(in srgb,var(--accent2) 20%,transparent);stroke-width:1;stroke-dasharray:3 7;opacity:.62}
 #mapsvg .radar-sweep{fill:color-mix(in srgb,var(--accent2) 9%,transparent);stroke:color-mix(in srgb,var(--accent2) 34%,transparent);stroke-width:1;opacity:.7}
-#mapsvg .world-japan{fill:none;stroke:color-mix(in srgb,var(--accent) 84%,var(--ink));stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 #mapsvg .world-label{fill:color-mix(in srgb,var(--muted) 82%,transparent);font-family:var(--mono);font-size:8px;letter-spacing:.16em}
 #mapsvg .world-title{fill:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.12em}
 #mapsvg .place-pin{cursor:pointer}
@@ -883,27 +882,27 @@ body.playful-mode #playful-site{display:block}
 const BANDS=["偽情報","陰謀論","ネットワーク分析","政治"];
 const THEME_COLOR={"偽情報":"#ff6b6b","陰謀論":"#9aa7ff","ネットワーク分析":"#6fd2c0","政治":"#f2b36d"};
 const PAPERS=[
- {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",pubType:"domestic",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,authors:"太田光紀・鳥海不二夫",citation:"太田光紀・鳥海不二夫「YouTubeでの偽情報を発信するユーザの特徴分析」2024年度人工知能学会全国大会, 2024。",authorKeys:["ota","toriumi"],place:{city:"浜松",country:"日本",x:816,y:224},
+ {id:"p1",year:2024,venue:"2024年度人工知能学会全国大会",short:"JSAI",kind:"国内学会（大会発表）",pubType:"domestic",state:"accepted",theme:"偽情報",oral:false,format:"presentation",cites:null,authors:"太田光紀・鳥海不二夫",citation:"太田光紀・鳥海不二夫「YouTubeでの偽情報を発信するユーザの特徴分析」2024年度人工知能学会全国大会, 2024。",authorKeys:["ota","toriumi"],place:{city:"浜松",country:"日本",x:849,y:157},
   title:"YouTubeでの偽情報を発信するユーザの特徴分析",
   note:"地震動画と人工地震動画を比較し、投稿者・視聴者の重なりと偽情報コミュニティの特徴を分析した。DOI: 10.11517/pjsai.JSAI2024.0_2I4OS1b01",
   links:["J-STAGE","DOI"]},
- {id:"p2",year:2024,venue:"ABCSS2024 (co-located with IEEE Big Data 2024)",short:"ABCSS",kind:"International Workshop Presentation",pubType:"workshop",state:"accepted",theme:"ネットワーク分析",oral:false,format:"workshop",cites:null,authors:"Koki Ota and Fujio Toriumi",citation:"Koki Ota and Fujio Toriumi, “Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube,” ABCSS2024 (workshop co-located with IEEE Big Data 2024), 2024.",authorKeys:["ota","toriumi"],place:{city:"Washington, D.C.",country:"USA",x:212,y:176},
+ {id:"p2",year:2024,venue:"ABCSS2024 (co-located with IEEE Big Data 2024)",short:"ABCSS",kind:"International Workshop Presentation",pubType:"workshop",state:"accepted",theme:"ネットワーク分析",oral:false,format:"workshop",cites:null,authors:"Koki Ota and Fujio Toriumi",citation:"Koki Ota and Fujio Toriumi, “Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube,” ABCSS2024 (workshop co-located with IEEE Big Data 2024), 2024.",authorKeys:["ota","toriumi"],place:{city:"Washington, D.C.",country:"USA",x:247,y:158},
   title:"Comparative Evaluation of Network-Based and NLP-Based Methods for Detecting Conspiracy Theory Communities on YouTube",
   note:"YouTube上の陰謀論コミュニティ検出について、ネットワークベース手法とNLPベース手法を比較評価した。pp. 3042–3050。",
   links:["IEEE","DBLP"]},
- {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",pubType:"domestic",state:"accepted",theme:"陰謀論",oral:false,format:"presentation",cites:null,authors:"太田光紀・中条雅貴・鳥海不二夫",citation:"太田光紀・中条雅貴・鳥海不二夫「陰謀論動画における受発信ユーザーの行動分析」第37回社会システム部会研究会, 2025。",authorKeys:["ota","chujyo","toriumi"],place:{city:"石垣島",country:"日本",x:842,y:242},
+ {id:"p3",year:2025,venue:"第37回社会システム部会研究会",short:"SocSys",kind:"国内研究会（発表）",pubType:"domestic",state:"accepted",theme:"陰謀論",oral:false,format:"presentation",cites:null,authors:"太田光紀・中条雅貴・鳥海不二夫",citation:"太田光紀・中条雅貴・鳥海不二夫「陰謀論動画における受発信ユーザーの行動分析」第37回社会システム部会研究会, 2025。",authorKeys:["ota","chujyo","toriumi"],place:{city:"石垣島",country:"日本",x:810,y:202},
   title:"陰謀論動画における受発信ユーザーの行動分析",
   note:"陰謀論動画をめぐる発信者と受信者の行動を、ネットワークと動画・コメントの関係から分析した。",
   links:["プログラム"]},
- {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Pathways to Conspiracy Theorizing on YouTube in Japan,” ICWSM 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Copenhagen",country:"Denmark",x:507,y:124},
+ {id:"p4",year:2025,venue:"ICWSM 2025",short:"ICWSM",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Pathways to Conspiracy Theorizing on YouTube in Japan,” ICWSM 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Copenhagen",country:"Denmark",x:520,y:104},
   title:"Pathways to Conspiracy Theorizing on YouTube in Japan",
   note:"日本のYouTubeチャンネルを、思想的・金銭的動機とエンゲージメントで分類。収益化された陰謀論チャンネルが、視聴者をより極端な内容へ導く経路を分析した。pp. 2635–2641。",
   links:["AAAI","PDF"]},
- {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Exploring the Trajectory to Conspiracy Theories on YouTube in Japan,” IC2S2 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Norrköping",country:"Sweden",x:524,y:107},
+ {id:"p5",year:2025,venue:"IC2S2 2025",short:"IC2S2",kind:"Peer-reviewed International Conference (Poster)",pubType:"international",state:"accepted",theme:"陰謀論",oral:false,format:"poster",cites:null,authors:"Koki Ota, Masaki Chujyo, and Fujio Toriumi",citation:"Koki Ota, Masaki Chujyo, and Fujio Toriumi, “Exploring the Trajectory to Conspiracy Theories on YouTube in Japan,” IC2S2 2025, Poster, 2025.",authorKeys:["ota","chujyo","toriumi"],place:{city:"Norrköping",country:"Sweden",x:537,y:88},
   title:"Exploring the Trajectory to Conspiracy Theories on YouTube in Japan",
   note:"Koki Ota, Masaki Chujyo, Fujio Toriumi。#207 / Poster ID: 25。2021年4月〜2024年9月のYouTube Data APIデータを用い、ワクチン関連チャンネルの分類と、投稿者・視聴者が陰謀論へ進む経路を分析した。",
   links:["IC2S2","Poster #207"]},
- {id:"p6",year:2026,venue:"76th Annual International Communication Association Conference",short:"ICA",kind:"International Conference (Co-authored)",pubType:"international",state:"accepted",theme:"政治",oral:false,format:"presentation",coauthor:true,cites:null,authors:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi",citation:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi, “Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’,” 76th Annual International Communication Association Conference, Cape Town, 2026. [Co-authored work]",authorKeys:["lim","ota","chujyo","tanaka","toriumi","park","ohki","ishibashi"],place:{city:"Cape Town",country:"South Africa",x:584,y:294},
+ {id:"p6",year:2026,venue:"76th Annual International Communication Association Conference",short:"ICA",kind:"International Conference (Co-authored)",pubType:"international",state:"accepted",theme:"政治",oral:false,format:"presentation",coauthor:true,cites:null,authors:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi",citation:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi, “Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’,” 76th Annual International Communication Association Conference, Cape Town, 2026. [Co-authored work]",authorKeys:["lim","ota","chujyo","tanaka","toriumi","park","ohki","ishibashi"],place:{city:"Cape Town",country:"South Africa",x:548,y:301},
   title:"Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’",
   note:"韓国の憲政危機における右派言説のハイブリッド・メディア動態を扱う共同研究。Koki Otaは第2著者で、主著ではない。",
   links:["ICA 2026","Public record"]}
@@ -1132,23 +1131,24 @@ function renderWorldMap(svg){
   [-2,-1,0,1,2].forEach(i=>radar.appendChild(svgEl("path",{class:"world-grid",d:"M"+(500+i*148)+" 40 Q"+(500+i*90)+" 207 "+(500+i*148)+" 374"})));
   svg.appendChild(radar);
   const land=svgEl("g");
-  ["M71 111 C109 66 179 55 245 72 C277 81 309 110 296 137 C284 160 250 154 229 173 C207 194 168 186 146 166 C119 161 84 144 71 111 Z",
-   "M238 190 C277 190 310 218 311 251 C311 286 285 335 258 359 C239 341 242 309 225 283 C209 259 211 215 238 190 Z",
-   "M419 93 C466 55 536 62 576 81 C616 65 684 76 725 104 C765 113 807 137 809 163 C801 184 765 190 728 178 C696 169 670 194 634 185 C605 178 579 196 548 177 C514 174 491 152 463 145 C435 136 407 116 419 93 Z",
-   "M522 181 C558 164 607 181 623 218 C634 255 612 307 584 336 C552 324 538 292 536 258 C529 229 505 199 522 181 Z",
-   "M777 268 C811 243 868 248 899 274 C910 300 881 326 840 327 C802 326 775 307 777 268 Z"].forEach(d=>land.appendChild(svgEl("path",{class:"world-land",d:d})));
+  [
+   "M61 106 L82 83 L116 70 L150 72 L174 62 L211 68 L229 82 L265 86 L292 104 L303 124 L289 143 L263 147 L245 162 L219 169 L201 187 L177 181 L164 165 L137 161 L123 143 L92 137 L74 121 Z",
+   "M253 191 L276 196 L294 214 L302 239 L296 265 L285 286 L277 315 L259 343 L247 327 L242 296 L228 274 L220 246 L228 218 Z",
+   "M330 66 L353 51 L378 57 L385 78 L371 96 L346 94 Z",
+   "M425 105 L449 88 L477 84 L497 96 L514 91 L531 100 L548 94 L568 102 L593 92 L625 95 L650 87 L688 95 L713 108 L750 111 L779 126 L807 133 L829 150 L824 170 L800 175 L780 164 L755 171 L732 164 L709 178 L681 171 L653 183 L625 174 L605 184 L578 174 L555 181 L531 169 L509 174 L493 159 L469 157 L455 143 L434 139 L420 122 Z",
+   "M493 174 L519 167 L545 175 L563 195 L568 222 L558 248 L550 276 L530 306 L511 291 L501 265 L488 244 L483 215 L476 193 Z",
+   "M811 265 L838 252 L873 255 L896 270 L904 291 L886 309 L854 315 L824 305 L807 286 Z",
+   "M838 130 L847 126 L854 132 L850 140 L841 140 Z",
+   "M849 142 C846 148 847 153 842 158 C838 162 837 169 831 173 L826 170 C831 165 831 159 836 156 C839 151 839 146 844 141 Z",
+   "M824 174 L832 174 L835 178 L827 181 L821 179 Z",
+   "M814 179 L821 183 L818 191 L811 195 L806 190 L808 183 Z",
+   "M800 198 l-3 3 M790 205 l-3 3 M781 212 l-3 3"
+  ].forEach(d=>land.appendChild(svgEl("path",{class:"world-land",d:d})));
   svg.appendChild(land);
-  const japan=svgEl("g");
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M842 151 L853 147 L859 153 L854 161 L844 162 L838 157 Z"}));
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M845 166 C841 174 843 181 837 187 C832 192 831 200 824 205 C818 210 815 218 807 221 L802 216 C809 210 810 202 817 198 C823 193 824 185 831 181 C835 175 835 168 840 164 Z"}));
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M808 224 L820 222 L824 227 L816 231 L806 229 Z"}));
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M799 226 L807 232 L804 242 L796 248 L790 241 L793 232 Z"}));
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M786 251 l-3 3 M777 259 l-3 3 M768 267 l-3 3"}));
-  svg.appendChild(japan);
-  [[118,199,"NORTH AMERICA"],[470,76,"EUROPE"],[544,347,"AFRICA"],[864,143,"JAPAN"],[810,342,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
+  [[112,190,"NORTH AMERICA"],[456,76,"EUROPE"],[493,329,"AFRICA"],[858,118,"JAPAN"],[829,334,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
   const title=svgEl("text",{class:"world-title",x:28,y:30});title.textContent="PRESENTATION RADAR / 2024 — 2026";svg.appendChild(title);
   const pins=svgEl("g");
-  const offsets={p1:[-14,-13,"end"],p3:[15,19,"start"],p4:[-12,19,"end"],p5:[12,-12,"start"],p6:[13,4,"start"]};
+  const offsets={p1:[14,-8,"start"],p3:[14,18,"start"],p4:[-12,19,"end"],p5:[12,-12,"start"],p6:[13,4,"start"]};
   PAPERS.filter(p=>!(ST.asof<p.year)).forEach(p=>{
     const q=p.place, g=svgEl("g",{class:"place-pin",tabindex:"0",role:"button"});
     g.style.color=colorOf(p.theme);g.setAttribute("aria-label",p.title+" / "+q.city);
