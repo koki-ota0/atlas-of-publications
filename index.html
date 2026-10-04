@@ -212,16 +212,13 @@ footer.site{margin-top:44px; border-top:1px solid var(--line); padding:26px 0 60
 footer.site .cols{display:grid; grid-template-columns:1fr 1fr; gap:30px; font-size:12.5px; color:var(--ink2)}
 footer.site h4{margin:0 0 8px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; font-weight:500}
 footer.site p{margin:0 0 8px}
-.catline{display:flex; align-items:center; gap:12px; margin-top:18px; color:var(--muted)}
-#catbtn{color:var(--muted); opacity:.55; transition:opacity .2s}
-#catbtn:hover{opacity:1; color:var(--ink2)}
-.catnote{font-size:10.5px; letter-spacing:.08em}
 #doordock{position:fixed; right:14px; bottom:14px; z-index:60}
-#doordock button{width:30px;height:38px; border:1px solid var(--line2); border-radius:2px 2px 1px 1px; opacity:.30;
-  background:var(--panel); color:var(--muted); transition:opacity .2s, border-color .2s; display:block}
-#doordock button:hover{opacity:1; border-color:var(--accent); color:var(--ink2)}
+#doordock button{width:36px;height:46px; border:1px solid var(--accent); border-radius:3px 3px 1px 1px;
+  background:var(--panel); color:var(--ink2); transition:transform .2s,box-shadow .2s; display:grid;place-items:center;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent),0 10px 28px rgba(0,0,0,.3)}
+#doordock button:hover{transform:translateY(-2px);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 20%,transparent),0 13px 32px rgba(0,0,0,.38)}
 #doordock button i{display:block; width:2px;height:2px;border-radius:50%;background:currentColor;margin:0 0 0 20px;transform:translateY(19px)}
-@media print{#doordock,#catdock,.catline,#maphint{display:none!important}}
+@media print{#doordock,.secret-bird,#maphint{display:none!important}}
 footer.site .fine{margin-top:26px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
   font-family:var(--mono); font-size:11px; color:var(--muted)}
 
@@ -259,33 +256,16 @@ footer.site .fine{margin-top:26px; display:flex; justify-content:space-between; 
 #palette li.sel .lb{color:var(--ink)}
 #palette footer{padding:10px 18px; border-top:1px solid var(--line); font-family:var(--mono); font-size:10.5px; color:var(--muted); display:flex; justify-content:space-between}
 
-/* achievements panel (inside palette footer area / separate) */
-.achline{display:flex; gap:8px; flex-wrap:wrap; font-family:var(--mono); font-size:10.5px; color:var(--muted); padding:9px 18px; border-top:1px solid var(--line)}
-.achline .a{color:var(--ink2); border:1px solid var(--line2); border-radius:999px; padding:1px 8px}
-.achline .a.off{opacity:.5}
-
 /* room */
-#room .room{position:absolute; inset:0; display:grid; grid-template-columns:220px 1fr 300px; grid-template-rows:52px 1fr 40px;
-  background:var(--panel); color:var(--ink)}
-#room .rhead{grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 20px; border-bottom:1px solid var(--line)}
-#room .rhead .t{font-family:var(--mono); font-size:12px; letter-spacing:.2em; color:var(--ink2)}
-#room .rhead .right{display:flex; gap:12px; align-items:center; font-family:var(--mono); font-size:11px; color:var(--muted)}
-#room .lamp{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 10px var(--accent)}
-#room .rnav{border-right:1px solid var(--line); padding:14px 10px; display:flex; flex-direction:column; gap:4px}
-#room .rnav button{text-align:left; font-family:var(--mono); font-size:12.5px; color:var(--ink2); padding:8px 11px; border-radius:var(--r); line-height:1.5;
-  display:grid; grid-template-columns:22px 1fr; gap:8px; align-items:baseline}
-#room .rnav button .d{color:var(--accent2); font-size:11px}
-#room .rnav button:hover{background:var(--panel2)}
-#room .rnav button[aria-current="true"]{background:var(--panel2); color:var(--ink); box-shadow:inset 2px 0 0 var(--accent)}
-#room .rbody{overflow:auto; padding:24px 30px 60px}
+#room{padding:clamp(14px,4vw,48px);overflow:auto}
+#room .secret-room-shell{width:min(760px,100%);margin:min(8vh,64px) auto;background:var(--panel);color:var(--ink);
+  border:1px solid var(--line2);border-radius:10px;box-shadow:0 28px 90px rgba(0,0,0,.48);overflow:hidden;animation:pop .2s ease}
+#room .secret-room-head{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 22px;border-bottom:1px solid var(--line)}
+#room .secret-room-kicker{font:10px/1.2 var(--mono);letter-spacing:.2em;color:var(--accent2);display:block;margin-bottom:5px}
+#room .secret-room-head h2{font-size:18px;margin:0}
+#room .rbody{overflow:auto;padding:24px 26px 34px;max-height:calc(100vh - 190px)}
 #room .rbody h3{font-size:16px; margin-bottom:6px}
 #room .rbody .lead{color:var(--muted); font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; margin-bottom:18px}
-#room .rterm{border-left:1px solid var(--line); background:var(--panel2); padding:16px 18px; overflow:auto; font-family:var(--mono); font-size:11.5px; line-height:1.85; color:var(--ink2)}
-#room .rterm .cursor{display:inline-block;width:7px;height:12px;background:var(--accent);vertical-align:-1px;animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-#room .rfoot{grid-column:1/-1; border-top:1px solid var(--line); display:flex; align-items:center; padding:0 20px; gap:18px; font-family:var(--mono); font-size:10.5px; color:var(--muted)}
-#room .rfoot .frag{margin-left:auto; letter-spacing:.1em}
-#room .rfoot .frag b{color:var(--accent2); font-weight:500}
 .inviewbox{width:34px;height:34px;border:1px solid var(--line2);border-radius:50%;display:flex;align-items:center;justify-content:center;
   font-family:var(--mono); font-size:10px; color:var(--muted); margin:0 auto 14px}
 
@@ -331,43 +311,6 @@ footer.site .fine{margin-top:26px; display:flex; justify-content:space-between; 
 .btn{border:1px solid var(--line2); border-radius:var(--r); padding:7px 14px; font-family:var(--mono); font-size:12px; color:var(--ink2)}
 .btn:hover{border-color:var(--accent); color:var(--ink)}
 .btn.primary{border-color:var(--accent); color:var(--ink); background:color-mix(in srgb,var(--accent) 10%,transparent)}
-
-/* experiments */
-.xlist{list-style:none; margin:0; padding:0; border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
-.xlist li{display:grid; grid-template-columns:74px 1fr 92px; gap:14px; padding:9px 13px; border-bottom:1px solid var(--line);
-  cursor:pointer; font-family:var(--mono); font-size:11.5px; color:var(--ink2); align-items:center}
-.xlist li:last-child{border-bottom:0}
-.xlist li:hover{background:var(--panel2)}
-.xlist li[aria-current="true"]{background:var(--panel2); box-shadow:inset 2px 0 0 var(--accent2); color:var(--ink)}
-.xlist .rid{color:var(--accent2)}
-.xlist .shape{color:var(--ink)}
-.xlist .out{color:var(--muted); text-align:right; font-size:10.5px}
-.xchart{margin:16px 0 6px; border:1px solid var(--line); border-radius:var(--r); background:var(--panel2); padding:8px}
-.xchart svg{display:block; width:100%; height:auto}
-.xchart .ax{stroke:var(--line2); stroke-width:1}
-.xchart .curve{fill:none; stroke:var(--accent); stroke-width:1.4}
-.xchart .tick{font-family:var(--mono); font-size:9px; fill:var(--muted)}
-.xnote{font-size:13px; color:var(--ink2); border-left:2px solid var(--line2); padding-left:14px; margin-top:14px}
-.xnote b{color:var(--ink); font-weight:600}
-.xmsg{margin-top:16px; border:1px solid var(--line2); border-left:2px solid var(--accent2); padding:12px 15px; font-size:13px; color:var(--ink2);
-  background:var(--panel2); border-radius:var(--r)}
-.xmsg .s1{color:var(--accent2)}
-
-/* history / versions */
-.histpaper{border:1px solid var(--line); border-radius:var(--r); margin-bottom:14px; overflow:hidden}
-.histpaper>button.h{width:100%; text-align:left; padding:13px 16px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:baseline}
-.histpaper>button.h:hover{background:var(--panel2)}
-.histpaper .ht{font-size:14px; font-weight:600}
-.histpaper .hm{font-family:var(--mono); font-size:11px; color:var(--muted)}
-.histpaper .steps{border-top:1px solid var(--line); padding:6px 16px 14px}
-.histpaper .steps li{font-size:13px; color:var(--ink2); margin:10px 0; display:grid; grid-template-columns:96px 1fr; gap:14px}
-.histpaper .steps li .d{font-family:var(--mono); font-size:10.5px; color:var(--muted)}
-.rev{border-left:2px solid var(--danger); padding-left:13px; margin:12px 0 0}
-.rev .q{font-size:13px; color:var(--ink)}
-.rev .a{font-size:12.5px; color:var(--muted); margin-top:5px; font-family:var(--mono)}
-.unresolved{border-left:2px solid var(--accent2); padding:12px 15px; margin-top:14px; font-size:13px; color:var(--ink2); background:var(--panel2)}
-.choice{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
-.choice .picked{font-family:var(--mono); font-size:12px; color:var(--accent); border:1px solid var(--accent); border-radius:var(--r); padding:6px 12px}
 
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
 
@@ -468,8 +411,7 @@ body.about-open{overflow:hidden}
 .profilefacts{border-left:1px solid var(--line2);padding-left:20px;font-family:var(--mono);font-size:11px;color:var(--muted)}
 .profilefacts div{display:flex;justify-content:space-between;gap:18px;padding:7px 0;border-bottom:1px solid var(--line)}
 .profilefacts b{color:var(--ink2);font-weight:400;text-align:right}
-.hidden-cat{position:absolute;right:16px;bottom:9px;color:var(--accent);opacity:.18;font-size:15px;transform:rotate(-12deg);z-index:2;user-select:none}
-.overlap,footer.site,#catdock,.catline{display:none!important}
+.overlap,footer.site{display:none!important}
 .ctabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin-top:20px;padding:0 4px}
 .ctabs button{position:relative;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);padding:11px 1px 10px;border-bottom:2px solid transparent;margin-bottom:-1px}
@@ -516,22 +458,16 @@ body.tab-atlas main.wrap,body.tab-index main.wrap{min-height:60vh}
 #mapsvg .node.pulse .disc{animation:nodetick 3.4s ease-in-out infinite}
 @keyframes nodetick{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* 猫と扉 — 見つけられるように */
-#catdock{position:fixed;right:16px;bottom:62px;z-index:61}
-#catdock>button{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);
-  background:color-mix(in srgb,var(--panel) 92%,transparent);color:var(--ink2);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 22px rgba(0,0,0,.4);transition:transform .18s,border-color .2s,color .2s;opacity:.92}
-#catdock>button:hover{opacity:1;border-color:var(--accent);color:var(--ink)}
-#catdock>button.wig{animation:wig 1.1s ease 2}
-#catdock .badge{position:absolute;right:-3px;top:-3px;background:var(--yt);color:#fff}
-#catdock .lbl{position:absolute;right:54px;bottom:9px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;color:var(--ink2);
-  background:color-mix(in srgb,var(--panel) 95%,transparent);border:1px solid var(--line2);border-radius:3px;padding:3px 9px;
-  opacity:0;transition:opacity .2s;pointer-events:none}
-#catdock>button:hover .lbl{opacity:1}
-@keyframes wig{0%,100%{transform:rotate(0)}30%{transform:rotate(-10deg)}70%{transform:rotate(10deg)}}
-body.keyed #catdock .badge{display:none}
-#doordock button{opacity:.55}
-body.keyed #doordock button{opacity:.92;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
+/* 3 羽の鳥と、鍵で現れる扉 */
+.secret-bird{position:absolute;z-index:12;width:36px;height:36px;display:grid;place-items:center;color:var(--ink2);
+  opacity:.3;border:0;border-radius:50%;background:transparent;transition:opacity .2s,transform .2s,background .2s}
+.secret-bird svg{width:21px;height:21px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+.secret-bird:hover,.secret-bird:focus-visible{opacity:1;transform:translateY(-2px) rotate(-4deg);background:color-mix(in srgb,var(--panel) 72%,transparent);outline:2px solid var(--focus);outline-offset:2px}
+.secret-bird.found{opacity:0;transform:scale(.6);pointer-events:none}
+.bird-banner{right:7%;bottom:7px;color:#dce9f4;opacity:.38}
+.bird-map{left:2.5%;bottom:12%;color:var(--accent2)}
+.index{position:relative}
+.bird-index{right:2%;top:43px;color:var(--muted)}
 #doordock .sign{position:absolute;right:40px;bottom:5px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;color:var(--ink2);
   border:1px solid var(--line2);border-radius:3px;padding:3px 8px;background:color-mix(in srgb,var(--panel) 95%,transparent);
   opacity:0;transition:opacity .2s;pointer-events:none}
@@ -542,14 +478,8 @@ body.no-motion *{animation:none!important;transition:none!important}
    6. responsive
    ============================================================ */
 @media (max-width:900px){
-  #catdock{bottom:56px;right:12px}
   #papers{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #room .room{grid-template-columns:1fr; grid-template-rows:52px 1fr 46px}
-  #room .rnav{grid-row:3; flex-direction:row; border-right:0; border-top:1px solid var(--line); overflow-x:auto; padding:6px}
-  #room .rnav button{grid-template-columns:1fr; white-space:nowrap}
   #room .rbody{padding:18px}
-  #room .rterm{display:none}
-  #room .rfoot{grid-row:4}
   .gwrap{grid-template-columns:1fr}
   .shead{display:block}
   .shead .hint{text-align:left; margin-top:8px}
@@ -686,8 +616,10 @@ body.playful-mode #playful-site{display:block}
 <header class="site">
   <div class="wrap">
     <div class="chan" id="top">
-      <div class="banner" aria-hidden="true">
-        <span id="catbtn" class="hidden-cat" title="猫">⌁</span>
+      <div class="banner">
+        <button class="secret-bird bird-banner" type="button" data-bird="banner" aria-label="バナーに隠れている鳥">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 19c5-1 7-5 9-10 2 4 5 6 10 6-2 2-3 4-3 7l5 3c-7 1-13 0-17-3l-4 1 2-3Z" fill="currentColor"/><circle cx="17.8" cy="12.5" r="1" fill="var(--bg)"/></svg>
+        </button>
       </div>
       <div class="chanrow">
         <div class="avatar" aria-hidden="true"></div>
@@ -734,6 +666,9 @@ body.playful-mode #playful-site{display:block}
         <div id="mapinner">
           <svg id="mapsvg" viewBox="0 0 1000 440" role="img" aria-label="2023年から2026年までの研究業績をテーマ別に配置した地図" tabindex="0"></svg>
         </div>
+        <button class="secret-bird bird-map" type="button" data-bird="map" aria-label="地図に隠れている鳥">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 19c5-1 7-5 9-10 2 4 5 6 10 6-2 2-3 4-3 7l5 3c-7 1-13 0-17-3l-4 1 2-3Z" fill="currentColor"/><circle cx="17.8" cy="12.5" r="1" fill="var(--bg)"/></svg>
+        </button>
         <div id="maptip" role="status" aria-live="polite"></div>
       </div>
     </div>
@@ -752,12 +687,14 @@ body.playful-mode #playful-site{display:block}
       <button class="cbtn" id="asofreset" type="button" data-tip="RESET — 2026.12 に戻る">↺</button>
       <span class="pctl">
         <button class="cbtn" type="button" data-cmd="d" data-tip="紙 / 暗（d）">◐</button>
-        <button class="cbtn" id="p-room" type="button" data-tip="作業用房 — 扉を開く">▦</button>
       </span>
     </div>
   </section>
 
   <section class="index" id="index" aria-label="研究業績一覧">
+    <button class="secret-bird bird-index" type="button" data-bird="index" aria-label="業績一覧に隠れている鳥">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 19c5-1 7-5 9-10 2 4 5 6 10 6-2 2-3 4-3 7l5 3c-7 1-13 0-17-3l-4 1 2-3Z" fill="currentColor"/><circle cx="17.8" cy="12.5" r="1" fill="var(--bg)"/></svg>
+    </button>
     <div class="shead">
       <h2><span class="playmark"></span>INDEX</h2>
       <div class="hint" id="filterstate">全 6 本</div>
@@ -822,8 +759,7 @@ body.playful-mode #playful-site{display:block}
   <div class="box">
     <header><span>COMMANDS</span><span>esc で閉じる</span></header>
     <ul id="cmdlist" role="listbox" aria-label="コマンド"></ul>
-    <div class="achline" id="achline" aria-label="記録"></div>
-    <footer><span>↑↓ で移動 · enter で実行</span><span id="palnote">記録 0 / 15</span></footer>
+    <footer><span>↑↓ で移動 · enter で実行</span><span>esc で閉じる</span></footer>
   </div>
 </div>
 
@@ -834,21 +770,14 @@ body.playful-mode #playful-site{display:block}
   </div>
 </div>
 
-<div class="ovl" id="room" role="dialog" aria-modal="true" aria-label="作業用房">
-  <div class="room">
-    <div class="rhead">
-      <div class="t">作業用房 — BACK ROOM</div>
-      <div class="right"><span id="rclock" class="mono">--:--</span><span class="lamp" id="rlamp"></span><span id="rstate">在室</span>
-        <button class="xclose" id="rclose" type="button">esc</button></div>
-    </div>
-    <nav class="rnav" id="rnav" aria-label="部屋の中身"></nav>
+<div class="ovl" id="room" role="dialog" aria-modal="true" aria-labelledby="roomTitle">
+  <section class="secret-room-shell">
+    <header class="secret-room-head">
+      <div><span class="secret-room-kicker">SECRET ROOM</span><h2 id="roomTitle">注視のゲーム</h2></div>
+      <button class="xclose" id="rclose" type="button" aria-label="隠し部屋を閉じる">esc</button>
+    </header>
     <div class="rbody" id="rbody"></div>
-    <pre class="rterm" id="rterm" aria-label="端末ログ"></pre>
-    <div class="rfoot">
-      <span id="rgoal"></span>
-      <span class="frag" id="rfrag">断片 <b>0</b> / 4</span>
-    </div>
-  </div>
+  </section>
 </div>
 
 <div id="doordock" hidden>
@@ -859,7 +788,7 @@ body.playful-mode #playful-site{display:block}
       <path d="M2 29h20" stroke="currentColor" stroke-width="1.2"/>
     </svg>
   </button>
-  <span class="sign">作業用房 — 入る</span>
+  <span class="sign">隠し部屋 — 入る</span>
 </div>
 
 </div>
@@ -904,25 +833,6 @@ const PAPERS=[
 const PAPER_MONTH={p1:5,p2:12,p3:3,p4:6,p5:7,p6:6};
 PAPERS.forEach(p=>{p.month=PAPER_MONTH[p.id]||1;if(["p1","p2","p3"].includes(p.id))p.oral=true});
 const LINEAGE=[["p3","p4"],["p4","p5"],["p3","p5"],["p1","p3"]];
-const SUBMIT={};
-const VERSIONS={};
-const FAILED=[
- {id:"#0338",cat:"発散",steps:"12,400",out:"12,400 歩で反転。原因不明",
-  note:"推薦モデルの学習で、損失が下がり続けたあと突然反転して、そのまま上がりきった。視聴ログを 1 年分に増やした直後だった。原因は 8 か月たったいまも分かっていない。",
-  msg:"反転した理由は、いまも分かりません。記録だけ残します。"},
- {id:"#0302",cat:"振動",steps:"8,000",out:"同じ seed で 3 回別の結果",
-  note:"同じ seed・同じ設定で 3 回回して、3 回とも違う形になった。ログの読み込み順に依存していた。この実験以降、報告する数値はすべて 5 分割の平均にしている。",
-  msg:"再現しない実験を、再現しないまま残しています。"},
- {id:"#0291",cat:"プラトー",steps:"22,000",out:"検証ラベルが 0 だったことに 2 週間気づかず",
-  note:"平坦な検証曲線。ハイパーパラメータを疑って 2 週間つぶした。実際はデータ読み込みで検証ラベルが全部 0 になっていた。虚無を学習していた 2 週間。",
-  msg:"虚無を 2 週間学習していました。平坦な曲線はいまでも疑って見ます。"},
- {id:"#0411",cat:"成功しすぎ",steps:"6,300",out:"検証 loss 0.004 → リーク",
-  note:"検証損失が 0.004 まで下がった。喜んで 2 日後に、学習データと検証データの視聴者が重複していたことに気づいた。作り直して 0.31。そちらが正しい値。",
-  msg:"良すぎる数値は、だいたい間違っています。"},
- {id:"#0399",cat:"NaN",steps:"1,200",out:"attention の softmax。版を 1 つ戻したら動いた",
-  note:"1,200 歩で NaN。原因は attention 内の softmax。ライブラリの版を 1 つ戻したら動いた。理由は説明できない。",
-  msg:"説明できないことのほうが多い。版を戻したら動いた、以上です。"}
-];
 const GAME_SENTENCES=[
  {jp:"猫が机の上で眠っている。",en:"The cat is sleeping on the desk.",
   key:[["猫が",1],["机の上で",4],["眠っている",1]]},
@@ -931,36 +841,15 @@ const GAME_SENTENCES=[
  {jp:"査読者は、実験の再現性についてしか尋ねなかった。",en:"The reviewer asked only about the reproducibility of the experiment.",
   key:[["査読者は",1],["実験の",3],["再現性について",2],["しか",1],["尋ねなかった",4]]}
 ];
-const ACHIEVEMENTS=[
- {id:"curious",name:"好奇心",desc:"? パレットを開く"},
- {id:"key",name:"鍵",desc:"猫を 3 回叩く"},
- {id:"visit",name:"内見",desc:"作業用房に入る"},
- {id:"read",name:"読了",desc:"実験 5 本を読み終える"},
- {id:"cite",name:"引用",desc:"表示中の引用の合計が 100 を超える"},
- {id:"relayout",name:"組み替え",desc:"r で地図を作り直す"},
- {id:"replay",name:"再生",desc:"プレイヤーで年を再生する"},
- {id:"sub",name:"登録",desc:"チャンネルを登録する"},
- {id:"experimenter",name:"実験者",desc:"#0399 の分まで読む"},
- {id:"core",name:"核心",desc:"注視のゲームで 70 以上"},
- {id:"back",name:"さかのぼり",desc:"AS OF で 2023 以前に戻す"},
- {id:"failed",name:"失敗",desc:"失敗した実験を 3 本読む"},
- {id:"night",name:"夜間",desc:"深夜に開く"},
-];
-
 /* ---------- 2. STATE (declared first — TDZ guard) ------------------ */
-const KEY={ach:"atlas-ach",frag:"atlas-frag",choice:"atlas-choice",last:"atlas-last",
-           theme:"atlas-theme",seen:"atlas-seen",ncr:"atlas-ncr",ncr2:"atlas-ncr2",done:"atlas-done",asof:"atlas-asof",
-           sub:"atlas-sub",motion:"atlas-motion"};
+const KEY={theme:"atlas-theme",asof:"atlas-asof",sub:"atlas-sub",motion:"atlas-motion",birds:"atlas-birds-v2"};
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
   del(k){try{localStorage.removeItem(k)}catch(e){}}};
-const ST={RENDER:"settle",frag:new Set(LS.get(KEY.frag,[])),ach:new Set(LS.get(KEY.ach,[])),
-  choice:LS.get(KEY.choice,null),theme:null,
-  ncr:LS.get(KEY.ncr,0),ncr2:LS.get(KEY.ncr2,0),seen:new Set(LS.get(KEY.seen,[])),sub:LS.get(KEY.sub,false),
-  done:new Set(LS.get(KEY.done,[])),last:LS.get(KEY.last,null),asof:2026+11/12,t:0,now:new Date(),
+const ST={RENDER:"settle",theme:null,sub:LS.get(KEY.sub,false),asof:2026+11/12,t:0,now:new Date(),
   playing:false,playTimer:null,
   inlineWrite:false,inkInit:false,game:{sent:0,scores:[],rows:[],draft:{},final:false},
-  msText:"—",xActive:"#0338",histOpen:null,roomTab:"game",room:false,dev:false,metro:false,labels:false,mapMode:"cluster",gap:null,gapLabel:"初回"};
+  msText:"—",room:false,dev:false,metro:false,labels:false,mapMode:"cluster"};
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const E=id=>document.getElementById(id);
 let secretBuffer="";
@@ -996,40 +885,11 @@ const colorOf=t=>THEME_COLOR[t]||"#888";
 const START_YEAR=2023,END_TIME=2026+11/12;
 const paperTime=p=>p.year+(p.month-1)/12;
 const asofLabel=t=>{const y=Math.floor(t),m=Math.round((t-y)*12)+1;return y+"."+String(m).padStart(2,"0")};
-const DAYS=()=>0;
 const REDUCED=()=>ST.motion==="off"||(ST.motion!=="on"&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 const TOTAL_PUBLISHED=PAPERS.filter(p=>p.state!=="review").length;
 const TOTAL_CITES=PAPERS.reduce((a,p)=>a+(p.cites||0),0);
 
 function toast(){}
-function unlocked(){for(const a of ACHIEVEMENTS){if(ST.ach.has(a.id))return true}return false}
-function readFrag(id){if(ST.frag.has(id))return;ST.frag.add(id);LS.set(KEY.frag,[...ST.frag]);syncFrag();
-  toast("断片 +1  —  "+FRAG[id].src,ST.frag.size+" / 4 本目");checkReveal();}
-function revealFrag(){const b=E("fragline");if(b&&!b.textContent.trim()&&hasChain()){b.textContent="投稿から "+DAYS()+" 日";b.hidden=false}}
-function syncFrag(){const n=ST.frag.size;const f=E("rfrag");if(f)f.innerHTML="断片 <b>"+n+"</b> / 4";
-  document.body.dataset.frag=n;revealFrag();}
-function checkReveal(){if(ST.frag.has("a")&&ST.frag.has("c")&&ST.frag.has("d"))openChain();}
-function unlock(a){if(ST.ach.has(a))return;ST.ach.add(a);LS.set(KEY.ach,[...ST.ach]);const d=ACHIEVEMENTS.find(x=>x.id===a);
-  toast("記録 — "+d.name);renderAch();}
-function applyChain(){
-  document.body.dataset.chain="1";
-  const o=E("ovline");
-  if(o){o.hidden=false;o.textContent="↳ 投稿から "+DAYS()+" 日。返事はいまだ 1 つだけです（3 日前ではありません。ずっと待っています）。"}
-  revealFrag();
-  if(ST.done.has("chainrow"))return;
-  ST.done.add("chainrow");LS.set(KEY.done,[...ST.done]);
-  const box=E("papers");if(!box)return;
-  const row=document.createElement("div");row.className="paper";row.id="pc-row";
-  row.innerHTML='<div class="yr"><b>糸</b>'+String(SUBMIT.p10).slice(0,7)+'</div>'+
-    '<div><h3 style="font-weight:500;color:var(--ink2);font-size:15px">査読中 1 本の記録に、投稿から '+DAYS()+
-    " 日の行が 1 つ増えました。</h3>"+
-    '<div class="sub"><span>'+SUBMIT.p10+' 投稿</span><span>返事 1 通</span><span>v3 未送信</span><span>'+DAYS()+
-    ' 日</span></div></div><div class="aside"><span class="cites">'+DAYS()+' 日</span></div>';
-  box.appendChild(row);
-}
-function openChain(){if(ST.done.has("l3"))return;ST.done.add("l3");LS.set(KEY.done,[...ST.done]);
-  toast("回収 — 糸がつながりました");applyChain();renderAtlas();
-  if(ST.room)renderRoom();}
 
 /* ---------- 3. ATLAS ---------------------------------------------- */
 const W=1000,H=440,PADL=40,PADR=30,PADT=46,AXIS_Y=404,YEAR_Y=0;
@@ -1235,8 +1095,6 @@ function renderAtlas(seed){
     gn.appendChild(hit);
     if(ST.dev){gn.appendChild(svgEl("circle",{class:"dbg",cx:n.x,cy:n.y,r:Math.max(r+10,16)}));
       const dt=svgEl("text",{class:"dbgtext",x:n.x+10,y:n.y-10});dt.textContent="x"+Math.round(n.x)+" y"+Math.round(n.y);gn.appendChild(dt)}
-    if(p.state==="review"&&ST.done.has("l3")){
-      const w=svgEl("text",{class:"edgelab",x:n.x+r+9,y:n.y+22});w.textContent="投稿から "+DAYS()+" 日";gn.appendChild(w)}
     ng.appendChild(gn);
   });
   renderPlaybackStamp(svg);
@@ -1251,7 +1109,7 @@ function renderNote(){
   const lin='ノード <b>'+n+"</b> · エッジ <b id=\"lcount\">"+e+"</b> · 密度 "+dens;
   if(ST.metro){
     el.innerHTML='<span style="color:var(--accent)">METRIC</span> 描画 '+ms+"ms · "+lin+
-      " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日";
+      " · 絞り込み "+(ST.theme||"なし");
   }else if(ST.asof<END_TIME){
     el.innerHTML=lin+" · "+asofLabel(ST.asof)+" までの部分グラフ · 描画 "+ms+"ms";
   }else{
@@ -1375,10 +1233,8 @@ function renderPapers(){
     box.appendChild(el);
   });
   renderFilters();
-  if(totalCites>100)unlock("cite");
   document.body.dataset.count=list.length;
   document.body.classList.toggle("only",list.length===0);
-  revealFrag();
 }
 E("papers").addEventListener("click",e=>{
   const card=e.target.closest(".paper[data-openpaper]");if(card)openDrawer("paper",card.dataset.openpaper);
@@ -1396,7 +1252,6 @@ function stateBadge(p){
   if(p.state==="pre")return '<span class="st pre"><i></i>予印</span>';
   return '<span class="st review"><i></i>査読中</span>';
 }
-const hasHistory=p=>!!VERSIONS[p.id];
 function renderMeta(){
   E("mPub").textContent=TOTAL_PUBLISHED;
   const cite=E("mCites");if(cite)cite.textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
@@ -1420,7 +1275,7 @@ function renderSub(){
 }
 if(E("subbtn"))E("subbtn").addEventListener("click",()=>{
   ST.sub=!ST.sub;LS.set(KEY.sub,ST.sub);renderSub();
-  if(ST.sub){unlock("sub");toast("登録しました","更新はどこにも送信されません（0 bytes）")}
+  if(ST.sub){toast("登録しました","更新はどこにも送信されません（0 bytes）")}
   else toast("登録を解除しました","");
 });
 const TABTARGET={top:"top",atlas:"atlas",index:"index"};
@@ -1458,12 +1313,11 @@ E("asof").addEventListener("input",e=>{
   const n=PAPERS.filter(p=>paperTime(p)<=ST.asof).length;
   E("asofval").textContent=asofLabel(ST.asof)+" — "+(idx===47?"全 6 本":n+" 本");
   renderNote();
-  if(ST.asof<END_TIME){unlock("back")}
   renderAtlas();renderPapers();
 });
 E("asofreset").onclick=()=>{E("asof").value=47;E("asof").dispatchEvent(new Event("input"))};
 if(E("btnRelayout"))E("btnRelayout").onclick=()=>relayout();
-function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);unlock("relayout");toast("配置を作り直しました","seed "+ST.seed)}
+function relayout(){ST.seed=(ST.seed||20260601)+977;renderAtlas(ST.seed);toast("配置を作り直しました","seed "+ST.seed)}
 
 /* ---------- 5. DRAWER --------------------------------------------- */
 const D={open:false};
@@ -1497,10 +1351,6 @@ E("drawer").addEventListener("click",e=>{if(e.target===E("drawer"))closeDrawer()
   const cc=e.target.closest("[data-copycitation]");if(cc){const pre=cc.parentElement.querySelector(".drawer-citation");
     navigator.clipboard&&navigator.clipboard.writeText(pre.textContent);cc.textContent="コピーしました"}
   const gt=e.target.closest("[data-goto]");if(gt){closeDrawer();focusPaper(gt.dataset.goto);return}
-  const gr=e.target.closest("[data-goroom]");if(gr){
-    if(!ST.ach.has("key")){toast("扉には鍵がかかっています","猫が持っています");return}
-    closeDrawer();E("room").classList.add("on");ST.room=true;ST.roomTab="hist";ST.histOpen=gr.dataset.goroom;
-    unlock("visit");renderRoom();if(ST.roomTab==="hist"&&ST.histOpen==="p10")readFrag("d");return}
 });
 
 /* ---------- 6. PALETTE -------------------------------------------- */
@@ -1514,7 +1364,7 @@ const CMDS=[
  {k:"▶",label:"PLAY — 2023 年から順にたどる（プレイヤーの左端）",fmt:"TIMELINE"}
 ];
 let palOpen=false,palIdx=0,palQ="";
-function openPalette(){palOpen=true;palQ="";palIdx=0;E("palette").classList.add("on");renderPalette();unlock("curious")}
+function openPalette(){palOpen=true;palQ="";palIdx=0;E("palette").classList.add("on");renderPalette()}
 function closePalette(){palOpen=false;E("palette").classList.remove("on")}
 function palItems(){
   const list=CMDS;
@@ -1530,16 +1380,6 @@ function renderPalette(){
     li.onclick=()=>{palIdx=i;runCmd(c.k);closePalette()};
     ul.appendChild(li)});
   if(!items.length){const li=document.createElement("li");li.innerHTML='<span class="cmd">—</span><span class="lb">該当するコマンドがありません</span><span class="fmt"></span>';ul.appendChild(li)}
-  renderAch();
-}
-function renderAch(){
-  const box=E("achline");if(!box)return;
-  const got=ACHIEVEMENTS.filter(a=>ST.ach.has(a.id));
-  const miss=ACHIEVEMENTS.length-got.length;
-  box.innerHTML=got.map(a=>'<span class="a">'+a.name+'</span>').join("")+
-    (miss?'<span class="a off">？ ×'+miss+"</span>":"")+
-    '<span style="margin-left:auto">記録 '+got.length+" / "+ACHIEVEMENTS.length+"</span>";
-  const pn=E("palnote");if(pn)pn.textContent="記録 "+got.length+" / "+ACHIEVEMENTS.length+" · 未獲得 "+miss+" 種";
 }
 function runCmd(k){
   switch(k){
@@ -1569,149 +1409,32 @@ function toggleMetric(){
   ST.metro=!ST.metro;renderNote();
   if(!ST.metro){toast("計測 — 解除");return}
   toast("計測 — 描画 "+ST.msText+"ms · ノード "+PAPERS.length+" · 系譜 "+LINEAGE.length+
-    " · 絞り込み "+(ST.theme||"なし")+" · 断片 "+ST.frag.size+"/4 · 投稿から "+DAYS()+" 日");
+    " · 絞り込み "+(ST.theme||"なし"));
 }
 function playTimeline(){
   if(ST.playing)return;ST.playing=true;
-  unlock("replay");
   const el=E("asof");let idx=0;
   el.value=idx;el.dispatchEvent(new Event("input"));
   toast("PLAY — 2023.01 から月単位でたどります","約 6 秒 · esc で止まります");
   ST.playTimer=setInterval(()=>{
     idx++;
     if(idx>47){clearInterval(ST.playTimer);ST.playing=false;el.value=47;el.dispatchEvent(new Event("input"));
-      unlock("replay");toast("最後まで来ました — 2026.12、全 6 本");return}
+      toast("最後まで来ました — 2026.12、全 6 本");return}
     el.value=idx;el.dispatchEvent(new Event("input"));
   },125);
 }
 function stopPlay(){if(ST.playTimer)clearInterval(ST.playTimer);ST.playTimer=null;ST.playing=false}
 
 /* ---------- 7. ROOM ------------------------------------------------ */
-const RTABS=[["game","01","注視のゲーム"],["exp","02","失敗した実験"],["about","03","棚"]];
+function hasBirdKey(){return BIRD_IDS.every(id=>FOUND_BIRDS.has(id))}
 function openRoom(){
-  E("room").classList.add("on");document.body.classList.add("room-open");ST.room=true;unlock("visit");
-  if(ST.roomTab==="game"&&(!ST.game.pred||!ST.game.pred.length))newSentence();
-  else renderRoom();
+  if(!hasBirdKey())return;
+  E("room").classList.add("on");document.body.classList.add("room-open");ST.room=true;
+  if(!ST.game.pred||!ST.game.pred.length)newSentence();else renderRoom();
+  requestAnimationFrame(()=>E("rclose").focus());
 }
 function closeRoom(){E("room").classList.remove("on");document.body.classList.remove("room-open");ST.room=false}
-function hourState(){const h=new Date().getHours();if(h>=23||h<5)return"deep";if(h<9)return"morning";if(h>=18)return"evening";return"day"}
-function tickClock(){
-  const d=new Date(),hh=String(d.getHours()).padStart(2,"0"),mm=String(d.getMinutes()).padStart(2,"0");
-  const hs=hourState();
-  const clock=E("rclock");if(!clock)return;
-  clock.textContent=hh+":"+mm;
-  E("rstate").textContent=hs==="deep"?"深夜 — 灯りを落としています":hs==="morning"?"朝 — 誰もいません":"在室";
-  E("room").dataset.h=hs;
-  const lamp=E("rlamp");if(lamp)lamp.style.background=hs==="deep"?"var(--muted)":hs==="evening"?"var(--accent2)":"var(--accent)";
-}
-function renderRoomNight(){tickClock()}
-function renderRoom(){renderRoomNav();renderRoomBody();renderTerm();tickClock()}
-function renderRoomNav(){
-  const n=E("rnav");n.innerHTML="";
-  RTABS.forEach(([id,no,label])=>{const b=document.createElement("button");b.type="button";
-    b.setAttribute("aria-current",ST.roomTab===id?"true":"false");
-    b.innerHTML='<span class="d">'+no+'</span><span>'+label+"</span>";
-    b.onclick=()=>{ST.roomTab=id;renderRoom()};n.appendChild(b)});
-}
-function renderRoomBody(){
-  const b=E("rbody");
-  if(ST.roomTab==="game")renderGame(b);
-  else if(ST.roomTab==="exp")renderExp(b);
-  else renderAbout(b);
-}
-function renderTerm(){
-  const t=E("rterm");if(!t)return;
-  const d=new Date(),hh=String(d.getHours()).padStart(2,"0"),mm=String(d.getMinutes()).padStart(2,"0");
-  const L=[];
-  L.push("$ tail -f 作業用房.log                 "+hh+":"+mm+" 在室");
-  L.push(ST.gap==null?"前回来たのは、初めてです"
-       :ST.gap===0?"前回来たのは、今日です（"+ST.gapLabel+"）"
-       :"前回来たのは "+ST.gap+" 日前（"+ST.gapLabel+"）");
-  L.push("投稿から "+DAYS()+" 日 — 返事 1 通 / v3 は未送信");
-  if(ST.sub)L.push("チャンネル登録: 済み（送信 0 bytes — どこにも届きません）");
-  L.push("断片 "+ST.frag.size+" / 4"+(!ST.frag.size?" — なし":""));
-  if(ST.theme)L.push("絞り込み中: "+ST.theme);
-  if(ST.asof<END_TIME)L.push("AS OF "+asofLabel(ST.asof)+" に戻っています");
-  if(hourState()==="deep")L.push("深夜です。端末の輝度を落としています。");
-  L.push("");
-  if(ST.frag.size){L.push("— 集めた断片 —");
-    [...ST.frag].map(id=>FRAG[id]).sort((a,b)=>a.n-b.n).forEach(f=>L.push("▍"+f.text+"   ("+f.src+")"));}
-  if(ST.done.has("l3")){L.push("");L.push("▍糸 — 4 本が 1 本につながりました。審査はまだ終わっていません。")}
-  if(ST.choice){L.push("▍選択 — "+(ST.choice==="log"?"log（ログと seed を送った）":"wait（もう 1 週間見る）"))}
-  if(!ST.frag.size&&!ST.done.has("l3"))L.push("（断片は、表のどこかに落ちています）");
-  t.innerHTML=esc(L.join("\n"))+'<span class="cursor"></span>';
-  t.scrollTop=t.scrollHeight;
-  const rf=E("rfrag");if(rf)rf.innerHTML="断片 <b>"+ST.frag.size+"</b> / 4";
-}
-function roomGoal(){
-  if(ST.done.has("l3"))return"糸はつながりました。返事はまだ 1 通だけです。";
-  if(ST.frag.size)return"断片が "+ST.frag.size+" 本。端末に溜まっています。";
-  return"この部屋のものは、公開面の評価には加点されません。";
-}
-
-/* ---------- 8. EXPERIMENTS ---------------------------------------- */
-const XANN={
- "#0338":{t:0.70,kind:"point",label:"12,400 歩 — ここで反転"},
- "#0302":{t:0.50,kind:"point",label:"同じ seed で 3 回、3 通り"},
- "#0291":{t:0.30,t2:0.92,kind:"band",label:"平坦 — 検証 label は 0 のまま"},
- "#0411":{t:0.10,kind:"point",label:"リーク（検証 loss 0.004）"},
- "#0399":{t:0.42,kind:"stop",label:"NaN — ここで停止"}
-};
-function curve(f,id){
-  const rnd=mulberry(id.split("").reduce((a,c)=>a+c.charCodeAt(0),7));
-  const pts=[];const N=160;
-  for(let i=0;i<=N;i++){const t=i/N;let y;
-    if(f.cat==="発散"){y=t<0.55?0.10+0.75*Math.exp(-3.4*t):0.10+0.75*Math.exp(-3.4*0.55)+(t-0.55)*3.1}
-    else if(f.cat==="振動"){y=0.30+0.55*Math.exp(-1.5*t)+0.16*Math.sin(t*26)*Math.exp(-0.9*t)}
-    else if(f.cat==="プラトー"){y=t<0.26?0.16+0.72*Math.exp(-5.5*t):0.16+0.72*Math.exp(-5.5*0.26)-0.012*(t-0.26)}
-    else if(f.cat==="成功しすぎ"){y=0.015+0.92*Math.exp(-5.2*t)}
-    else {y=0.14+0.72*Math.exp(-2.4*t);if(t>0.42)break}
-    y+= (rnd()-.5)*0.006;
-    pts.push([t,Math.max(0.012,y)])}
-  return pts;
-}
-function renderExp(b){
-  let h='<h3>02 失敗した実験</h3><div class="lead">WORKLOG — 5 本。形が全部違う。読んだ本数は記録されます（'+ST.seen.size+' / 5）</div>';
-  h+='<div id="xstage"><ul class="xlist" id="flist">';
-  FAILED.forEach(f=>{h+='<li data-x="'+f.id+'" aria-current="'+(ST.xActive===f.id?"true":"false")+'">'+
-    '<span class="rid">'+f.id+'</span><span class="shape">'+f.cat+'</span><span class="out">'+f.out+"</span></li>"});
-  h+='</ul><div id="xdetail"></div></div>';
-  b.innerHTML=h;
-  renderXDetail();
-}
-function renderXDetail(){
-  const box=E("xdetail");if(!box)return;
-  const f=FAILED.find(x=>x.id===ST.xActive)||FAILED[0];
-  const pts=curve(f,f.id);
-  const X=t=>26+t*520,Y=y=>168-Math.min(y,1.15)*135;
-  const d=pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)).join(" ");
-  const a=XANN[f.id];
-  let ann="";
-  if(a){
-    if(a.kind==="point")ann='<line x1="'+X(a.t)+'" y1="'+Y(0.6)+'" x2="'+X(a.t)+'" y2="'+Y(0.12)+'" stroke="var(--danger)" stroke-width="1" stroke-dasharray="2 3"/>'+
-      '<text class="tick" x="'+X(a.t)+'" y="'+(Y(1.1)-4)+'" fill="var(--danger)">'+a.label+"</text>";
-    if(a.kind==="band")ann='<rect x="'+X(a.t)+'" y="'+Y(0.9)+'" width="'+(X(a.t2)-X(a.t))+'" height="'+(Y(0.05)-Y(0.9))+'" fill="none" stroke="var(--danger)" stroke-width="1" stroke-dasharray="3 3"/>'+
-      '<text class="tick" x="'+X(a.t)+'" y="'+(Y(0.95)-2)+'" fill="var(--danger)">'+a.label+"</text>";
-    if(a.kind==="stop"){const p=pts[pts.length-1];ann='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="3.4" fill="none" stroke="var(--danger)" stroke-width="1.4"/>'+
-      '<text class="tick" x="'+X(p[0])+'" y="'+(Y(p[1])-12)+'" fill="var(--danger)" text-anchor="middle">'+a.label+"</text>"}
-  }
-  box.innerHTML='<div class="xchart"><svg viewBox="0 0 560 200" role="img" aria-label="'+f.id+' の学習曲線（'+f.cat+'）">'+
-    '<line class="ax" x1="26" y1="168" x2="552" y2="168"/><line class="ax" x1="26" y1="20" x2="26" y2="168"/>'+
-    '<text class="tick" x="26" y="188">0</text><text class="tick" x="500" y="188" text-anchor="end">'+f.steps+" step</text>"+
-    '<text class="tick" x="6" y="26">loss</text><text class="tick" x="6" y="166">0</text>'+
-    '<path class="curve" d="'+d+'"/>'+ann+"</svg></div>"+
-    '<div class="mono" style="font-size:11.5px;color:var(--ink2);display:flex;gap:18px;flex-wrap:wrap"><span>'+f.id+"</span><span>"+f.cat+"</span><span>"+f.steps+" steps</span><span>"+f.out+"</span></div>"+
-    '<div class="xnote">'+f.note+'</div>'+
-    (hasChain()&&f.id==="#0291"?'<div class="xmsg"><span class="s1">↳ 相互リンク</span> この平坦な曲線が、いま審査中の 1 本の差し戻し理由と同じものです。<a href="#" data-openpaper="p10">その 1 本を見る</a></div>':"")+
-    '<div class="xmsg">'+f.msg+"</div>";
-}
-function markSeen(id){
-  if(!ST.seen.has(id)){ST.seen.add(id);LS.set(KEY.seen,[...ST.seen]);
-    if(id==="#0291"){readFrag("c")}
-    if(ST.seen.size>=3)unlock("failed");
-    if(id==="#0399")unlock("experimenter");
-    renderExp(E("rbody"))}
-}
+function renderRoom(){renderGame(E("rbody"))}
 
 /* ---------- 9. ATTENTION GAME ------------------------------------- */
 const PUNCT=/^[、。！？「」（）]+$/;
@@ -1786,7 +1509,6 @@ function renderGame(b){
       "<b>平均 "+avg+" / 100</b><br>"+g.scores.map((v,i)=>(i+1)+" 文目 "+v).join(" · ")+
       "<br>"+(avg>=70?"合格 — あなたは注意の行き先をほぼ当てています。この予測の仕方で、私は 3 本目の実験を組み直しました。"
         :"70 に届きませんでした。帯の幅より、外したセグメントのほうが大事です。もう一度どうぞ。")+"</div>";
-    if(avg>=70)unlock("core");
     h+='<div style="margin-top:12px"><button class="btn" id="greset">最初から</button></div>';
   }
   b.innerHTML=h;
@@ -1822,157 +1544,30 @@ function scoreSentence(){
 function finishGame(){ST.game.final=true;renderRoom()}
 function resetGame(){ST.game={sent:0,scores:[],rows:[],pred:[],draft:{},final:false,scored:false,init:true,feedback:[]};newSentence()}
 
-/* ---------- 10. HISTORY (03) -------------------------------------- */
-function hasChain(){return ST.done.has("l3")}
-function renderHist(b){
-  const list=PAPERS.filter(p=>VERSIONS[p.id]).slice().sort((a,b)=>b.year-a.year);
-  let h='<h3>03 論文の変遷</h3><div class="lead">公開情報で確認できた 5 本の書誌と、現在確認中の研究枠です。</div>';
-  list.forEach(p=>{
-    const open=ST.histOpen===p.id;
-    h+='<div class="histpaper"><button class="h" type="button" data-hist2="'+p.id+'" aria-expanded="'+open+'">'+
-      '<span class="ht">'+esc(p.title||"(査読中 — 題名は伏せています)")+"</span>"+
-      '<span class="hm">'+p.id.toUpperCase()+" · "+p.year+" · "+VERSIONS[p.id].length+" 版</span></button>";
-    if(open){
-      h+='<div class="steps"><ol style="list-style:none;padding:0;margin:0">';
-      VERSIONS[p.id].forEach(([d,txt])=>h+='<li><span class="d">'+d+"</span><span>"+esc(txt)+"</span></li>");
-      h+="</ol>";
-      if(p.id==="p7")h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— Reviewer 2（原文。引用は統計的に薄い、という指摘も同時に来た）</div></div>';
-      if(p.id==="p8")h+='<div class="rev"><div class="q">「5 種で足りている証拠が弱い。7 種に増やして差が出ないことを示してほしい」</div><div class="a">— Reviewer 1（原文。7 回やり直して 5 種に戻した、が結論）</div></div>';
-      if(p.id==="p10"){
-        h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— 差し戻し理由（原文）</div></div>';
-        h+='<div class="unresolved">返信していない 1 人へ — v3 は書いてあります。送る日を決めていないだけです。</div>';
-        if(hasChain()){
-          h+='<div class="xmsg" style="margin-top:12px"><span class="s1">↳ 相互リンク</span> この差し戻しは 02 の #0291 と同じ失敗です。<a href="#" data-openexp="#0291">実験ログを見る</a></div>';
-          h+=choiceHtml();
-        }
-      }
-      h+="</div>";
-    }
-    h+="</div>";
+/* ---------- 10. BIRDS / KEY / DOOR ------------------------------- */
+const BIRD_IDS=["banner","map","index"];
+const FOUND_BIRDS=new Set(LS.get(KEY.birds,[]).filter(id=>BIRD_IDS.includes(id)));
+function syncBirdHunt(){
+  $$(".secret-bird").forEach(button=>{
+    const found=FOUND_BIRDS.has(button.dataset.bird);
+    button.classList.toggle("found",found);button.disabled=found;
+    button.setAttribute("aria-hidden",found?"true":"false");
   });
-  h+='<div style="margin-top:26px"><h4 style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)">糸 — 集めた断片</h4>';
-  const got=[...ST.frag].map(id=>FRAG[id]).sort((a,b)=>a.n-b.n);
-  if(!got.length)h+='<p style="color:var(--muted);font-size:13px">まだ 0 本です。断片は、表のどこかに落ちています。</p>';
-  else{h+='<ol style="list-style:none;padding:0;margin:0">'+got.map(f=>'<li style="font-size:13px;color:var(--ink2);margin:9px 0;display:grid;grid-template-columns:72px 1fr;gap:12px"><span class="mono" style="font-size:10.5px;color:var(--muted)">'+f.src+"</span><span>▍"+esc(f.text)+"</span></li>").join("")+"</ol>";}
-  if(hasChain())h+='<p class="mono" style="font-size:11.5px;color:var(--accent)">4 本のうち 3 本が 1 本につながりました。「投稿から '+DAYS()+' 日」は、毎日 1 ずつ増えます。</p>';
-  else h+='<p class="mono" style="font-size:11.5px;color:var(--muted)">同じ事実が 4 箇所に散らばっています。3 本そろうと、糸になります。</p>';
-  h+="</div>";
-  b.innerHTML=h;
-  if(ST.histOpen)unlock("reviewer");
+  const keyed=hasBirdKey();
+  E("doordock").hidden=!keyed;
+  document.body.classList.toggle("bird-keyed",keyed);
 }
-function choiceHtml(){
-  if(ST.choice){
-    const t=ST.choice==="log"
-      ?"Reviewer 2 が 1 行返しました。「表 3 の件、こちらでも再現しました。あと 1 週間もらえますか」— そのあと数字はまた進みました。"
-      :"v3 の文面だけは書いて、送りませんでした。宛先は入っています。";
-    return '<div class="choice"><span class="picked">'+(ST.choice==="log"?"log":"wait")+"</span><span style=\"color:var(--ink2);font-size:12.5px;align-self:center\">"+t+"</span></div>"+
-      '<p class="mono" style="font-size:11px;color:var(--muted)">どちらを選んでも待ちは続きます。救済ではなく、選んだことが記録されるだけです。</p>';
-  }
-  return '<div class="choice"><button class="btn primary" data-choice="log">log — ログと seed を送る</button>'+
-    '<button class="btn" data-choice="wait">wait — もう 1 週間見る</button></div>'+
-    '<p class="mono" style="font-size:11px;color:var(--muted)">選んだことは、このブラウザの中だけに残ります。</p>';
+function collectBird(id){
+  if(!BIRD_IDS.includes(id)||FOUND_BIRDS.has(id))return;
+  FOUND_BIRDS.add(id);LS.set(KEY.birds,[...FOUND_BIRDS]);syncBirdHunt();
 }
-
-/* ---------- 11. SHELF (04) ---------------------------------------- */
-function renderAbout(b){
-  b.innerHTML='<h3>04 棚</h3><div class="lead">ここは、表に出さないものの置き場です。</div>'+
-   '<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">'+
-     '<button id="catbig" class="btn" style="width:96px;height:66px;display:flex;align-items:center;justify-content:center" aria-label="猫">'+
-       '<svg viewBox="0 0 40 24" width="56" height="34" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2">'+
-       '<path d="M4 20c0-6 3-9 8-9h8c5 0 8 3 8 9z"/><path d="M9 11 8 6l5 2.4M23 11l1-5-5 2.4"/>'+
-       '<path d="M28 20c4 0 8-1.5 9-4.5" stroke-linecap="round"/></g>'+
-       '<circle cx="12" cy="15" r=".9" fill="currentColor"/><circle cx="19" cy="15" r=".9" fill="currentColor"/></svg></button>'+
-     '<p style="flex:1;min-width:240px;font-size:13.5px;color:var(--ink2);margin:0">この部屋のものは、公開面の研究業績の評価には加点されません。'+
-     '表は計測で、裏は工房です。隠し部屋はオーバーレイなので、ネットワークのノードやエッジは 1 つも増えていません。<br>'+
-     '<span class="mono" style="font-size:11.5px;color:var(--muted)">入口：右下の猫を 3 回 ／ プレイヤーの ▦ ／ 画面右下の扉</span></p>'+
-   "</div>"+
-   '<h4>記録</h4><div class="achline" style="border:0;padding:0">'+ACHIEVEMENTS.map(a=>'<span class="a'+(ST.ach.has(a.id)?"":" off")+'" title="'+a.desc+'">'+(ST.ach.has(a.id)?a.name:"？")+"</span>").join("")+"</div>"+
-   '<h4>データの差し替え</h4><p style="font-size:13.5px;color:var(--ink2)">直すのは 3 つの配列が中心（PAPERS / LINEAGE / BANDS）。ネットワーク・凡例・動画リスト・統計・JSON・サムネイルがまとめて更新されます。伏線の人物設定は VERSIONS と SUBMIT に集約してあります。</p>'+
-   '<h4>保存しているもの</h4><p class="mono" style="font-size:11.5px;color:var(--muted)">atlas-ach / atlas-frag / atlas-choice / atlas-last / atlas-theme / atlas-seen<br>削除はブラウザの保存データ削除のみ。リセットボタンは置いていません。</p>'+
-   '<h4>一覧</h4><p style="font-size:13.5px;color:var(--ink2)">コマンドの一覧は <button class="btn" id="openpal2">?</button> にだけあります。それ以外は、発見される前提で設計していません。</p>';
-}
-
-/* ---------- 12. CAT / DOOR / FRAGMENTS ----------------------------- */
-const FRAG={
- a:{n:1,text:"2026 の 1 本、まだ返事は 1 つだけ。あと 2 日で 300 日目になります",src:"猫を 3 回叩く"},
- b:{n:2,text:"この年の時点では、この 1 本は査読者を 1 人も選んでいません",src:"AS OF の幽霊点"},
- c:{n:3,text:"検証ラベルが 0 だったまま 2 週間気づかなかった plateau",src:"#0291"},
- d:{n:4,text:"差し戻し理由「実験 3 の表 3 が再現できません」",src:"03 の査読中"}
-};
-function catLine(){
-  const h=hourState(),c=[];
-  if(ST.theme)c.push("いまは「"+ST.theme+"」だけ見ています。絞り込むと、ネットワークが少し静かになります。");
-  if(ST.asof<END_TIME)c.push(asofLabel(ST.asof)+" までの部分グラフです。まだ "+PAPERS.filter(p=>paperTime(p)>ST.asof).length+" 本ぶんの空きがあります。");
-  if(ST.frag.size>=2&&!hasChain())c.push("断片が "+ST.frag.size+" 本。集めた断片は、この部屋の端末に溜まります。");
-  if(hasChain())c.push("糸はつながりましたね。まだ返事は 1 つだけです。");
-  if(ST.sub)c.push("登録ありがとうございます。どこにも送っていません。");
-  if(h==="deep")c.push("深夜ですね。灯りを落としています。");
-  c.push("この部屋のことは、表では説明していません。");
-  c.push("名前がない点には、赤い線が 2 本入っています。");
-  c.push("鍵はもう渡しました。扉は右下にあります。");
-  c.push("推薦は、あなたのログを見ていません。");
-  c.push("YouTube の推薦は、同じ入力を 2 回返しません。");
-  c.push("査読中の 1 本には、まだ名前がありません。");
-  return c[(Math.random()*c.length)|0];
-}
-function strokeCat(){
-  if(!ST.ach.has("key")){
-    ST.ncr2++;LS.set(KEY.ncr2,ST.ncr2);
-    if(ST.ncr2>=3){
-      unlock("key");document.body.classList.add("keyed");readFrag("a");
-      toast(FRAG.a.text,"");
-      catNotes();showDoor();
-      toast("鍵を受け取りました — 右下の扉が開きます");
-      return;
-    }
-    catNotes();
-    toast("猫を叩いた（"+ST.ncr2+" 回目）","あと "+(3-ST.ncr2)+" 回");
-    return;
-  }
-  toast(catLine());
-}
-function showDoor(){const d=E("doordock");if(d)d.hidden=false}
-E("catbtn").addEventListener("click",strokeCat);
-if(E("catbtn2"))E("catbtn2").addEventListener("click",strokeCat);
-E("doorbtn").addEventListener("click",()=>visitRoom());
-function visitRoom(){
-  if(!ST.ach.has("key")){toast("扉には鍵がかかっています","右下の猫が持っています");return}
-  openRoom();
-}
-E("p-room").addEventListener("click",()=>visitRoom());
+$$('.secret-bird[data-bird]').forEach(button=>button.addEventListener("click",()=>collectBird(button.dataset.bird)));
+E("doorbtn").addEventListener("click",openRoom);
 E("p-play").addEventListener("click",()=>{ST.playing?stopPlay():playTimeline()});
 $$("#player [data-cmd]").forEach(b=>b.addEventListener("click",()=>runCmd(b.dataset.cmd)));
-function catNotes(){
-  const c=E("catnote"),l=E("catlbl");
-  if(!ST.ach.has("key")){
-    if(c)c.textContent=ST.ncr2===0?"— 眠っています":ST.ncr2===1?"— 目を少し開けました":"— 鍵を探しています…";
-  }else{
-    if(c)c.textContent="— 鍵は渡しました。扉は右下です";
-    if(l)l.textContent="猫 — 鍵は渡しました。扉は右下です";
-  }
-}
-setInterval(()=>{
-  const b=E("catbtn2");if(!b||ST.ach.has("key"))return;
-  b.classList.add("wig");setTimeout(()=>b.classList.remove("wig"),2400);
-},14000);
-E("rclose").onclick=()=>closeRoom();
+E("rclose").onclick=closeRoom;
 E("room").addEventListener("click",e=>{if(e.target===E("room"))closeRoom()});
-E("rbody").addEventListener("click",e=>{
-  const hist=e.target.closest("[data-hist2]");
-  if(hist){const id=hist.dataset.hist2;ST.histOpen=ST.histOpen===id?null:id;renderHist(E("rbody"));
-    if(ST.histOpen==="p10")readFrag("d");renderTerm();return}
-  const x=e.target.closest("li[data-x]");
-  if(x){ST.xActive=x.dataset.x;renderExp(E("rbody"));markSeen(ST.xActive);return}
-  const ch=e.target.closest("[data-choice]");
-  if(ch){ST.choice=ch.dataset.choice;LS.set(KEY.choice,ST.choice);renderHist(E("rbody"));renderTerm();
-    toast(ST.choice==="log"?"記録しました — log":"記録しました — wait");return}
-  const gp=e.target.closest("[data-openpaper]");
-  if(gp){e.preventDefault();openDrawer("paper",gp.dataset.openpaper);return}
-  const gx=e.target.closest("[data-openexp]");
-  if(gx){e.preventDefault();ST.roomTab="exp";renderRoom();markSeen(gx.dataset.openexp);return}
-  if(e.target.closest("#catbig")){strokeCat();return}
-  if(e.target.closest("#openpal2")){closeRoom();openPalette();return}
-});
+
 /* game interactions delegated */
 E("rbody").addEventListener("input",e=>{
   const inp=e.target.closest("input[data-i]");if(!inp)return;
@@ -1980,15 +1575,14 @@ E("rbody").addEventListener("input",e=>{
   v=Math.max(0,Math.min(100,v));ST.game.pred[i]=v;gameUpdateVisual();
 });
 E("rbody").addEventListener("click",e=>{
-  if(!e.target.closest("#gscorebtn,#geven,#gzero,#gnext,#gredo,#gfinish,#greset"))return;
+  if(!e.target.closest("#gscorebtn,#geven,#gfill,#gzero,#gnext,#gredo,#gfinish,#greset"))return;
   const g=ST.game;
   if(e.target.closest("#gscorebtn")){scoreSentence();return}
   if(e.target.closest("#geven")){const t=tokensOf(GAME_SENTENCES[g.sent]);const base=Math.floor(100/t.length);
     g.pred=t.map((_,i)=>i===0?100-base*(t.length-1):base);renderRoom();return}
   if(e.target.closest("#gzero")){g.pred=g.pred.map(()=>0);renderRoom();return}
-  if(e.target.closest("#gfill")){const sum=g.pred.reduce((a,v)=>a+(v||0),0);const rest=100-sum;if(rest>0){
+  if(e.target.closest("#gfill")){const sum=g.pred.reduce((a,v)=>a+(v||0),0),rest=100-sum;if(rest>0){
     let idx=0;g.pred.forEach((v,i)=>{if((v||0)>g.pred[idx])idx=i});
-    if(g.pred.reduce((a,v)=>a+(v||0),0)===0)idx=0;
     g.pred[idx]=(g.pred[idx]||0)+rest;renderRoom()}return}
   if(e.target.closest("#gnext")){g.sent++;newSentence();return}
   if(e.target.closest("#gredo")){g.scored=false;g.final=false;renderRoom();return}
@@ -2027,37 +1621,19 @@ document.addEventListener("keydown",e=>{
 });
 if(E("presshint"))E("presshint").addEventListener("click",()=>openPalette());
 
-/* ---------- 15. MEMORY / INIT ------------------------------------- */
-function memoryOnLoad(){
-  const last=ST.last;
-  if(last&&last.t){
-    const gap=Math.floor((Date.now()-last.t)/864e5);
-    ST.gap=gap;
-    const d=new Date(last.t);
-    ST.gapLabel=(d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
-    if(gap>=2)toast(gap+" 日ぶり。","その数字は、また "+gap+" 日進みました");
-  }else{ST.gap=null;ST.gapLabel="初回"}
-  LS.set(KEY.last,{t:Date.now()});
-}
+/* ---------- 15. INIT ---------------------------------------------- */
 function init(){
   ST.quiet=true;
   document.title="Koki Ota — Researcher";
   const th=LS.get(KEY.theme,null);if(th)document.documentElement.setAttribute("data-theme",th);
   ST.motion=LS.get(KEY.motion,null);
   document.body.classList.toggle("no-motion",REDUCED());
-  memoryOnLoad();
-  renderMeta();renderSub();renderAtlas();renderPapers();renderPalette();renderTerm();
+  ["atlas-ach","atlas-frag","atlas-choice","atlas-last","atlas-seen","atlas-ncr","atlas-ncr2","atlas-done"].forEach(k=>LS.del(k));
+  renderMeta();renderSub();renderAtlas();renderPapers();renderPalette();syncBirdHunt();
   const savedAsof=LS.get(KEY.asof,2026);
   const a=savedAsof===2025?2026:Math.max(2023,Math.min(2026,savedAsof));
   if(a!==2026){E("asof").value=a;E("asof").dispatchEvent(new Event("input"))}
-  if(hourState()==="deep")unlock("night");
-  if(ST.ach.has("key")){showDoor();document.body.classList.add("keyed")}
-  catNotes();
-  syncFrag();
-  if(hasChain()){applyChain();}
-  tickClock();setInterval(tickClock,30000);
   ST.quiet=false;
-  if(ST.frag.size===4&&!ST.done.has("allfrag")){ST.done.add("allfrag");LS.set(KEY.done,[...ST.done]);toast("断片 4 本 — 全部そろいました","")}
 }
 /* テスト用の読み取り口（書き換えはしない） */
 window.ATLAS={tokensOf,perfect:i=>{
@@ -2065,7 +1641,7 @@ window.ATLAS={tokensOf,perfect:i=>{
   const out=t.map(x=>Math.floor(x.key/tot*100));
   const rest=100-out.reduce((a,b)=>a+b,0);
   out[out.indexOf(Math.max.apply(null,out))]+=rest;return out},
-  state:()=>({frag:[...ST.frag],done:[...ST.done],days:DAYS()})};
+  state:()=>({birds:[...FOUND_BIRDS],key:hasBirdKey(),room:ST.room})};
 init();
 
 </script>
