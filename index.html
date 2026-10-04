@@ -170,33 +170,32 @@ body.map-info-open .mapfoot .note{display:block}
    ============================================================ */
 section.index{padding:40px 0 10px}
 .filters{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 4px; align-items:center}
-.paper{display:grid; grid-template-columns:138px 1fr 132px; gap:22px; padding:20px 0; border-bottom:1px solid var(--line)}
-.paper:hover{background:var(--panel2)}
-.paper-thumb{position:relative;align-self:start;aspect-ratio:16/9;overflow:hidden;border-radius:7px;border:1px solid var(--line2);background:linear-gradient(145deg,color-mix(in srgb,var(--thumb) 32%,var(--mapbg)),var(--mapbg) 72%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--thumb) 12%,transparent)}
+#papers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 18px;margin-top:22px}
+.paper{min-width:0;cursor:pointer;outline:none}
+.paper:focus-visible .paper-thumb{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 42%,transparent)}
+.paper-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:linear-gradient(145deg,color-mix(in srgb,var(--thumb) 32%,var(--mapbg)),var(--mapbg) 72%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--thumb) 16%,transparent)}
 .paper-thumb::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.14),transparent 48%,rgba(0,0,0,.44))}
 .paper-thumb img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease,filter .35s ease}
-.paper-thumb .paper-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:31px;height:23px;border-radius:7px;background:var(--yt);color:#fff;display:grid;place-items:center;font-size:10px;padding-left:2px;box-shadow:0 4px 14px rgba(0,0,0,.24)}
-.paper-thumb .paper-play,.paper-thumb b,.paper-thumb small{z-index:2}
+.paper-thumb b,.paper-thumb small{z-index:2}
 .paper-thumb b{position:absolute;left:8px;top:7px;font:600 10px/1 var(--mono);color:#fff;letter-spacing:.08em;text-shadow:0 1px 5px #000}
 .paper-thumb small{position:absolute;right:7px;bottom:6px;padding:3px 5px;border-radius:3px;background:rgba(0,0,0,.74);color:#fff;font:600 9px/1 var(--mono);letter-spacing:.05em}
-.paper:hover .paper-thumb{border-color:color-mix(in srgb,var(--thumb) 58%,var(--line2))}
-.paper:hover .paper-thumb img{transform:scale(1.035);filter:saturate(1.08)}
-.paper h3{font-size:16.5px; line-height:1.6; font-weight:600}
-.paper h3 .idx{font-family:var(--mono); font-size:11px; color:var(--muted); margin-right:9px; font-weight:400}
-.paper .sub{font-family:var(--mono); font-size:11.5px; color:var(--ink2); margin-top:7px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-.paper .authors{color:var(--ink2);font-size:13px;margin-top:8px}
-.paper .citation{color:var(--ink2);font-size:14px;line-height:1.75;margin-top:8px;max-width:82ch}
-.paper .note{color:var(--muted); font-size:12.5px; margin-top:7px; max-width:74ch}
-.paper .note .revline{display:block; color:var(--accent2); font-family:var(--mono); font-size:11.5px; margin-top:7px}
-.paper .aside{text-align:right; font-family:var(--mono); font-size:11.5px; color:var(--muted); padding-top:3px}
-.paper .aside .cites{color:var(--muted); display:block;font-size:10.5px}
-.paper .aside .links{display:flex; gap:10px; justify-content:flex-end; margin-top:9px; flex-wrap:wrap}
-.paper .aside .links span{border-bottom:1px dotted var(--line2); font-size:11px}
-.lk{cursor:help}
-.paper .aside .links .off{color:var(--muted); border:0}
-.paper .aside .hist{margin-top:11px}
-.paper .aside .hist button{font-family:var(--mono); font-size:11px; color:var(--accent); border-bottom:1px solid transparent}
-.paper .aside .hist button:hover{border-bottom-color:var(--accent)}
+.paper:hover .paper-thumb img{transform:scale(1.035);filter:saturate(1.08) brightness(1.04)}
+.paper h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:11px 2px 0;font-size:14.5px;line-height:1.45;font-weight:600;min-height:2.9em;color:var(--ink)}
+.paper-meta{display:flex;align-items:baseline;gap:5px;margin:6px 2px 0;min-width:0;font-size:12px;line-height:1.45;color:var(--muted)}
+.paper-meta .venue{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.paper-meta .dot{flex:none}
+.paper-meta time{flex:none;white-space:nowrap}
+.drawer-hero{aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:var(--mapbg);margin-bottom:20px}
+.drawer-hero img{width:100%;height:100%;display:block;object-fit:cover}
+.drawer-title{font-size:20px!important;line-height:1.55!important;margin:0 0 10px!important}
+.drawer-meta{display:flex;gap:7px;flex-wrap:wrap;font:11px/1.4 var(--mono);color:var(--muted)}
+.drawer-meta span{border:1px solid var(--line2);border-radius:999px;padding:4px 9px}
+.drawer-summary{font-size:14px;line-height:1.8;color:var(--ink2)}
+.drawer-citation{white-space:pre-wrap;font:12px/1.75 var(--mono);color:var(--ink2);border:1px solid var(--line2);border-radius:7px;padding:14px;background:var(--panel2)}
+.drawer-copy{margin-top:9px}
+.drawer-facts{display:grid;grid-template-columns:90px 1fr;gap:9px 16px;font-size:13px;line-height:1.6}
+.drawer-facts dt{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.drawer-facts dd{color:var(--ink2)}
 .st{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; letter-spacing:.04em}
 .st i{width:9px; height:9px; border-radius:50%; flex:none}
 .st.accepted i{background:var(--accent)}
@@ -467,6 +466,8 @@ body.about-open{overflow:hidden}
 .about-info-icon svg{display:block;width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .about-info-icon .fill{fill:currentColor;stroke:none}
 .about-info-copy{line-height:1.4}
+.about-info-copy a{color:#0f0f0f;text-decoration:none}
+.about-info-copy a:hover{text-decoration:underline}
 .chact{display:flex;gap:9px;align-items:flex-start;padding-top:44px}
 .subbtn{display:flex;align-items:center;gap:9px;background:var(--yt);color:#fff;border-radius:999px;padding:10px 17px;
   font-size:13px;font-weight:600;letter-spacing:.02em;border:1px solid transparent;transition:filter .18s,background .2s,color .2s}
@@ -557,11 +558,7 @@ body.no-motion *{animation:none!important;transition:none!important}
    ============================================================ */
 @media (max-width:900px){
   #catdock{bottom:56px;right:12px}
-  .paper{grid-template-columns:1fr; gap:12px}
-  .paper-thumb{width:min(210px,100%)}
-  .paper .aside{text-align:left; display:flex; gap:16px; flex-wrap:wrap; align-items:center}
-  .paper .aside .links{justify-content:flex-start; margin-top:0}
-  .paper .aside .hist{margin-top:0}
+  #papers{grid-template-columns:repeat(2,minmax(0,1fr))}
   #room .room{grid-template-columns:1fr; grid-template-rows:52px 1fr 46px}
   #room .rnav{grid-row:3; flex-direction:row; border-right:0; border-top:1px solid var(--line); overflow-x:auto; padding:6px}
   #room .rnav button{grid-template-columns:1fr; white-space:nowrap}
@@ -574,6 +571,7 @@ body.no-motion *{animation:none!important;transition:none!important}
   #toasts{left:12px; bottom:12px; max-width:calc(100vw - 96px)}
   #toasts .t{font-size:11px; padding:6px 13px}
 }
+@media (max-width:620px){#papers{grid-template-columns:1fr;gap:26px}.paper h3{font-size:15px}}
 @media (max-width:760px){
   #mapsvg{min-width:700px}
   #maphint{display:block}
@@ -825,6 +823,10 @@ body.playful-mode #playful-site{display:block}
         <h3>その他の情報</h3>
         <div class="about-info-list">
           <div class="about-info-row">
+            <span class="about-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="m4 7 8 6 8-6"/></svg></span>
+            <span class="about-info-copy"><a href="mailto:koki@torilab.net">koki@torilab.net</a></span>
+          </div>
+          <div class="about-info-row">
             <span class="about-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><path d="M2.9 12h18.2M12 2.75c2.25 2.5 3.4 5.58 3.4 9.25S14.25 18.75 12 21.25C9.75 18.75 8.6 15.67 8.6 12S9.75 5.25 12 2.75Z"/></svg></span>
             <span class="about-info-copy">日本</span>
           </div>
@@ -927,7 +929,7 @@ const PAPERS=[
   links:["IC2S2","Poster #207"]},
  {id:"p6",year:2026,venue:"76th Annual International Communication Association Conference",short:"ICA",kind:"International Conference (Co-authored)",pubType:"international",state:"accepted",theme:"政治",oral:false,format:"presentation",coauthor:true,cites:null,authors:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi",citation:"Dongwoo Lim, Koki Ota, Masaki Chujyo, Mikihito Tanaka, Fujio Toriumi, Kisuk Park, Yu Ohki, and Maho Ishibashi, “Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’,” 76th Annual International Communication Association Conference, Cape Town, 2026. [Co-authored work]",authorKeys:["lim","ota","chujyo","tanaka","toriumi","park","ohki","ishibashi"],place:{city:"Cape Town",country:"South Africa",x:546,y:264},
   title:"Circulating Legitimacy during the Constitutional Crisis: Hybrid-Media Dynamics of Right-Wing Discourse in South Korea’s ‘Enlightenment Order’",
-  note:"韓国の憲政危機における右派言説のハイブリッド・メディア動態を扱う共同研究。Koki Otaは第2著者で、主著ではない。",
+  note:"韓国の憲政危機における右派言説のハイブリッド・メディア動態を扱う共同研究。",
   links:["ICA 2026","Public record"]}
 ];
 const PAPER_MONTH={p1:5,p2:12,p3:3,p4:6,p5:7,p6:6};
@@ -1248,7 +1250,7 @@ function renderAtlas(seed){
     }else if(p.format==="poster"){
       gn.appendChild(svgEl("rect",{class:"disc",x:n.x-r,y:n.y-r,width:r*2,height:r*2,rx:1.5,fill:c,"fill-opacity":".9",stroke:c,"stroke-width":1.2}));
     }else{
-      gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:r,fill:c,"fill-opacity":".3",stroke:c,"stroke-width":1.8}));
+      gn.appendChild(svgEl("circle",{class:"disc",cx:n.x,cy:n.y,r:r,fill:c,"fill-opacity":".9",stroke:c,"stroke-width":1.2}));
     }
     if(p.state!=="review"&&!ghost){
       const right=n.x>W-170,lab=svgEl("text",{x:right?n.x-r-8:n.x+r+9,y:n.y+4+(n.labDy||0),"text-anchor":right?"end":"start"});
@@ -1386,30 +1388,28 @@ function renderFilters(){
     f.appendChild(c)});
 }
 function linkCount(id){return LINEAGE.filter(([a,b])=>a===id||b===id).length}
+function relativeAge(p){
+  const published=new Date(p.year,(p.month||1)-1,1),days=Math.max(0,Math.floor((Date.now()-published.getTime())/86400000));
+  if(days===0)return "今日";
+  if(days<30)return days+"日前";
+  if(days<365)return Math.floor(days/30)+"か月前";
+  return Math.floor(days/365)+"年前";
+}
 function renderPapers(){
   const box=E("papers");box.innerHTML="";
   const list=PAPERS.filter(p=>(curFilter==="all"||p.pubType===curFilter)&&(!ST.theme||p.theme===ST.theme)&&!(ST.asof<paperTime(p)));
   const sorted=list.slice().sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
   const totalCites=list.reduce((a,p)=>a+(p.cites||0),0);
-  E("filterstate").textContent=list.length+" uploads"+(ST.theme?" · "+ST.theme:"");
+  E("filterstate").textContent=list.length+" 本の研究"+(ST.theme?" · "+ST.theme:"");
   sorted.forEach(p=>{
     const el=document.createElement("article");el.className="paper";el.id="p-"+p.id;
+    el.tabIndex=0;el.setAttribute("role","button");el.dataset.openpaper=p.id;
+    el.setAttribute("aria-label",(p.title||"査読中の研究")+"の詳細を表示");
     el.dataset.state=p.state;el.dataset.theme=p.theme;if(p.oral)el.dataset.oral="1";
-    const st=stateBadge(p);
-    const hist=hasHistory(p)?'<button type="button" data-hist="'+p.id+'">変遷を見る '+VERSIONS[p.id].length+" 版</button>":"";
-    let extra="";
-    if(p.id==="p10"){extra='<span class="revline" id="fragline" hidden></span><span class="revline" id="ovline" hidden></span>';}
     el.innerHTML=
-     '<div class="paper-thumb" style="--thumb:'+colorOf(p.theme)+'"><img src="assets/thumbnails/'+p.short.toLowerCase()+'.png" alt="" loading="lazy"><b>'+String(p.year)+'</b><span class="paper-play">▶</span><small>'+p.short+'</small></div>'+
-     '<div><h3><span class="idx">'+(p.state==="review"?"R?":p.id.toUpperCase())+'</span>'+
-       (p.title||'<span style="color:var(--muted)">(査読中 — 題名は伏せています)</span>')+"</h3>"+
-       '<div class="citation">'+(p.citation||p.authors||"")+'</div>'+
-       '<div class="sub"><span>'+p.venue+"</span><span>"+p.kind+"</span>"+st+
-         (linkCount(p.id)?'<span style="color:var(--muted)">関連 '+linkCount(p.id)+' 件</span>':"")+"</div>"+
-       '<p class="note">'+p.note+extra+"</p></div>"+
-     '<div class="aside"><span class="cites">'+(p.place?p.place.city+" · "+p.place.country:"")+'</span>'+
-       (p.links.length?'<div class="links">'+p.links.map(l=>'<span class="lk" title="デモ用（リンク先はありません）">'+l+"</span>").join("")+"</div>":"")+
-       '<div class="hist">'+hist+"</div></div>";
+     '<div class="paper-thumb" style="--thumb:'+colorOf(p.theme)+'"><img src="assets/thumbnails/'+p.short.toLowerCase()+'.png" alt="" loading="lazy"><b>'+String(p.year)+'</b><small>'+p.short+'</small></div>'+
+     '<h3>'+(p.title||"査読中の研究")+'</h3>'+
+     '<div class="paper-meta"><span class="venue">'+p.venue+'</span><span class="dot">·</span><time datetime="'+p.year+'-'+String(p.month).padStart(2,"0")+'">'+relativeAge(p)+"</time></div>";
     box.appendChild(el);
   });
   renderFilters();
@@ -1418,6 +1418,13 @@ function renderPapers(){
   document.body.classList.toggle("only",list.length===0);
   revealFrag();
 }
+E("papers").addEventListener("click",e=>{
+  const card=e.target.closest(".paper[data-openpaper]");if(card)openDrawer("paper",card.dataset.openpaper);
+});
+E("papers").addEventListener("keydown",e=>{
+  const card=e.target.closest(".paper[data-openpaper]");if(!card)return;
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();openDrawer("paper",card.dataset.openpaper)}
+});
 function stateBadge(p){
   if(p.state==="accepted"){
     const label=p.coauthor?"Co-authored work":p.format==="poster"?"Poster presentation":p.oral?"Oral presentation":"Oral presentation";
@@ -1437,7 +1444,7 @@ function renderMeta(){
   lg.innerHTML=
    '<span><i style="width:10px;height:10px;border-radius:50%;background:var(--ink2)"></i>口頭発表</span>'+
    '<span><i style="width:10px;height:10px;border-radius:1px;background:var(--ink2)"></i>ポスター発表</span>'+
-   '<span><i style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid var(--ink2)"></i>共同研究</span>'+
+   '<span><i style="width:12px;height:12px;background:var(--ink2);clip-path:polygon(50% 0,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)"></i>共同研究</span>'+
    '<span><i style="width:10px;height:10px;transform:rotate(45deg);border:1.5px dashed var(--ink2)"></i>査読中</span>'+
    BANDS.map(b=>'<span><i style="width:9px;height:9px;border-radius:50%;background:'+colorOf(b)+'"></i>'+b+"</span>").join("");
 }
@@ -1502,39 +1509,22 @@ function openDrawer(kind,arg){
   D.kind=kind;D.arg=arg;const b=E("dbody"),t=E("dtitle"),k=E("dkind");
   E("drawer").classList.add("on");b.scrollTop=0;
   if(kind==="paper"){
-    const p=paper(arg);t.textContent=p.id.toUpperCase()+(p.state==="review"?"（査読中）":"");
-    k.textContent=p.year+" / "+p.theme+" / "+(p.state==="review"?"審査中":"発表済み");
-    let h="";
-    if(p.id==="p10"){
-      h+='<div class="unresolved"><b>この 1 本について分かっていること。</b><br>'+
-        "投稿は "+SUBMIT.p10+" で、返事は 1 つだけ返ってきています。返ってこなかった側の話は、書きかけのまま残っています。</div>"+
-        '<p style="color:var(--ink2);font-size:13.5px">学会名も題名も出していません。査読中だからです。この地図では、査読中の点も発表済みの点と同じ重さで描いています。</p>';
-      h+='<h4>未解決</h4><div class="unresolved">返信していない 1 人へ — v3 は書いてありますが、送っていません。締切は自分では決められません。</div>';
-    }else{
-      h+='<h3 style="font-size:17px;line-height:1.65;margin:0 0 12px">'+p.title+"</h3>";
-      h+='<p style="font-size:14.5px">'+p.note+"</p>";
-      h+='<h4>書誌</h4><div class="mono" style="font-size:12px;color:var(--ink2)">'+
-        p.authors+"<br>"+p.venue+" / "+p.kind+" / "+p.year+"<br>"+
-        "links: "+(p.links.join(" · ")||"—")+"</div>";
-    }
-    if(VERSIONS[p.id]){
-      h+='<h4>変遷</h4><div class="histpaper" style="border:0"><div class="steps" style="border:0;padding:0"><ol style="list-style:none;padding:0;margin:0">';
-      VERSIONS[p.id].forEach(([d,txt])=>{h+='<li style="display:grid;grid-template-columns:96px 1fr;gap:14px;font-size:13px;color:var(--ink2);margin:10px 0">'+
-        '<span class="mono" style="font-size:10.5px;color:var(--muted)">'+d+"</span><span>"+txt+"</span></li>"});
-      h+="</ol></div></div>";
-      if(p.id==="p7"||p.id==="p8"){
-        h+='<div class="rev"><div class="q">「実験 3 の表 3 が再現できません」</div><div class="a">— Reviewer 2（原文）</div></div>';
-      }
-      h+='<div style="margin-top:16px"><button class="btn" data-openroom="history">変遷を全部読む（03）</button></div>';
-      unlock("reviewer");
-    }
-    if(p.id==="p1")h+='<p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:14px">この論文の誤り分析が、3 年後に p6 の手法になります（地図の線）。</p>';
-    if(ST.theme&&p.theme!==ST.theme)h+='<p class="mono" style="font-size:11.5px;color:var(--accent2);margin-top:14px">いま「'+ST.theme+'」で絞り込んでいます。この論文は地図では減光されています。</p>';
-    h+='<div style="margin-top:22px;display:flex;gap:8px;flex-wrap:wrap">'+
-      '<button class="btn" data-goto="'+p.id+'">一覧で見る</button>'+
-      (VERSIONS[p.id]?'<button class="btn" data-goroom="'+p.id+'">変遷を見る（作業用房 03）</button>':"")+
-      "</div>";
-    b.innerHTML=h;
+    const p=paper(arg),status=p.state==="review"?"査読中":p.coauthor?"共同研究":p.format==="poster"?"ポスター発表":"口頭発表";
+    t.textContent=p.short+" · "+p.year;k.textContent=status;
+    b.innerHTML=
+      '<div class="drawer-hero"><img src="assets/thumbnails/'+p.short.toLowerCase()+'.png" alt=""></div>'+
+      '<h3 class="drawer-title">'+p.title+'</h3>'+
+      '<div class="drawer-meta"><span>'+status+'</span><span>'+p.theme+'</span><span>'+p.venue+'</span><span>'+relativeAge(p)+'</span></div>'+
+      '<h4>内容の要約</h4><p class="drawer-summary">'+p.note+'</p>'+
+      '<h4>引用</h4><pre class="drawer-citation">'+p.citation+'</pre>'+
+      '<button class="btn drawer-copy" type="button" data-copycitation>引用をコピー</button>'+
+      '<h4>研究情報</h4><dl class="drawer-facts">'+
+        '<dt>Authors</dt><dd>'+p.authors+'</dd>'+
+        '<dt>Venue</dt><dd>'+p.venue+'</dd>'+
+        '<dt>Type</dt><dd>'+p.kind+'</dd>'+
+        '<dt>Place</dt><dd>'+(p.place?p.place.city+' · '+p.place.country:'—')+'</dd>'+
+        '<dt>Theme</dt><dd>'+p.theme+'</dd>'+
+      '</dl>';
   }
   else if(kind==="text"){t.textContent=arg.title;k.textContent=arg.kind||"";b.innerHTML=arg.html}
   else if(kind==="json"){t.textContent="MAP DATA — JSON";k.textContent="s";b.innerHTML=
@@ -1549,6 +1539,8 @@ function closeDrawer(){E("drawer").classList.remove("on");D.open=false}
 E("drawer").addEventListener("click",e=>{if(e.target===E("drawer"))closeDrawer();
   const cp=e.target.closest("#copyjson");if(cp){const pre=cp.parentElement.querySelector("pre");
     navigator.clipboard&&navigator.clipboard.writeText(pre.textContent);cp.textContent="コピーしました"}
+  const cc=e.target.closest("[data-copycitation]");if(cc){const pre=cc.parentElement.querySelector(".drawer-citation");
+    navigator.clipboard&&navigator.clipboard.writeText(pre.textContent);cc.textContent="コピーしました"}
   const gt=e.target.closest("[data-goto]");if(gt){closeDrawer();focusPaper(gt.dataset.goto);return}
   const gr=e.target.closest("[data-goroom]");if(gr){
     if(!ST.ach.has("key")){toast("扉には鍵がかかっています","猫が持っています");return}
