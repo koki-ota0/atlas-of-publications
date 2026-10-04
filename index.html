@@ -607,6 +607,7 @@ body.playful-mode #playful-site{display:block}
 .simple-shell{max-width:1120px;margin:0 auto;padding:0 32px}
 .simple-nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0;border-bottom:1px solid #dfe5e1}
 .simple-brand{font:600 13px var(--mono);letter-spacing:.12em;color:#1c2926;text-decoration:none}
+.atlas-touch-trigger{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 .simple-navlinks{display:flex;gap:26px;font:12px var(--mono);letter-spacing:.06em}
 .simple-navlinks a{color:#61706b;text-decoration:none}.simple-navlinks a:hover{color:#1c2926}
 .simple-hero{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:72px;padding:96px 0 88px;border-bottom:1px solid #dfe5e1}
@@ -633,7 +634,7 @@ body.playful-mode #playful-site{display:block}
 <div id="simple-site">
   <div class="simple-shell">
     <nav class="simple-nav" aria-label="Main navigation">
-      <a class="simple-brand" href="#simple-top">KOKI OTA</a>
+      <a class="simple-brand atlas-touch-trigger" href="#simple-top" data-atlas-touch>KOKI OTA</a>
       <div class="simple-navlinks"><a href="#simple-research">Research</a><a href="#simple-education">Education</a><a href="#simple-contact">Contact</a></div>
     </nav>
     <section class="simple-hero" id="simple-top">
@@ -707,7 +708,7 @@ body.playful-mode #playful-site{display:block}
       <div class="chanrow">
         <div class="avatar" aria-hidden="true">KO</div>
         <div class="chinfo">
-          <h1>太田 光紀</h1>
+          <h1 class="atlas-touch-trigger" data-atlas-touch>太田 光紀</h1>
           <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
             <span>業績 <b id="mPub">—</b> 件</span><i>|</i>
@@ -981,6 +982,15 @@ document.addEventListener("keydown",e=>{
     secretBuffer=(secretBuffer+e.key.toLowerCase()).slice(-5);
     if(secretBuffer==="atlas"){secretBuffer="";toggleAtlasView();}
   }
+});
+let touchCount=0,touchTimer=null;
+document.querySelectorAll("[data-atlas-touch]").forEach(trigger=>{
+  trigger.addEventListener("click",()=>{
+    clearTimeout(touchTimer);
+    touchCount+=1;
+    if(touchCount>=5){touchCount=0;toggleAtlasView();return;}
+    touchTimer=setTimeout(()=>{touchCount=0},2200);
+  });
 });
 const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
 const paper=id=>PAPERS.find(p=>p.id===id);
