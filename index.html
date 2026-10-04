@@ -172,11 +172,14 @@ section.index{padding:40px 0 10px}
 .paper{display:grid; grid-template-columns:138px 1fr 132px; gap:22px; padding:20px 0; border-bottom:1px solid var(--line)}
 .paper:hover{background:var(--panel2)}
 .paper-thumb{position:relative;align-self:start;aspect-ratio:16/9;overflow:hidden;border-radius:7px;border:1px solid var(--line2);background:linear-gradient(145deg,color-mix(in srgb,var(--thumb) 32%,var(--mapbg)),var(--mapbg) 72%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--thumb) 12%,transparent)}
-.paper-thumb::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 24%,color-mix(in srgb,var(--thumb) 20%,transparent) 25% 27%,transparent 28% 55%,color-mix(in srgb,var(--thumb) 13%,transparent) 56% 58%,transparent 59%)}
+.paper-thumb::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.14),transparent 48%,rgba(0,0,0,.44))}
+.paper-thumb img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease,filter .35s ease}
 .paper-thumb .paper-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:31px;height:23px;border-radius:7px;background:var(--yt);color:#fff;display:grid;place-items:center;font-size:10px;padding-left:2px;box-shadow:0 4px 14px rgba(0,0,0,.24)}
+.paper-thumb .paper-play,.paper-thumb b,.paper-thumb small{z-index:2}
 .paper-thumb b{position:absolute;left:8px;top:7px;font:600 10px/1 var(--mono);color:#fff;letter-spacing:.08em;text-shadow:0 1px 5px #000}
 .paper-thumb small{position:absolute;right:7px;bottom:6px;padding:3px 5px;border-radius:3px;background:rgba(0,0,0,.74);color:#fff;font:600 9px/1 var(--mono);letter-spacing:.05em}
 .paper:hover .paper-thumb{border-color:color-mix(in srgb,var(--thumb) 58%,var(--line2))}
+.paper:hover .paper-thumb img{transform:scale(1.035);filter:saturate(1.08)}
 .paper h3{font-size:16.5px; line-height:1.6; font-weight:600}
 .paper h3 .idx{font-family:var(--mono); font-size:11px; color:var(--muted); margin-right:9px; font-weight:400}
 .paper .sub{font-family:var(--mono); font-size:11.5px; color:var(--ink2); margin-top:7px; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
@@ -605,9 +608,7 @@ body.no-motion *{animation:none!important;transition:none!important}
 body.playful-mode #simple-site{display:none}
 body.playful-mode #playful-site{display:block}
 .simple-shell{max-width:1120px;margin:0 auto;padding:0 32px}
-.simple-nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0;border-bottom:1px solid #dfe5e1}
-.simple-brand{font:600 13px var(--mono);letter-spacing:.12em;color:#1c2926;text-decoration:none}
-.atlas-touch-trigger{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.simple-nav{display:flex;align-items:center;justify-content:flex-start;padding:28px 0;border-bottom:1px solid #dfe5e1}
 .simple-navlinks{display:flex;gap:26px;font:12px var(--mono);letter-spacing:.06em}
 .simple-navlinks a{color:#61706b;text-decoration:none}.simple-navlinks a:hover{color:#1c2926}
 .simple-hero{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);gap:72px;padding:96px 0 88px;border-bottom:1px solid #dfe5e1}
@@ -634,8 +635,7 @@ body.playful-mode #playful-site{display:block}
 <div id="simple-site">
   <div class="simple-shell">
     <nav class="simple-nav" aria-label="Main navigation">
-      <a class="simple-brand atlas-touch-trigger" href="#simple-top" data-atlas-touch>KOKI OTA</a>
-      <div class="simple-navlinks"><a href="#simple-research">Research</a><a href="#simple-education">Education</a><a href="#simple-contact">Contact</a></div>
+      <div class="simple-navlinks"><a href="#simple-contact" data-secret-nav="contact">Contact</a><a href="#simple-research" data-secret-nav="research">Research</a><a href="#simple-education" data-secret-nav="education">Education</a></div>
     </nav>
     <section class="simple-hero" id="simple-top">
       <div>
@@ -708,7 +708,7 @@ body.playful-mode #playful-site{display:block}
       <div class="chanrow">
         <div class="avatar" aria-hidden="true">KO</div>
         <div class="chinfo">
-          <h1 class="atlas-touch-trigger" data-atlas-touch>太田 光紀</h1>
+          <h1>太田 光紀</h1>
           <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
             <span>業績 <b id="mPub">—</b> 件</span><i>|</i>
@@ -983,13 +983,16 @@ document.addEventListener("keydown",e=>{
     if(secretBuffer==="atlas"){secretBuffer="";toggleAtlasView();}
   }
 });
-let touchCount=0,touchTimer=null;
-document.querySelectorAll("[data-atlas-touch]").forEach(trigger=>{
-  trigger.addEventListener("click",()=>{
-    clearTimeout(touchTimer);
-    touchCount+=1;
-    if(touchCount>=5){touchCount=0;toggleAtlasView();return;}
-    touchTimer=setTimeout(()=>{touchCount=0},2200);
+const secretNavOrder=["research","education","contact"];
+let secretNavProgress=[],secretNavTimer=null;
+document.querySelectorAll("[data-secret-nav]").forEach(link=>{
+  link.addEventListener("click",()=>{
+    clearTimeout(secretNavTimer);
+    const step=link.dataset.secretNav;
+    const expected=secretNavOrder[secretNavProgress.length];
+    secretNavProgress=step===expected?[...secretNavProgress,step]:(step===secretNavOrder[0]?[step]:[]);
+    if(secretNavProgress.length===secretNavOrder.length){secretNavProgress=[];toggleAtlasView();return;}
+    secretNavTimer=setTimeout(()=>{secretNavProgress=[]},5000);
   });
 });
 const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
@@ -1136,11 +1139,13 @@ function renderWorldMap(svg){
    "M777 268 C811 243 868 248 899 274 C910 300 881 326 840 327 C802 326 775 307 777 268 Z"].forEach(d=>land.appendChild(svgEl("path",{class:"world-land",d:d})));
   svg.appendChild(land);
   const japan=svgEl("g");
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M826 146 C833 153 828 164 836 170 C843 176 835 187 842 194 C848 202 840 210 846 219"}));
-  japan.appendChild(svgEl("path",{class:"world-japan",d:"M817 222 C824 226 829 231 835 238"}));
-  japan.appendChild(svgEl("circle",{class:"world-japan",cx:812,cy:241,r:2.5}));
+  japan.appendChild(svgEl("path",{class:"world-japan",d:"M842 151 L853 147 L859 153 L854 161 L844 162 L838 157 Z"}));
+  japan.appendChild(svgEl("path",{class:"world-japan",d:"M845 166 C841 174 843 181 837 187 C832 192 831 200 824 205 C818 210 815 218 807 221 L802 216 C809 210 810 202 817 198 C823 193 824 185 831 181 C835 175 835 168 840 164 Z"}));
+  japan.appendChild(svgEl("path",{class:"world-japan",d:"M808 224 L820 222 L824 227 L816 231 L806 229 Z"}));
+  japan.appendChild(svgEl("path",{class:"world-japan",d:"M799 226 L807 232 L804 242 L796 248 L790 241 L793 232 Z"}));
+  japan.appendChild(svgEl("path",{class:"world-japan",d:"M786 251 l-3 3 M777 259 l-3 3 M768 267 l-3 3"}));
   svg.appendChild(japan);
-  [[118,199,"NORTH AMERICA"],[470,76,"EUROPE"],[544,347,"AFRICA"],[847,137,"JAPAN"],[810,342,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
+  [[118,199,"NORTH AMERICA"],[470,76,"EUROPE"],[544,347,"AFRICA"],[864,143,"JAPAN"],[810,342,"OCEANIA"]].forEach(([x,y,s])=>{const t=svgEl("text",{class:"world-label",x:x,y:y});t.textContent=s;svg.appendChild(t)});
   const title=svgEl("text",{class:"world-title",x:28,y:30});title.textContent="PRESENTATION RADAR / 2024 — 2026";svg.appendChild(title);
   const pins=svgEl("g");
   const offsets={p1:[-14,-13,"end"],p3:[15,19,"start"],p4:[-12,19,"end"],p5:[12,-12,"start"],p6:[13,4,"start"]};
@@ -1377,7 +1382,7 @@ function renderPapers(){
     let extra="";
     if(p.id==="p10"){extra='<span class="revline" id="fragline" hidden></span><span class="revline" id="ovline" hidden></span>';}
     el.innerHTML=
-     '<div class="paper-thumb" style="--thumb:'+colorOf(p.theme)+'"><b>'+String(p.year)+'</b><span class="paper-play">▶</span><small>'+p.short+'</small></div>'+
+     '<div class="paper-thumb" style="--thumb:'+colorOf(p.theme)+'"><img src="assets/thumbnails/'+p.short.toLowerCase()+'.png" alt="" loading="lazy"><b>'+String(p.year)+'</b><span class="paper-play">▶</span><small>'+p.short+'</small></div>'+
      '<div><h3><span class="idx">'+(p.state==="review"?"R?":p.id.toUpperCase())+'</span>'+
        (p.title||'<span style="color:var(--muted)">(査読中 — 題名は伏せています)</span>')+"</h3>"+
        '<div class="citation">'+(p.citation||p.authors||"")+'</div>'+
