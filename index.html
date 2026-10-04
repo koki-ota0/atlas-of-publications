@@ -444,20 +444,42 @@ body.room-open #toasts{bottom:auto; top:66px; left:20px}
 .banner .wm{position:absolute;right:26px;bottom:-30px;font-family:var(--mono);font-size:104px;letter-spacing:.04em;
   color:var(--ink);opacity:.045;line-height:1}
 .banner .sig{position:absolute;right:22px;top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ink2);opacity:.8}
-.banner .playline{position:absolute;z-index:1;left:22px;top:18px;display:flex;align-items:center;gap:10px;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.18em;color:var(--ink2);opacity:.85}
 .chanrow{display:grid;grid-template-columns:104px 1fr auto;gap:22px;align-items:start;padding:0 4px;margin-top:-40px;position:relative;z-index:2}
 .avatar{width:96px;height:96px;border-radius:50%;border:3px solid var(--bg);background:#061528 url("assets/profile/channel-avatar.png") center/cover no-repeat;
   display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:27px;letter-spacing:.02em;
   color:var(--ink2);box-shadow:0 0 0 1px var(--line2)}
 .chinfo h1{display:flex;align-items:center;gap:9px;font-size:27px;letter-spacing:-.01em}
 .chinfo .check{width:16px;height:16px;flex:none;color:var(--muted)}
-.chinfo .handle{font-family:var(--mono);font-size:12px;color:var(--ink2);margin-top:7px;letter-spacing:.04em}
 .cstats{display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:11px}
 .cstats b{color:var(--ink);font-weight:500}
 .cstats i{font-style:normal;color:var(--line2)}
 .chinfo .def{margin-top:13px;max-width:62ch;color:var(--ink2)}
 .chinfo .def b{color:var(--ink);font-weight:600}
+.def-preview{display:flex;align-items:baseline;gap:5px;font-size:13px}
+.about-more{color:var(--ink);font-weight:650;white-space:nowrap;text-decoration:none}
+.about-more:hover{text-decoration:underline}
+.about-overlay{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.66);backdrop-filter:blur(4px)}
+.about-overlay[hidden]{display:none}
+body.about-open{overflow:hidden}
+.about-card{width:min(700px,calc(100vw - 24px));max-height:min(820px,calc(100vh - 28px));overflow:auto;overscroll-behavior:contain;background:#fff;color:#0f0f0f;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.45);font-family:Arial,"Noto Sans JP",sans-serif}
+.about-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:25px 28px 18px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px)}
+.about-head h2{font-size:24px;letter-spacing:-.02em}
+.about-close{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:32px;line-height:1;color:#0f0f0f}
+.about-close:hover{background:#f2f2f2}
+.about-body{padding:4px 28px 34px}
+.about-section+.about-section{margin-top:28px}
+.about-section h3{margin:0 0 13px;font-size:20px;letter-spacing:-.02em}
+.about-description{margin:0;white-space:pre-line;font-size:15px;line-height:1.72;color:#202020}
+.about-link,.about-info-row{display:flex;align-items:center;gap:15px;min-height:52px;color:#0f0f0f;text-decoration:none}
+.about-link:hover .about-link-copy b{text-decoration:underline}
+.about-link-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:7px;background:#ff0033;color:#fff;font-size:15px;font-weight:800}
+.about-link-copy{min-width:0;display:flex;flex-direction:column;gap:2px}
+.about-link-copy b{font-size:14px;font-weight:500}
+.about-link-copy span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#065fd4;font-size:14px}
+.about-info-row{font-size:14px}
+.about-info-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;font-size:21px}
+.about-info-row a{color:#0f0f0f;text-decoration:none}
+.about-info-row a:hover{text-decoration:underline}
 .chact{display:flex;gap:9px;align-items:flex-start;padding-top:44px}
 .subbtn{display:flex;align-items:center;gap:9px;background:var(--yt);color:#fff;border-radius:999px;padding:10px 17px;
   font-size:13px;font-weight:600;letter-spacing:.02em;border:1px solid transparent;transition:filter .18s,background .2s,color .2s}
@@ -494,6 +516,14 @@ body.tab-atlas main.wrap,body.tab-index main.wrap{min-height:60vh}
   .banner .wm{font-size:78px}
   .profilegrid{grid-template-columns:1fr;gap:20px}
   .profilefacts{border-left:0;border-top:1px solid var(--line2);padding:12px 0 0}
+}
+@media (max-width:640px){
+  .about-overlay{align-items:end;padding:0;background:rgba(0,0,0,.58)}
+  .about-card{width:100%;max-height:92dvh;border-radius:18px 18px 0 0}
+  .about-head{padding:20px 20px 14px}
+  .about-body{padding:4px 20px 28px}
+  .about-head h2{font-size:21px}
+  .def-preview{font-size:12.5px}
 }
 
 /* ネットワーク */
@@ -701,21 +731,18 @@ body.playful-mode #playful-site{display:block}
 
     <div class="chan" id="top">
       <div class="banner" aria-hidden="true">
-        <span class="playline"><span class="playmark" style="margin:0"></span>ATLAS OF RESEARCH OUTPUTS — PROFILE</span>
         <span id="catbtn" class="hidden-cat" title="猫">⌁</span>
       </div>
       <div class="chanrow">
         <div class="avatar" aria-hidden="true"></div>
         <div class="chinfo">
           <h1>太田 光紀</h1>
-          <div class="handle">Koki Ota&nbsp;&nbsp;·&nbsp;&nbsp;東京大学&nbsp;&nbsp;·&nbsp;&nbsp;計算社会科学 / YouTube研究</div>
           <div class="cstats" id="cstats" aria-label="チャンネル統計">
-            <span>業績 <b id="mPub">—</b> 件</span><i>|</i>
-            <span>査読中 <b id="mRev">—</b> 本</span><i>|</i>
-            <span><b id="mYears">—</b></span><i>|</i>
-            <span>公開データ</span>
+            <span>@Kokiota</span><i>・</i>
+            <span>業績 <b id="mPub">—</b> 件</span><i>・</i>
+            <span>査読中 <b id="mRev">—</b> 本</span>
           </div>
-          <p class="def"><b>YouTube上の偽情報・陰謀論と、そこへ至るネットワークを研究しています。</b>動画・コメント・投稿者・視聴者の関係をデータから分析しています。</p>
+          <p class="def def-preview"><span>YouTube上の偽情報のネットワークやコミュニティ変化を研究…</span><button class="about-more" id="aboutMore" type="button">さらに表示</button></p>
         </div>
         <div class="chact">
           <button class="subbtn" id="subbtn" type="button" aria-pressed="false">
@@ -809,6 +836,41 @@ body.playful-mode #playful-site{display:block}
 </main>
 
 <!-- overlays -->
+<div class="about-overlay" id="aboutModal" hidden role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <section class="about-card">
+    <header class="about-head">
+      <h2 id="aboutTitle">太田 光紀 / Koki Ota</h2>
+      <button class="about-close" id="aboutClose" type="button" aria-label="プロフィール詳細を閉じる">×</button>
+    </header>
+    <div class="about-body">
+      <section class="about-section">
+        <h3>説明</h3>
+        <p class="about-description">計算社会科学の視点から、YouTube上の偽情報のネットワークやコミュニティ変化について研究しています。
+
+動画・コメント・投稿者・視聴者の関係をデータから分析し、偽情報や陰謀論へ至る経路と、発信者・視聴者コミュニティの変化を明らかにすることを目指しています。</p>
+      </section>
+      <section class="about-section">
+        <h3>リンク</h3>
+        <a class="about-link" href="https://www.torilab.net/" target="_blank" rel="noreferrer">
+          <span class="about-link-icon" aria-hidden="true">T</span>
+          <span class="about-link-copy"><b>鳥海研究室</b><span>torilab.net</span></span>
+        </a>
+        <a class="about-link" href="#index" data-about-target="index">
+          <span class="about-link-icon" aria-hidden="true">▶</span>
+          <span class="about-link-copy"><b>研究業績</b><span>論文・国際会議・国内会議・ワークショップ</span></span>
+        </a>
+      </section>
+      <section class="about-section">
+        <h3>その他の情報</h3>
+        <div class="about-info-row"><span class="about-info-icon" aria-hidden="true">✉</span><a href="mailto:koki@torilab.net">koki@torilab.net</a></div>
+        <div class="about-info-row"><span class="about-info-icon" aria-hidden="true">◎</span><span>東京大学大学院 工学系研究科</span></div>
+        <div class="about-info-row"><span class="about-info-icon" aria-hidden="true">⌂</span><span>鳥海研究室</span></div>
+        <div class="about-info-row"><span class="about-info-icon" aria-hidden="true">◉</span><span>日本</span></div>
+      </section>
+    </div>
+  </section>
+</div>
+
 <div class="ovl" id="palette" role="dialog" aria-modal="true" aria-label="コマンドパレット">
   <div class="box">
     <header><span>COMMANDS</span><span>esc で閉じる</span></header>
@@ -1393,7 +1455,6 @@ function stateBadge(p){
 const hasHistory=p=>!!VERSIONS[p.id];
 function renderMeta(){
   E("mPub").textContent=TOTAL_PUBLISHED;
-  E("mYears").textContent="2023 – 2026";
   const cite=E("mCites");if(cite)cite.textContent=TOTAL_CITES?fmt(TOTAL_CITES):"—";
   E("mRev").textContent=PAPERS.filter(p=>p.state==="review").length;
   const foot=E("footstate");if(foot)foot.textContent=TOTAL_PUBLISHED+" 本 · 4 年 · 実データ更新 2026-10-03";
@@ -1431,6 +1492,21 @@ function setTab(id){
 $$("#ctabs button").forEach(b=>b.addEventListener("click",()=>{
   const id=b.dataset.tab;setTab(id);
   window.scrollTo({top:0,behavior:REDUCED()?"auto":"smooth"});
+}));
+const aboutModal=E("aboutModal"),aboutMore=E("aboutMore"),aboutClose=E("aboutClose");
+function openAbout(){
+  aboutModal.hidden=false;document.body.classList.add("about-open");
+  requestAnimationFrame(()=>aboutClose.focus());
+}
+function closeAbout(returnFocus=true){
+  aboutModal.hidden=true;document.body.classList.remove("about-open");
+  if(returnFocus)aboutMore.focus();
+}
+aboutMore.addEventListener("click",openAbout);
+aboutClose.addEventListener("click",()=>closeAbout());
+aboutModal.addEventListener("click",e=>{if(e.target===aboutModal)closeAbout()});
+aboutModal.querySelectorAll("[data-about-target]").forEach(link=>link.addEventListener("click",()=>{
+  closeAbout(false);setTab(link.dataset.aboutTarget);window.scrollTo({top:0,behavior:REDUCED()?"auto":"smooth"});
 }));
 if(E("btnLegend"))E("btnLegend").addEventListener("click",()=>{
   const open=document.body.classList.toggle("map-info-open");
@@ -2007,6 +2083,7 @@ E("rbody").addEventListener("click",e=>{
 
 /* ---------- 14. KEYBOARD ------------------------------------------ */
 document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!aboutModal.hidden){closeAbout();return}
   if(!document.body.classList.contains("playful-mode"))return;
   const tag=(e.target.tagName||"").toLowerCase(),typing=tag==="input"||tag==="textarea";
   if(ST.playing&&e.key==="Escape"){stopPlay();toast("PLAY — 止めました")}
